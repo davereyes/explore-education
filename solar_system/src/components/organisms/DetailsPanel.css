@@ -1,0 +1,197 @@
+.cosmos-details {
+  width: var(--cosmos-rail-width);
+  height: 100vh;
+  padding: var(--cosmos-space-6) var(--cosmos-space-5);
+  background: var(--cosmos-color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-4);
+  overflow: hidden;
+}
+
+/* Static (non-scrolling) top zone */
+.cosmos-details__static {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-4);
+  flex-shrink: 0;
+}
+
+/* Scrollable zone for the planet data sections */
+.cosmos-details__scroll {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-6);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s var(--cosmos-ease-out);
+}
+.cosmos-details__scroll:hover,
+.cosmos-details__scroll:focus-within {
+  scrollbar-color: var(--cosmos-color-line) transparent;
+}
+.cosmos-details__scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.cosmos-details__scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.cosmos-details__scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 3px;
+  transition: background 0.3s var(--cosmos-ease-out);
+}
+.cosmos-details__scroll:hover::-webkit-scrollbar-thumb {
+  background: var(--cosmos-color-line);
+}
+
+.cosmos-details__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-3);
+  padding: var(--cosmos-space-5);
+  background: var(--cosmos-color-bg-elevated);
+  border-radius: var(--cosmos-radius-lg);
+  box-shadow: none;
+}
+
+.cosmos-details__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cosmos-space-3);
+}
+
+.cosmos-details__eyebrow {
+  font-family: var(--cosmos-font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: var(--cosmos-color-ink-mute);
+}
+
+.cosmos-details__title {
+  font-family: var(--cosmos-font-display);
+  font-size: var(--cosmos-text-sm);
+  font-weight: var(--cosmos-weight-bold);
+  letter-spacing: 0.12em;
+  color: var(--cosmos-color-ink);
+}
+
+.cosmos-details__pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cosmos-color-teal);
+  box-shadow: 0 0 0 0 rgba(42, 157, 143, 0.5);
+  animation: cosmos-pulse 2s var(--cosmos-ease-out) infinite;
+}
+
+@keyframes cosmos-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(42, 157, 143, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(42, 157, 143, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(42, 157, 143, 0);
+  }
+}
+
+.cosmos-details__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cosmos-details__facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-3);
+}
+
+/* ----- Core mode: per-layer detail card ----- */
+.cosmos-core-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-2);
+  padding: var(--cosmos-space-4);
+  background: var(--cosmos-color-bg-elevated);
+  border: 1px solid var(--cosmos-color-line);
+  border-radius: var(--cosmos-radius-md);
+}
+
+.cosmos-core-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--cosmos-space-3);
+}
+
+.cosmos-core-card__index {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--cosmos-font-mono);
+  font-weight: var(--cosmos-weight-bold);
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.cosmos-core-card__name {
+  font-family: var(--cosmos-font-display);
+  font-size: var(--cosmos-text-base);
+  font-weight: var(--cosmos-weight-bold);
+  color: var(--cosmos-color-ink);
+  letter-spacing: 0.02em;
+}
+
+.cosmos-core-card__summary {
+  font-size: var(--cosmos-text-sm);
+  color: var(--cosmos-color-ink);
+  font-weight: var(--cosmos-weight-medium);
+  line-height: var(--cosmos-leading-snug);
+}
+
+.cosmos-core-card__body {
+  font-size: var(--cosmos-text-xs);
+  color: var(--cosmos-color-ink-soft);
+  line-height: var(--cosmos-leading-relaxed);
+}
+
+.cosmos-core-card__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--cosmos-space-2);
+  margin: 0;
+  padding-top: var(--cosmos-space-2);
+  border-top: 1px solid var(--cosmos-color-line-soft);
+}
+
+.cosmos-core-card__stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cosmos-core-card__stats dt {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cosmos-color-ink-mute);
+  font-weight: var(--cosmos-weight-medium);
+}
+
+.cosmos-core-card__stats dd {
+  font-size: var(--cosmos-text-sm);
+  font-weight: var(--cosmos-weight-semibold);
+  color: var(--cosmos-color-ink);
+  margin: 0;
+}

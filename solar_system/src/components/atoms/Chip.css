@@ -1,0 +1,44 @@
+.cosmos-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cosmos-space-2);
+  padding: var(--cosmos-space-1) var(--cosmos-space-3);
+  border-radius: var(--cosmos-radius-pill);
+  background: var(--cosmos-color-bg-elevated);
+  border: 1px solid var(--cosmos-color-line);
+  font-size: var(--cosmos-text-xs);
+  font-weight: var(--cosmos-weight-medium);
+  color: var(--cosmos-color-ink-soft);
+  white-space: nowrap;
+  min-height: 28px;
+}
+
+.cosmos-chip--coral {
+  background: var(--cosmos-color-coral-soft);
+  border-color: transparent;
+  color: var(--cosmos-color-coral-deep);
+}
+
+.cosmos-chip--teal {
+  background: var(--cosmos-color-teal-soft);
+  border-color: transparent;
+  color: var(--cosmos-color-teal-deep);
+}
+
+.cosmos-chip--warm {
+  background: #fde6df;
+  border-color: transparent;
+  color: #c95738;
+}
+
+.cosmos-chip__icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--cosmos-text-sm);
+  line-height: 1;
+}
+
+.cosmos-chip__label {
+  font-family: var(--cosmos-font-mono);
+  letter-spacing: 0.01em;
+}

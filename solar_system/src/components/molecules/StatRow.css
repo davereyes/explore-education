@@ -1,0 +1,74 @@
+.cosmos-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--cosmos-space-3) 0;
+}
+
+.cosmos-stat__header {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: center;
+  gap: var(--cosmos-space-3);
+}
+
+.cosmos-stat__icon {
+  font-size: 0.95rem;
+  width: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cosmos-stat__label {
+  font-size: var(--cosmos-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cosmos-color-ink-soft);
+  font-weight: var(--cosmos-weight-semibold);
+}
+
+.cosmos-stat__value {
+  font-size: var(--cosmos-text-base);
+  font-weight: var(--cosmos-weight-bold);
+  color: var(--cosmos-color-ink);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cosmos-stat__unit {
+  font-size: var(--cosmos-text-xs);
+  color: var(--cosmos-color-ink-mute);
+  font-weight: var(--cosmos-weight-regular);
+  margin-left: 2px;
+}
+
+/* Solid progress bar (track + fill).
+   Height is 3px (~70% of the previous 4px dashed-segment height). */
+.cosmos-stat__bar {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background: var(--cosmos-color-line);
+  border-radius: var(--cosmos-radius-pill);
+  overflow: hidden;
+}
+
+.cosmos-stat__bar-fill {
+  height: 100%;
+  border-radius: var(--cosmos-radius-pill);
+  transition: width var(--cosmos-dur-base) var(--cosmos-ease-out),
+    background var(--cosmos-dur-base) var(--cosmos-ease-out);
+  background: var(--cosmos-color-teal);
+}
+
+.cosmos-stat__bar--teal .cosmos-stat__bar-fill {
+  background: var(--cosmos-color-teal);
+}
+.cosmos-stat__bar--coral .cosmos-stat__bar-fill {
+  background: var(--cosmos-color-coral);
+}
+.cosmos-stat__bar--muted .cosmos-stat__bar-fill {
+  background: var(--cosmos-color-ink-mute);
+}

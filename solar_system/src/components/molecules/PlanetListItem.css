@@ -1,0 +1,103 @@
+.cosmos-planet-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--cosmos-space-3);
+  width: 100%;
+  padding: var(--cosmos-space-3) var(--cosmos-space-3);
+  border-radius: var(--cosmos-radius-md);
+  background: var(--cosmos-color-bg-elevated);
+  border: 1px solid #d9d9d9;
+  text-align: left;
+  overflow: hidden;
+  transition: background var(--cosmos-dur-base) var(--cosmos-ease-out),
+    border-color var(--cosmos-dur-base) var(--cosmos-ease-out),
+    box-shadow var(--cosmos-dur-base) var(--cosmos-ease-out);
+}
+
+.cosmos-planet-item__active-tab {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  background: var(--cosmos-color-coral);
+  color: #fff;
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-bold);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.cosmos-planet-item:hover:not(:disabled) {
+  border-color: var(--cosmos-color-coral);
+  box-shadow: var(--cosmos-shadow-xs);
+}
+
+.cosmos-planet-item--selected {
+  background: var(--cosmos-color-bg-elevated);
+  border-color: var(--cosmos-color-coral);
+  box-shadow: var(--cosmos-shadow-glow-coral);
+  padding-right: 22px;
+}
+
+.cosmos-planet-item--disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.cosmos-planet-item__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cosmos-planet-item__name {
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-bold);
+  font-size: var(--cosmos-text-base);
+  letter-spacing: 0.04em;
+  color: var(--cosmos-color-ink);
+}
+
+.cosmos-planet-item__nickname {
+  font-size: var(--cosmos-text-xs);
+  color: var(--cosmos-color-ink-mute);
+  line-height: var(--cosmos-leading-snug);
+}
+
+/* Mobile grid: stack sphere on top, center text */
+@media (max-width: 820px) {
+  .cosmos-planet-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--cosmos-space-2);
+    padding: var(--cosmos-space-4) var(--cosmos-space-3);
+    border: 1px solid var(--cosmos-color-line-soft);
+  }
+
+  .cosmos-planet-item__text {
+    align-items: center;
+  }
+
+  .cosmos-planet-item__name {
+    font-size: var(--cosmos-text-sm);
+  }
+
+  .cosmos-planet-item__nickname {
+    font-size: 0.65rem;
+  }
+
+  .cosmos-planet-item .cosmos-badge {
+    font-size: 0.55rem;
+    padding: 1px 6px;
+  }
+}

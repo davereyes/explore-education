@@ -1,0 +1,25 @@
+.cosmos-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--cosmos-space-3);
+  border-radius: var(--cosmos-radius-pill);
+  font-size: 0.7rem;
+  font-weight: var(--cosmos-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cosmos-badge--muted {
+  background: var(--cosmos-color-bg-muted);
+  color: var(--cosmos-color-ink-mute);
+}
+
+.cosmos-badge--coral {
+  background: var(--cosmos-color-coral-soft);
+  color: var(--cosmos-color-coral-deep);
+}
+
+.cosmos-badge--teal {
+  background: var(--cosmos-color-teal-soft);
+  color: var(--cosmos-color-teal-deep);
+}

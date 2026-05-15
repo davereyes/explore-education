@@ -1,0 +1,164 @@
+.cosmos-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-5);
+  padding: var(--cosmos-space-7) var(--cosmos-space-8);
+  overflow: hidden;
+}
+
+/* Planet viewer is a background layer that matches the hero's CONTENT area
+   (inset to skip the padding that clears the floating sidebar / details panel).
+   That way the planet centers in the visible central area, never behind a panel. */
+/* The viewer extends EDGE-TO-EDGE of the hero (negating the hero's padding
+   that clears the sidebar / details panel). This lets the planet flow
+   BEHIND the floating cards (which sit at z-index 2 on top of the viewer
+   at z-index 0). Cards now visually "occlude" the planet smoothly instead
+   of hard-clipping the canvas at the panel edges. */
+.cosmos-hero__viewer {
+  position: absolute;
+  top: var(--cosmos-space-7);
+  bottom: var(--cosmos-space-7);
+  left: calc(-1 * (var(--cosmos-sidebar-width) + var(--cosmos-space-8)));
+  right: calc(-1 * (var(--cosmos-rail-width) + var(--cosmos-space-8)));
+  z-index: 0;
+}
+
+@media (max-width: 1180px) {
+  .cosmos-hero__viewer {
+    right: calc(-1 * var(--cosmos-space-8));
+  }
+}
+
+@media (max-width: 820px) {
+  .cosmos-hero__viewer {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    height: 60vh;
+    margin-top: var(--cosmos-space-4);
+  }
+}
+
+.cosmos-hero__top,
+.cosmos-hero__description,
+.cosmos-hero__chips,
+.cosmos-hero__actions {
+  position: relative;
+  z-index: 2;
+}
+
+.cosmos-hero__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--cosmos-space-6);
+}
+
+.cosmos-hero__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-2);
+  max-width: 60ch;
+}
+
+.cosmos-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cosmos-space-2);
+  font-family: var(--cosmos-font-mono);
+  font-size: var(--cosmos-text-xs);
+  letter-spacing: 0.18em;
+  color: var(--cosmos-color-coral);
+  text-transform: uppercase;
+}
+
+.cosmos-hero__crosshair {
+  color: var(--cosmos-color-coral);
+  font-size: var(--cosmos-text-base);
+}
+
+.cosmos-hero__title {
+  font-family: var(--cosmos-font-display);
+  font-size: clamp(2.5rem, 5vw, var(--cosmos-text-4xl));
+  font-weight: var(--cosmos-weight-bold);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  /* color is set inline from planet.color */
+}
+
+.cosmos-hero__nickname {
+  font-family: var(--cosmos-font-mono);
+  font-size: var(--cosmos-text-xs);
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.cosmos-hero__telemetry {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+  font-size: var(--cosmos-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.cosmos-hero__telemetry strong {
+  color: rgba(255, 255, 255, 0.92);
+  margin-left: var(--cosmos-space-2);
+  font-weight: var(--cosmos-weight-semibold);
+}
+
+.cosmos-hero__telemetry-active {
+  color: var(--cosmos-color-teal) !important;
+}
+
+.cosmos-hero__description {
+  max-width: 60ch;
+  font-size: var(--cosmos-text-md);
+  color: rgba(255, 255, 255, 0.78);
+  line-height: var(--cosmos-leading-relaxed);
+}
+
+.cosmos-hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cosmos-space-3);
+}
+
+.cosmos-hero__actions {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--cosmos-space-4);
+  padding-top: var(--cosmos-space-3);
+}
+
+.cosmos-hero__actions-side {
+  /* Empty side cells balance the grid so the center buttons stay perfectly
+     centered regardless of zoom controls width. */
+  display: flex;
+  align-items: center;
+}
+
+.cosmos-hero__actions-side--end {
+  justify-content: flex-end;
+}
+
+.cosmos-hero__actions-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cosmos-space-4);
+}
+
+/* The viewer accepts pointer events (so the canvas can drag and the zoom
+   buttons can be clicked). Hero text/buttons are at higher z-index so they
+   still receive their own clicks naturally via stacking order. */

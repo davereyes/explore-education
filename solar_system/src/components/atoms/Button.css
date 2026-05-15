@@ -1,0 +1,61 @@
+.cosmos-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cosmos-space-2);
+  min-height: var(--cosmos-touch-min);
+  padding: var(--cosmos-space-3) var(--cosmos-space-6);
+  border-radius: var(--cosmos-radius-pill);
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-semibold);
+  font-size: var(--cosmos-text-base);
+  letter-spacing: 0.02em;
+  transition: background var(--cosmos-dur-base) var(--cosmos-ease-out),
+    box-shadow var(--cosmos-dur-base) var(--cosmos-ease-out),
+    color var(--cosmos-dur-base) var(--cosmos-ease-out);
+}
+
+.cosmos-btn:focus-visible {
+  outline: 3px solid var(--cosmos-color-coral);
+  outline-offset: 3px;
+}
+
+.cosmos-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.cosmos-btn--primary {
+  background: var(--cosmos-color-coral);
+  color: #fff;
+  box-shadow: var(--cosmos-shadow-glow-coral);
+}
+.cosmos-btn--primary:hover {
+  background: var(--cosmos-color-coral-deep);
+}
+
+.cosmos-btn--secondary {
+  background: var(--cosmos-color-bg-elevated);
+  color: var(--cosmos-color-ink-soft);
+  box-shadow: var(--cosmos-shadow-sm);
+  border: 1px solid var(--cosmos-color-line);
+}
+.cosmos-btn--secondary:hover {
+  color: var(--cosmos-color-ink);
+  border-color: var(--cosmos-color-coral);
+}
+
+.cosmos-btn--ghost {
+  background: transparent;
+  color: var(--cosmos-color-ink-soft);
+}
+.cosmos-btn--ghost:hover {
+  color: var(--cosmos-color-coral);
+}
+
+.cosmos-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--cosmos-text-md);
+}

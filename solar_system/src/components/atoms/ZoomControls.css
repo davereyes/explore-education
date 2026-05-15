@@ -1,0 +1,33 @@
+.cosmos-zoom {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--cosmos-space-2);
+}
+
+.cosmos-zoom__btn {
+  pointer-events: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--cosmos-color-bg-elevated);
+  border: 1px solid var(--cosmos-color-line);
+  color: var(--cosmos-color-ink);
+  font-family: var(--cosmos-font-display);
+  font-size: 1.4rem;
+  font-weight: var(--cosmos-weight-bold);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--cosmos-shadow-sm);
+  cursor: pointer;
+  transition: background 0.18s var(--cosmos-ease-out), color 0.18s var(--cosmos-ease-out),
+    border-color 0.18s var(--cosmos-ease-out);
+}
+
+.cosmos-zoom__btn:hover {
+  background: var(--cosmos-color-coral);
+  color: #fff;
+  border-color: var(--cosmos-color-coral);
+}

@@ -1,0 +1,182 @@
+.cosmos-viewer3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  container-type: size;
+}
+
+/* When the 3D canvas mounts, fill the container; the canvas handles
+   its own internal layout and the moons/orbit are inside the GL scene. */
+.cosmos-viewer3d--webgl > canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* ----- Core view labels (rendered via drei <Html>) ----- */
+.cosmos-core-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cosmos-space-2);
+  padding: 6px var(--cosmos-space-3);
+  border-radius: var(--cosmos-radius-pill);
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-semibold);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.cosmos-core-label__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.cosmos-core-label__name {
+  color: #fff;
+}
+
+.cosmos-core-label__size {
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--cosmos-font-mono);
+  font-weight: var(--cosmos-weight-regular);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* Anchor for halo + orbit + planet.
+   Centered HORIZONTALLY in the visible content area, but pushed DOWN
+   vertically (~60%) so the text content (title, description, chips) lives
+   on top without overlapping the planet (estilo Claude Design). */
+.cosmos-viewer3d__stage {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+}
+
+@media (max-width: 820px) {
+  .cosmos-viewer3d__stage {
+    top: 50%;
+  }
+}
+
+/* All three layers anchored to the same center point.
+   The planet uses a separate __planet-anchor wrapper because framer-motion
+   writes its own transform on __planet-wrap and would override translate. */
+.cosmos-viewer3d__halo,
+.cosmos-viewer3d__orbit,
+.cosmos-viewer3d__planet-anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+/* Soft background glow behind planet */
+.cosmos-viewer3d__halo {
+  width: min(75cqmin, 640px);
+  height: min(75cqmin, 640px);
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(0, 121, 247, 0.12) 0%,
+    rgba(0, 121, 247, 0.04) 45%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  pointer-events: none;
+}
+
+/* Decorative dashed orbit ring */
+.cosmos-viewer3d__orbit {
+  width: min(66cqmin, 560px);
+  height: min(66cqmin, 560px);
+  border: 1px dashed rgba(0, 121, 247, 0.18);
+  animation: cosmos-spin 90s linear infinite;
+  pointer-events: none;
+}
+
+/* Planet anchor: holds the size, no scale/opacity animation here */
+.cosmos-viewer3d__planet-anchor {
+  width: min(56cqmin, 480px);
+  height: min(56cqmin, 480px);
+}
+
+/* Planet wrapper: framer-motion target, fills the anchor */
+.cosmos-viewer3d__planet-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cosmos-viewer3d__planet {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow:
+    inset -28px -36px 70px rgba(0, 0, 0, 0.32),
+    inset 20px 14px 50px rgba(255, 255, 255, 0.18),
+    0 26px 70px rgba(0, 121, 247, 0.20);
+  animation: cosmos-float 8s var(--cosmos-ease-in-out) infinite;
+}
+
+.cosmos-viewer3d__planet-shade {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 70% 70%, transparent 50%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+/* Floating drop shadow below planet */
+.cosmos-viewer3d__shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -8%;
+  width: 80%;
+  height: 6%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(20, 26, 40, 0.18) 0%,
+    rgba(20, 26, 40, 0) 70%
+  );
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+@keyframes cosmos-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes cosmos-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+

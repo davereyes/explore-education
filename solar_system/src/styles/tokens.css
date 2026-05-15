@@ -1,0 +1,108 @@
+:root {
+  /* ----- Color palette ----- */
+  --cosmos-color-bg: #f4f5f7;
+  --cosmos-color-bg-elevated: #ffffff;
+  --cosmos-color-bg-muted: #eceef1;
+  --cosmos-color-surface-glow: rgba(231, 111, 81, 0.08);
+
+  --cosmos-color-ink: #1c1f24;
+  --cosmos-color-ink-soft: #4a5161;
+  --cosmos-color-ink-mute: #8a93a3;
+  --cosmos-color-ink-disabled: #b8bfca;
+
+  --cosmos-color-line: #dee2e8;
+  --cosmos-color-line-soft: #e8ebef;
+
+  /* Brand
+     Note: the CSS variables keep their original "coral" name for stability
+     (used across hundreds of CSS rules) but the values are now blue. Treat
+     `--cosmos-color-coral` as the brand primary token. */
+  --cosmos-color-coral: #0079f7;
+  --cosmos-color-coral-soft: #dceafe;
+  --cosmos-color-coral-deep: #0061c7;
+  --cosmos-color-teal: #2a9d8f;
+  --cosmos-color-teal-soft: #d6efeb;
+  --cosmos-color-teal-deep: #1f7a6f;
+
+  --cosmos-color-warning: #e9c46a;
+  --cosmos-color-info: #6c8ebf;
+  --cosmos-color-purple: #8e7dbe;
+
+  /* Planet accents */
+  --cosmos-planet-mercury: #b1a59a;
+  --cosmos-planet-venus: #e0c089;
+  --cosmos-planet-earth: #3c83b8;
+  --cosmos-planet-mars: #e76f51;
+  --cosmos-planet-jupiter: #c89572;
+  --cosmos-planet-saturn: #e3c98e;
+  --cosmos-planet-uranus: #9fd3d1;
+  --cosmos-planet-neptune: #3d5fa3;
+  --cosmos-planet-sun: #f5a93b;
+
+  /* ----- Typography ----- */
+  --cosmos-font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --cosmos-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --cosmos-font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  --cosmos-text-xs: 0.75rem;
+  --cosmos-text-sm: 0.875rem;
+  --cosmos-text-base: 1rem;
+  --cosmos-text-md: 1.125rem;
+  --cosmos-text-lg: 1.375rem;
+  --cosmos-text-xl: 1.75rem;
+  --cosmos-text-2xl: 2.25rem;
+  --cosmos-text-3xl: 3rem;
+  --cosmos-text-4xl: 4.5rem;
+
+  --cosmos-leading-tight: 1.15;
+  --cosmos-leading-snug: 1.3;
+  --cosmos-leading-normal: 1.5;
+  --cosmos-leading-relaxed: 1.7;
+
+  --cosmos-weight-regular: 400;
+  --cosmos-weight-medium: 500;
+  --cosmos-weight-semibold: 600;
+  --cosmos-weight-bold: 700;
+
+  /* ----- Spacing (4px base) ----- */
+  --cosmos-space-1: 0.25rem;
+  --cosmos-space-2: 0.5rem;
+  --cosmos-space-3: 0.75rem;
+  --cosmos-space-4: 1rem;
+  --cosmos-space-5: 1.25rem;
+  --cosmos-space-6: 1.5rem;
+  --cosmos-space-7: 2rem;
+  --cosmos-space-8: 2.5rem;
+  --cosmos-space-9: 3rem;
+  --cosmos-space-10: 4rem;
+
+  /* ----- Radii ----- */
+  --cosmos-radius-xs: 6px;
+  --cosmos-radius-sm: 10px;
+  --cosmos-radius-md: 14px;
+  --cosmos-radius-lg: 20px;
+  --cosmos-radius-xl: 28px;
+  --cosmos-radius-pill: 9999px;
+
+  /* ----- Shadows ----- */
+  --cosmos-shadow-xs: 0 1px 2px rgba(20, 26, 40, 0.04);
+  --cosmos-shadow-sm: 0 2px 6px rgba(20, 26, 40, 0.05), 0 1px 2px rgba(20, 26, 40, 0.04);
+  --cosmos-shadow-md: 0 8px 24px rgba(20, 26, 40, 0.06), 0 2px 4px rgba(20, 26, 40, 0.04);
+  --cosmos-shadow-lg: 0 16px 40px rgba(20, 26, 40, 0.08), 0 4px 12px rgba(20, 26, 40, 0.04);
+  --cosmos-shadow-glow-coral: 0 8px 24px rgba(0, 121, 247, 0.28);
+  --cosmos-shadow-glow-teal: 0 8px 24px rgba(42, 157, 143, 0.28);
+
+  /* ----- Motion ----- */
+  --cosmos-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --cosmos-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --cosmos-dur-fast: 140ms;
+  --cosmos-dur-base: 240ms;
+  --cosmos-dur-slow: 420ms;
+
+  /* ----- Layout ----- */
+  --cosmos-sidebar-width: 282px;
+  --cosmos-rail-width: 317px;
+  --cosmos-touch-min: 44px;
+  --cosmos-z-overlay: 100;
+  --cosmos-z-modal: 200;
+}

@@ -1,0 +1,18 @@
+.cosmos-sphere {
+  position: relative;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.cosmos-sphere__ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  border-radius: 50%;
+  border: 2px solid;
+  border-color: inherit;
+  pointer-events: none;
+  opacity: 0.7;
+}

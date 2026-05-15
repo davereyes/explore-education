@@ -1,0 +1,188 @@
+/* ================================================================
+   Dark mode glass cards & text overrides.
+   Activated by `data-theme="dark"` on `.cosmos-explorer`.
+
+   Provides:
+   - Cards: rgba white at ~5% + backdrop-filter blur + subtle border
+            ("liquid glass" look)
+   - Text:  white-ish hierarchy (full, 70%, 50%)
+   - Lines, dividers, dashes: white at 8-12%
+
+   Note: the explorer's background + starfield are theme-AGNOSTIC (always
+   dark cosmos). The toggle exclusively switches the cards' appearance.
+   ================================================================ */
+
+/* Liquid-glass cards: a very thin white veil that lets the dark background
+   show through. The blur is what darkens/diffuses, not the tint.
+   Inspired by Apple Materials / iOS overlays. */
+[data-theme='dark'] .cosmos-sidebar__card,
+[data-theme='dark'] .cosmos-details__section,
+[data-theme='dark'] .cosmos-theme-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* ===== Sidebar ===== */
+[data-theme='dark'] .cosmos-sidebar__brand-name {
+  color: #f0f3f8;
+}
+[data-theme='dark'] .cosmos-sidebar__brand-sub {
+  color: rgba(240, 243, 248, 0.5);
+}
+[data-theme='dark'] .cosmos-sidebar__section-title {
+  color: #f0f3f8;
+}
+
+/* ===== Planet list items ===== */
+[data-theme='dark'] .cosmos-planet-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+[data-theme='dark'] .cosmos-planet-item:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--cosmos-color-coral);
+}
+[data-theme='dark'] .cosmos-planet-item--selected {
+  background: rgba(0, 121, 247, 0.12);
+  border-color: var(--cosmos-color-coral);
+}
+[data-theme='dark'] .cosmos-planet-item__name {
+  color: #f0f3f8;
+}
+[data-theme='dark'] .cosmos-planet-item__nickname {
+  color: rgba(240, 243, 248, 0.55);
+}
+
+/* ===== Back to platform button ===== */
+[data-theme='dark'] .cosmos-back-to-platform {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(240, 243, 248, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+[data-theme='dark'] .cosmos-back-to-platform:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: var(--cosmos-color-coral);
+}
+
+/* ===== Details panel ===== */
+[data-theme='dark'] .cosmos-details__title {
+  color: #f0f3f8;
+}
+
+/* ===== Stat rows ===== */
+[data-theme='dark'] .cosmos-stat__label {
+  color: rgba(240, 243, 248, 0.7);
+}
+[data-theme='dark'] .cosmos-stat__value {
+  color: #f0f3f8;
+}
+[data-theme='dark'] .cosmos-stat__unit {
+  color: rgba(240, 243, 248, 0.5);
+}
+[data-theme='dark'] .cosmos-stat__bar {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ===== Fun fact cards ===== */
+[data-theme='dark'] .cosmos-fact {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+[data-theme='dark'] .cosmos-fact:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--cosmos-color-coral);
+}
+[data-theme='dark'] .cosmos-fact--expanded {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(0, 121, 247, 0.12) 100%
+  );
+  border-color: var(--cosmos-color-coral);
+}
+[data-theme='dark'] .cosmos-fact__title {
+  color: #f0f3f8;
+}
+[data-theme='dark'] .cosmos-fact__body {
+  color: rgba(240, 243, 248, 0.7);
+}
+[data-theme='dark'] .cosmos-fact__emoji {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== Theme toggle ===== */
+[data-theme='dark'] .cosmos-theme-toggle__group {
+  background: rgba(0, 0, 0, 0.30);
+}
+[data-theme='dark'] .cosmos-theme-toggle__btn {
+  color: rgba(240, 243, 248, 0.6);
+}
+[data-theme='dark'] .cosmos-theme-toggle__btn:hover {
+  color: #fff;
+}
+[data-theme='dark'] .cosmos-theme-toggle__btn--active {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Hero chips: liquid-glass + corner edge highlight =====
+   Override ALL color tones (warm/coral/teal) with a single neutral glass
+   look. The CSS-mask trick renders a 1px ring whose opacity varies along a
+   135° diagonal, so light "hits" the top-left and bottom-right corners — the
+   look Apple uses on iOS/macOS glass surfaces. */
+[data-theme='dark'] .cosmos-chip,
+[data-theme='dark'] .cosmos-chip--warm,
+[data-theme='dark'] .cosmos-chip--coral,
+[data-theme='dark'] .cosmos-chip--teal {
+  position: relative;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid transparent;
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+[data-theme='dark'] .cosmos-chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 255, 255, 0.06) 28%,
+    rgba(255, 255, 255, 0.06) 72%,
+    rgba(255, 255, 255, 0.55) 100%
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* ===== Zoom controls ===== */
+[data-theme='dark'] .cosmos-zoom__btn {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #f0f3f8;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+[data-theme='dark'] .cosmos-zoom__btn:hover {
+  background: var(--cosmos-color-coral);
+  color: #fff;
+  border-color: var(--cosmos-color-coral);
+}

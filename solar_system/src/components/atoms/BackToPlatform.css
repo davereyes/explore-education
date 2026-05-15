@@ -1,0 +1,32 @@
+.cosmos-back-to-platform {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cosmos-space-2);
+  padding: var(--cosmos-space-3) var(--cosmos-space-5);
+  background: var(--cosmos-color-bg-elevated);
+  border: 1px solid var(--cosmos-color-line);
+  border-radius: var(--cosmos-radius-pill);
+  box-shadow: var(--cosmos-shadow-sm);
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-semibold);
+  font-size: var(--cosmos-text-sm);
+  letter-spacing: 0.04em;
+  color: var(--cosmos-color-ink-soft);
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.cosmos-back-to-platform:hover {
+  color: var(--cosmos-color-coral);
+  border-color: var(--cosmos-color-coral);
+}
+
+.cosmos-back-to-platform__arrow {
+  font-size: var(--cosmos-text-md);
+  line-height: 1;
+}
+
+.cosmos-back-to-platform__label {
+  font-size: var(--cosmos-text-sm);
+}

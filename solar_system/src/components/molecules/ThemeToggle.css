@@ -1,0 +1,50 @@
+.cosmos-theme-toggle {
+  display: flex;
+  flex-direction: column;
+  padding: var(--cosmos-space-3);
+  background: var(--cosmos-color-bg-elevated);
+  border-radius: var(--cosmos-radius-lg);
+}
+
+.cosmos-theme-toggle__group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--cosmos-space-2);
+  padding: 4px;
+  background: var(--cosmos-color-bg-muted);
+  border-radius: var(--cosmos-radius-pill);
+}
+
+.cosmos-theme-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cosmos-space-2);
+  padding: var(--cosmos-space-2) var(--cosmos-space-3);
+  border-radius: var(--cosmos-radius-pill);
+  background: transparent;
+  border: none;
+  color: var(--cosmos-color-ink-soft);
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-semibold);
+  font-size: var(--cosmos-text-sm);
+  cursor: pointer;
+  transition: background 0.2s var(--cosmos-ease-out), color 0.2s var(--cosmos-ease-out),
+    box-shadow 0.2s var(--cosmos-ease-out);
+  min-height: 32px;
+}
+
+.cosmos-theme-toggle__btn:hover {
+  color: var(--cosmos-color-ink);
+}
+
+.cosmos-theme-toggle__btn--active {
+  background: var(--cosmos-color-bg-elevated);
+  color: var(--cosmos-color-ink);
+  box-shadow: var(--cosmos-shadow-sm);
+}
+
+.cosmos-theme-toggle__icon {
+  font-size: 0.95rem;
+  line-height: 1;
+}
