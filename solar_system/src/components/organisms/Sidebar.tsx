@@ -93,6 +93,12 @@ export const Sidebar: FC = () => {
  * concéntricas con planetitas en cada una. Mismo tamaño y proporciones
  * que el logo COSMOS.
  */
+/* Los hex de los planetitas mirror lo que cada planeta usa como `titleColor`
+   en `src/data/planets.ts`. SVG `fill` no acepta `var(--cosmos-*)` dentro
+   de elementos primitivos como `<circle>` sin usar `<style>` embebido, así
+   que mantenemos los hex aquí en sincronía manual.
+   Sol = sol.titleColor; azul = tierra.titleColor;
+   rojo = marte.titleColor; café = jupiter.titleColor. */
 const SystemSolarIcon: FC = () => (
   <div className="cosmos-sidebar__system-icon" aria-hidden>
     <svg viewBox="0 0 44 44" width="44" height="44">
@@ -100,11 +106,11 @@ const SystemSolarIcon: FC = () => (
       <circle cx="22" cy="22" r="10" fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="0.6" />
       <circle cx="22" cy="22" r="15" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="0.6" />
       <circle cx="22" cy="22" r="20" fill="none" stroke="rgba(255,255,255,0.16)" strokeWidth="0.6" />
-      {/* Sun */}
+      {/* Sun (sol.titleColor #ffd166) */}
       <circle cx="22" cy="22" r="4.5" fill="#ffd166">
         <animate attributeName="r" values="4.5;5;4.5" dur="2.4s" repeatCount="indefinite" />
       </circle>
-      {/* Planets on orbits */}
+      {/* Planets — colors mirror titleColor de Tierra / Marte / Júpiter */}
       <circle cx="32" cy="22" r="1.6" fill="#5ab6ff" />
       <circle cx="14" cy="35" r="1.4" fill="#ff8a6b" />
       <circle cx="34" cy="9" r="1.8" fill="#f4b485" />

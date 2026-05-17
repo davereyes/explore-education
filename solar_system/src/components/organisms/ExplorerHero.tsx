@@ -1,38 +1,29 @@
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
-import { getPlanet } from '../../data/planets';
 import { useExplorerStore } from '../../store/useExplorerStore';
 import type { Planet } from '../../types/planet';
 import { getDistanceAU, getSectorCode } from '../../utils/telemetry';
 import { Button } from '../atoms/Button';
 import { Chip } from '../atoms/Chip';
 import { StripNav } from '../atoms/StripNav';
-import { ZoomControls } from '../atoms/ZoomControls';
-import { ComparisonPair } from './ComparisonPair';
-import { PlanetViewer3D } from './PlanetViewer3D';
-import { getStripKmPerPx, ScaleStrip } from './ScaleStrip';
-import { SolarSystem3D } from './SolarSystem3D';
+import { ZoomControls } from '../molecules/ZoomControls';
+import { HeroCenterView } from './HeroCenterView';
+import { getStripKmPerPx } from './ScaleStrip';
 
 interface ExplorerHeroProps {
   planet: Planet;
 }
 
 /**
- * Hero del explorer — orquesta qué se ve en el centro según el contexto:
- *
- *  - selectedPlanetId === 'sistema-solar' → ScaleStrip (todos los planetas
- *    a escala real). Sin botones de acción.
- *  - viewMode === 'compare'               → ComparisonPair (2 planetas).
- *  - viewMode === 'core'                  → Planet3DCanvas en modo núcleo.
- *  - viewMode === 'explore' (default)     → Planet3DCanvas normal.
+ * Hero del explorer. Solo orquesta el chrome (título, descripción, chips,
+ * telemetría, fila de acciones). El qué se renderiza al centro vive en
+ * `HeroCenterView` para mantener este componente sin lógica de routing.
  */
 export const ExplorerHero: FC<ExplorerHeroProps> = ({ planet }) => {
   const viewMode = useExplorerStore((s) => s.viewMode);
   const setViewMode = useExplorerStore((s) => s.setViewMode);
   const systemView = useExplorerStore((s) => s.systemView);
   const setSystemView = useExplorerStore((s) => s.setSystemView);
-  const comparePartnerId = useExplorerStore((s) => s.comparePartnerId);
-
   const cameraZoom = useExplorerStore((s) => s.cameraZoom);
 
   const isSistemaSolar = planet.id === 'sistema-solar';
@@ -43,7 +34,6 @@ export const ExplorerHero: FC<ExplorerHeroProps> = ({ planet }) => {
 
   const hasCoreData = !!planet.coreLayers && planet.coreLayers.length > 0;
   const facts = planet.quickFacts;
-  const partner = getPlanet(comparePartnerId);
 
   return (
     <section className="cosmos-hero">
@@ -111,17 +101,7 @@ export const ExplorerHero: FC<ExplorerHeroProps> = ({ planet }) => {
       )}
 
       <div className="cosmos-hero__viewer">
-        {isSistemaSolar ? (
-          systemView === '3d' ? (
-            <SolarSystem3D />
-          ) : (
-            <ScaleStrip />
-          )
-        ) : isCompare ? (
-          <ComparisonPair a={planet} b={partner} />
-        ) : (
-          <PlanetViewer3D planetId={planet.id} />
-        )}
+        <HeroCenterView planet={planet} />
       </div>
 
       <div className="cosmos-hero__actions">
@@ -132,18 +112,18 @@ export const ExplorerHero: FC<ExplorerHeroProps> = ({ planet }) => {
           {isSistemaSolar && (
             <>
               <Button
-                variant={systemView === 'strip' ? 'primary' : 'secondary'}
-                icon="📏"
-                onClick={() => setSystemView('strip')}
-              >
-                Escala
-              </Button>
-              <Button
                 variant={systemView === '3d' ? 'primary' : 'secondary'}
                 icon="🌐"
                 onClick={() => setSystemView('3d')}
               >
                 Vista 3D
+              </Button>
+              <Button
+                variant={systemView === 'strip' ? 'primary' : 'secondary'}
+                icon="📏"
+                onClick={() => setSystemView('strip')}
+              >
+                Escala
               </Button>
             </>
           )}

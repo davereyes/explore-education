@@ -41,8 +41,9 @@
   border-radius: var(--cosmos-radius-pill);
   font-family: var(--cosmos-font-display);
   font-weight: var(--cosmos-weight-bold);
-  /* 50% bigger than the previous 10px */
-  font-size: 15px;
+  /* +70% sobre la versión anterior (15px → 26px) para mayor legibilidad
+     en la vista alejada del sistema solar. */
+  font-size: 26px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;

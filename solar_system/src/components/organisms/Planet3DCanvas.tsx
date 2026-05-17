@@ -19,8 +19,11 @@ import type { CoreLayer, Moon3D, Planet, PlanetRender3D } from '../../types/plan
 interface Planet3DCanvasProps {
   render3D: PlanetRender3D;
   planetId: string;
-  /** Datos completos del planeta — necesarios para la vista de núcleo. */
-  planet?: Planet;
+  /** Datos completos del planeta. Siempre requerido: cuando entras a
+   *  viewMode 'core' la escena lee `planet.coreLayers`; en 'explore' se
+   *  usa para varios IDs y configuraciones. Antes era opcional pero eso
+   *  ocultaba un type bug — el CoreView falla silente si llega undefined. */
+  planet: Planet;
 }
 
 /* ----- Saturn-style rings with radial UV mapping. The standard ringGeometry
@@ -314,7 +317,7 @@ interface SceneProps extends Planet3DCanvasProps {
 const Scene: FC<SceneProps> = ({ render3D, zoomScale, viewMode, planet }) => {
   const basePlanetScale = render3D.scale ?? 0.55;
   const surfaceTex = useTexture(render3D.textureUrl);
-  const isCore = viewMode === 'core' && !!planet?.coreLayers?.length;
+  const isCore = viewMode === 'core' && !!planet.coreLayers?.length;
 
   return (
     <>
@@ -324,7 +327,7 @@ const Scene: FC<SceneProps> = ({ render3D, zoomScale, viewMode, planet }) => {
       <directionalLight position={[0, -4, 4]} intensity={0.4} color="#ffd9a8" />
       {/* Outer group: vertical offset + per-planet scale * user zoom */}
       <group position={[0, -0.4, 0]} scale={basePlanetScale * zoomScale}>
-        {isCore && planet?.coreLayers ? (
+        {isCore && planet.coreLayers ? (
           <CoreView render3D={render3D} layers={planet.coreLayers} surfaceTex={surfaceTex} />
         ) : (
           <group rotation={[0, 0, MathUtils.degToRad(render3D.axialTiltDeg)]}>

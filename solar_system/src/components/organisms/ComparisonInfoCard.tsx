@@ -16,21 +16,15 @@ interface Props {
  * - Tip kid-friendly por planeta + metáfora de pareja
  */
 export const ComparisonInfoCard: FC<Props> = ({ a, b }) => {
-  const setSelectedPlanet = useExplorerStore((s) => s.setSelectedPlanet);
-  const setComparePartner = useExplorerStore((s) => s.setComparePartner);
+  const setComparisonPair = useExplorerStore((s) => s.setComparisonPair);
   const rows = compareRows(a, b);
   const metaphor = getPairMetaphor(a.id, b.id);
 
-  const handleA = (id: PlanetId) => {
-    // El primer planeta es siempre el "selectedPlanet" — cambiarlo trae el
-    // efecto deseado (el resto del Hero también muta). Mantenemos viewMode.
-    setSelectedPlanet(id);
-    // setSelectedPlanet también resetea viewMode='explore', así que aquí
-    // re-activamos compare en el siguiente tick mediante un parche:
-    requestAnimationFrame(() => {
-      useExplorerStore.getState().setViewMode('compare');
-    });
-  };
+  // Acción atómica: cambia el planeta A y mantiene a B + viewMode='compare'
+  // en un solo paso (antes había un requestAnimationFrame workaround porque
+  // setSelectedPlanet reseteaba viewMode a 'explore').
+  const handleA = (id: PlanetId) => setComparisonPair(id, b.id);
+  const handleB = (id: PlanetId) => setComparisonPair(a.id, id);
 
   return (
     <section className="cosmos-details__section">
@@ -51,7 +45,7 @@ export const ComparisonInfoCard: FC<Props> = ({ a, b }) => {
           label="B"
           value={b.id}
           exclude={a.id}
-          onChange={setComparePartner}
+          onChange={handleB}
           accent={b.titleColor ?? b.color}
         />
       </div>
@@ -88,13 +82,15 @@ export const ComparisonInfoCard: FC<Props> = ({ a, b }) => {
   );
 };
 
-const PlanetSelect: FC<{
+interface PlanetSelectProps {
   label: string;
   value: PlanetId;
   exclude: PlanetId;
   accent: string;
   onChange: (id: PlanetId) => void;
-}> = ({ label, value, exclude, accent, onChange }) => (
+}
+
+const PlanetSelect: FC<PlanetSelectProps> = ({ label, value, exclude, accent, onChange }) => (
   <label className="cosmos-compareinfo__select">
     <span className="cosmos-compareinfo__select-label">{label}</span>
     <select

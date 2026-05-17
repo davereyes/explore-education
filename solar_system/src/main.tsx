@@ -7,7 +7,7 @@ import './components/atoms/Button.css';
 import './components/atoms/Chip.css';
 import './components/atoms/PlanetSphere.css';
 import './components/atoms/StripNav.css';
-import './components/atoms/ZoomControls.css';
+import './components/molecules/ZoomControls.css';
 import './components/molecules/AmazingFactCard.css';
 import './components/molecules/FunFactCard.css';
 import './components/molecules/PageHeader.css';

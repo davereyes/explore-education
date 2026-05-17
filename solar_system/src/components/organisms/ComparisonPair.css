@@ -59,19 +59,22 @@
   font-size: var(--cosmos-text-md);
   font-weight: var(--cosmos-weight-bold);
   letter-spacing: 0.04em;
+  /* Color base = inline `style` con planet.titleColor — tiene contraste en
+     ambos themes. Sin embargo, si no hay titleColor en algún planeta caemos
+     al color del tema vía el padre. */
+  color: var(--cosmos-color-ink);
 }
 
 .cosmos-pair__dia {
   font-size: var(--cosmos-text-xs);
-  color: rgba(240, 243, 248, 0.55);
+  color: var(--cosmos-color-ink-mute);
 }
 
 .cosmos-pair__vs {
   font-family: var(--cosmos-font-display);
   font-size: var(--cosmos-text-2xl);
   font-weight: var(--cosmos-weight-bold);
-  color: #ffffff;
+  color: var(--cosmos-color-ink);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }

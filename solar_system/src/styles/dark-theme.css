@@ -140,8 +140,55 @@
 [data-theme='dark'] .cosmos-fact__body {
   color: rgba(240, 243, 248, 0.7);
 }
-[data-theme='dark'] .cosmos-fact__emoji {
+[data-theme='dark'] .cosmos-fact__emoji,
+[data-theme='dark'] .cosmos-amazing__emoji {
   background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .cosmos-fact__chevron,
+[data-theme='dark'] .cosmos-amazing__chevron {
+  color: #ffffff;
+}
+
+[data-theme='dark'] .cosmos-amazing {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+[data-theme='dark'] .cosmos-amazing:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--cosmos-color-coral);
+}
+[data-theme='dark'] .cosmos-amazing--expanded {
+  border-color: var(--cosmos-color-coral);
+}
+[data-theme='dark'] .cosmos-amazing__title {
+  color: #f0f3f8;
+}
+[data-theme='dark'] .cosmos-amazing__body {
+  color: rgba(240, 243, 248, 0.7);
+}
+
+/* Scrollbar visible en panel derecho dark */
+[data-theme='dark'] .cosmos-details__scroll {
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+[data-theme='dark'] .cosmos-details__scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+}
+[data-theme='dark'] .cosmos-details__scroll:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* ===== Comparar planetas (centro - ComparisonPair) ===== */
+[data-theme='dark'] .cosmos-pair__name {
+  color: #f0f3f8;
+}
+[data-theme='dark'] .cosmos-pair__dia {
+  color: rgba(240, 243, 248, 0.55);
+}
+[data-theme='dark'] .cosmos-pair__vs {
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 /* ===== Comparar planetas (panel derecho) ===== */

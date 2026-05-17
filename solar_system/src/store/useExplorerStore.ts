@@ -22,6 +22,10 @@ interface ExplorerState {
   cameraZoom: number;
   setSelectedPlanet: (id: PlanetId) => void;
   setComparePartner: (id: PlanetId) => void;
+  /** Set both sides of a Compare pair atomically, leaving the user in
+   *  compare viewMode. Use this from the right-panel selectors instead of
+   *  calling setSelectedPlanet + setViewMode separately. */
+  setComparisonPair: (a: PlanetId, b: PlanetId) => void;
   toggleFact: (index: number) => void;
   toggleAmazingFact: (id: string) => void;
   setTheme: (mode: ThemeMode) => void;
@@ -32,19 +36,29 @@ interface ExplorerState {
 }
 
 export const useExplorerStore = create<ExplorerState>((set) => ({
-  selectedPlanetId: 'marte',
+  // El "home" inicial es la vista 3D del sistema solar — primera impresión
+  // potente que muestra todo el contexto antes de que el niño entre a un
+  // planeta individual.
+  selectedPlanetId: 'sistema-solar',
   comparePartnerId: 'tierra',
   expandedFactIndex: 0,
   expandedAmazingId: null,
   theme: 'dark',
   viewMode: 'explore',
-  systemView: 'strip',
+  systemView: '3d',
   cameraZoom: 1,
   // Changing planet resets zoom and returns to explore view by default.
   // Si entras a "Sistema Solar" no hay viewMode aplicable — el hero se encarga.
   setSelectedPlanet: (id) =>
     set({ selectedPlanetId: id, cameraZoom: 1, viewMode: 'explore' }),
   setComparePartner: (id) => set({ comparePartnerId: id }),
+  setComparisonPair: (a, b) =>
+    set({
+      selectedPlanetId: a,
+      comparePartnerId: b,
+      viewMode: 'compare',
+      cameraZoom: 1,
+    }),
   toggleFact: (index) =>
     set((state) => ({ expandedFactIndex: state.expandedFactIndex === index ? null : index })),
   toggleAmazingFact: (id) =>

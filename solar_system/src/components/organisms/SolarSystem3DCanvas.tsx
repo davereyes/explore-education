@@ -4,7 +4,11 @@ import { useMemo, useRef, type FC } from 'react';
 import { Group, Mesh, Vector3 } from 'three';
 import { useExplorerStore } from '../../store/useExplorerStore';
 import { PLANETS } from '../../data/planets';
-import type { PlanetId } from '../../types/planet';
+import {
+  SOLAR_SYSTEM_PLANETS,
+  SUN_RADIUS,
+  type SolarSystemPlanetCfg,
+} from '../../data/solarSystemVisualization';
 import { RadialRing } from './Planet3DCanvas';
 
 /**
@@ -23,41 +27,9 @@ import { RadialRing } from './Planet3DCanvas';
  * Esferas de baja densidad (32 segmentos) para mantener fps.
  */
 
-interface PlanetCfg {
-  id: PlanetId;
-  textureUrl: string;
-  orbitRadius: number; // distancia al sol (unidades world)
-  size: number;        // radio visual (no real)
-  orbitSec: number;    // segundos para una vuelta
-  rotationSec: number; // segundos para girar sobre eje
-  tilt?: number;       // inclinación axial (radianes)
-  ringUrl?: string;
-  ringInner?: number;
-  ringOuter?: number;
-}
-
-// Distancias y tamaños VISUALMENTE balanceados (no escala real).
-const SUN_RADIUS = 1.8;
-const PLANETS_3D: PlanetCfg[] = [
-  { id: 'mercurio', textureUrl: '/textures/mercury.jpg',          orbitRadius: 3.5,  size: 0.22, orbitSec: 12,  rotationSec: 60 },
-  { id: 'venus',    textureUrl: '/textures/venus_atmosphere.jpg', orbitRadius: 4.8,  size: 0.36, orbitSec: 20,  rotationSec: 90 },
-  { id: 'tierra',   textureUrl: '/textures/earth_daymap.jpg',     orbitRadius: 6.2,  size: 0.38, orbitSec: 26,  rotationSec: 14, tilt: 0.41 },
-  { id: 'marte',    textureUrl: '/textures/mars.jpg',             orbitRadius: 7.8,  size: 0.28, orbitSec: 36,  rotationSec: 15 },
-  { id: 'jupiter',  textureUrl: '/textures/jupiter.jpg',          orbitRadius: 10.5, size: 0.95, orbitSec: 70,  rotationSec: 7  },
-  {
-    id: 'saturno',
-    textureUrl: '/textures/saturn.jpg',
-    orbitRadius: 13.5,
-    size: 0.85,
-    orbitSec: 100,
-    rotationSec: 8,
-    ringUrl: '/textures/saturn_ring_alpha.png',
-    ringInner: 1.2,
-    ringOuter: 2.0,
-  },
-  { id: 'urano',    textureUrl: '/textures/uranus.jpg',           orbitRadius: 16.5, size: 0.6,  orbitSec: 130, rotationSec: 10 },
-  { id: 'neptuno',  textureUrl: '/textures/neptune.jpg',          orbitRadius: 19.5, size: 0.6,  orbitSec: 160, rotationSec: 12 },
-];
+// Config visual (distancias, tamaños, velocidades) vive en data/.
+// Mira `src/data/solarSystemVisualization.ts` si necesitas ajustar.
+type PlanetCfg = SolarSystemPlanetCfg;
 
 export const SolarSystem3DCanvas: FC = () => {
   const zoom = useExplorerStore((s) => s.cameraZoom);
@@ -86,7 +58,7 @@ const Scene: FC<{ zoom: number }> = ({ zoom }) => (
 
     <group scale={zoom}>
       <Sun />
-      {PLANETS_3D.map((cfg) => (
+      {SOLAR_SYSTEM_PLANETS.map((cfg) => (
         <PlanetOrbit key={cfg.id} cfg={cfg} />
       ))}
     </group>
@@ -143,6 +115,7 @@ const PlanetOrbit: FC<{ cfg: PlanetCfg }> = ({ cfg }) => {
             ringTexture={cfg.ringUrl ? ringTex : undefined}
             ringInner={cfg.ringInner}
             ringOuter={cfg.ringOuter}
+            extraEmissive={cfg.extraEmissive ?? 0}
           />
           {/* Solo la Tierra trae luna */}
           {cfg.id === 'tierra' && <EarthMoon parentSize={cfg.size} />}
@@ -169,7 +142,11 @@ const PlanetSphere: FC<{
   ringTexture?: import('three').Texture;
   ringInner?: number;
   ringOuter?: number;
-}> = ({ size, texture, rotationSec, ringTexture, ringInner, ringOuter }) => {
+  /** Aumenta la intensidad emisiva del material (usa la propia textura como
+   *  emissive map). Útil para que un planeta específico (la Tierra) se
+   *  perciba más claro/luminoso que el resto. */
+  extraEmissive?: number;
+}> = ({ size, texture, rotationSec, ringTexture, ringInner, ringOuter, extraEmissive = 0 }) => {
   const ref = useRef<Mesh>(null);
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += delta * ((Math.PI * 2) / rotationSec);
@@ -178,7 +155,14 @@ const PlanetSphere: FC<{
     <>
       <mesh ref={ref}>
         <sphereGeometry args={[size, 32, 32]} />
-        <meshStandardMaterial map={texture} roughness={0.85} metalness={0.04} />
+        <meshStandardMaterial
+          map={texture}
+          roughness={0.85}
+          metalness={0.04}
+          emissiveMap={extraEmissive > 0 ? texture : undefined}
+          emissive={extraEmissive > 0 ? '#ffffff' : '#000000'}
+          emissiveIntensity={extraEmissive}
+        />
       </mesh>
       {ringTexture && ringInner && ringOuter && (
         <RadialRing inner={size * ringInner} outer={size * ringOuter} texture={ringTexture} />
