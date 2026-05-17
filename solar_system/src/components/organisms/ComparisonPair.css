@@ -5,7 +5,9 @@
   align-items: center;
   justify-content: center;
   gap: clamp(var(--cosmos-space-6), 8vw, var(--cosmos-space-10));
-  padding: var(--cosmos-space-6);
+  /* Padding-top más generoso que padding-bottom para empujar el par
+     hacia la mitad-baja del viewer, lejos del título. */
+  padding: 18vh var(--cosmos-space-6) var(--cosmos-space-6);
   pointer-events: auto;
 }
 
@@ -25,6 +27,8 @@
   filter: drop-shadow(0 16px 30px rgba(0, 0, 0, 0.45));
 }
 .cosmos-pair__planet--square {
+  /* Saturno: container == diámetro del planeta; los anillos del asset
+     hacen overflow lateral sin reservar espacio entre el planeta y el VS. */
   border-radius: 0;
   overflow: visible;
 }

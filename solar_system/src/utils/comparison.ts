@@ -8,13 +8,13 @@ import type { Planet, PlanetId } from '../types/planet';
 export const COMPARABLE_IDS: PlanetId[] = [...PLANET_ORDER];
 
 /**
- * Partner por defecto al activar Comparar: el siguiente planeta en orden.
- * Si el actual no es planeta (Sol, Sistema Solar), devolvemos Tierra.
+ * Partner por defecto al activar Comparar: la Tierra (referencia natural
+ * para que el niño dimensione cualquier planeta). Si el actual ya es la
+ * Tierra, usamos Marte como contraste.
  */
 export function getDefaultPartner(id: PlanetId): PlanetId {
-  const i = PLANET_ORDER.indexOf(id);
-  if (i === -1) return 'tierra';
-  return PLANET_ORDER[(i + 1) % PLANET_ORDER.length];
+  if (id === 'tierra') return 'marte';
+  return 'tierra';
 }
 
 /**

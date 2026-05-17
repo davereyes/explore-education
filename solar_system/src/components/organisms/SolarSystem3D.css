@@ -1,8 +1,19 @@
 .cosmos-solar3d {
   position: relative;
-  width: 100%;
   height: 100%;
+  /* El viewer del hero se extiende detrás de las cards (sidebar/details).
+     Re-aplicamos los offsets para que el canvas 3D solo viva en el área
+     central visible — así los planetas no quedan ocultos detrás de las
+     cards al orbitar. */
+  margin-left: calc(var(--cosmos-sidebar-width) + var(--cosmos-space-8) + var(--cosmos-space-4));
+  margin-right: calc(var(--cosmos-rail-width) + var(--cosmos-space-8) + var(--cosmos-space-4));
   pointer-events: auto;
+}
+
+@media (max-width: 1180px) {
+  .cosmos-solar3d {
+    margin-right: var(--cosmos-space-8);
+  }
 }
 
 .cosmos-solar3d canvas {

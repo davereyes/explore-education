@@ -46,7 +46,11 @@ const PairBody: FC<{ planet: Planet; size: number; delay: number }> = ({
   delay,
 }) => {
   const isSquare = planet.thumbnailShape === 'square';
-  const containerW = isSquare ? size * 2.3 : size;
+  // Para Saturno: el container es del tamaño del PLANETA SOLO (mismo que los
+  // otros), pero la imagen es 2.3× más ancha y se overflow horizontalmente
+  // centrada — así los anillos extienden afuera del box sin generar espacio
+  // vacío entre el planeta y el "VS".
+  const imageW = isSquare ? size * 2.3 : size;
   return (
     <motion.div
       key={planet.id}
@@ -57,10 +61,15 @@ const PairBody: FC<{ planet: Planet; size: number; delay: number }> = ({
     >
       <div
         className={`cosmos-pair__planet${isSquare ? ' cosmos-pair__planet--square' : ''}`}
-        style={{ width: containerW, height: size }}
+        style={{ width: size, height: size }}
       >
         {planet.thumbnailUrl ? (
-          <img src={planet.thumbnailUrl} alt={planet.name} draggable={false} />
+          <img
+            src={planet.thumbnailUrl}
+            alt={planet.name}
+            draggable={false}
+            style={isSquare ? { width: imageW, height: size, left: '50%', transform: 'translateX(-50%)', position: 'absolute' } : undefined}
+          />
         ) : (
           <div
             className="cosmos-pair__planet-fallback"

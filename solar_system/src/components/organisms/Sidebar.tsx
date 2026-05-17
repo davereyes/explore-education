@@ -46,6 +46,11 @@ export const Sidebar: FC = () => {
             <div className="cosmos-sidebar__brand-name">SISTEMA SOLAR</div>
             <div className="cosmos-sidebar__brand-sub">VISTA GENERAL</div>
           </div>
+          {isSystemSelected && (
+            <span className="cosmos-sidebar__system-tab" aria-hidden>
+              ACTIVO
+            </span>
+          )}
         </motion.button>
       </div>
 

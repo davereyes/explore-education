@@ -53,11 +53,11 @@ export const useExplorerStore = create<ExplorerState>((set) => ({
   setSystemView: (view) => set({ systemView: view, cameraZoom: 1 }),
   setViewMode: (mode) =>
     set((state) => {
-      // Al entrar en compare, asegurar que el partner no es el mismo planeta.
+      // Al entrar en compare SIEMPRE reseteamos al partner por defecto
+      // (Tierra para todos los planetas; Marte si el actual es Tierra).
+      // Así no "se queda pegado" el último partner manualmente elegido.
       const partner =
-        mode === 'compare' && state.comparePartnerId === state.selectedPlanetId
-          ? getDefaultPartner(state.selectedPlanetId)
-          : state.comparePartnerId;
+        mode === 'compare' ? getDefaultPartner(state.selectedPlanetId) : state.comparePartnerId;
       return { viewMode: mode, cameraZoom: 1, comparePartnerId: partner };
     }),
   zoomIn: () =>

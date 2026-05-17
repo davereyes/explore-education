@@ -629,8 +629,8 @@ export const PLANETS: Record<PlanetId, Planet> = {
     funFacts: [
       {
         emoji: '🌌',
-        title: 'Vivimos en una galaxia espiral',
-        body: 'La Vía Láctea tiene unos 100.000 millones de estrellas y mide ~100.000 años luz de ancho. Nuestro Sistema Solar es un puntito en uno de sus brazos.',
+        title: 'La Vía Láctea',
+        body: 'Vivimos en una galaxia espiral con unos 100.000 millones de estrellas que mide ~100.000 años luz de ancho. Nuestro Sistema Solar es un puntito en uno de sus brazos.',
       },
       {
         emoji: '🪨',

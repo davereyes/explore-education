@@ -111,12 +111,37 @@
 
 /* ----- Sistema Solar shortcut: same shell as the brand card but clickable. */
 .cosmos-sidebar__system-card {
+  position: relative;
   width: 100%;
   text-align: left;
   border: 1px solid transparent;
+  overflow: hidden;
   cursor: pointer;
   transition: border-color var(--cosmos-dur-base) var(--cosmos-ease-out),
     box-shadow var(--cosmos-dur-base) var(--cosmos-ease-out);
+}
+
+.cosmos-sidebar__system-card--selected {
+  padding-right: 22px;
+}
+
+.cosmos-sidebar__system-tab {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  background: var(--cosmos-color-coral);
+  color: #fff;
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-bold);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 
 .cosmos-sidebar__system-card--selected {
