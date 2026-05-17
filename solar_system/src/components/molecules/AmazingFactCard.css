@@ -1,0 +1,104 @@
+.cosmos-amazing {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  background: var(--cosmos-color-bg-elevated);
+  border: 1px solid var(--cosmos-color-line);
+  border-radius: var(--cosmos-radius-md);
+  overflow: hidden;
+  transition: border-color var(--cosmos-dur-base) var(--cosmos-ease-out),
+    box-shadow var(--cosmos-dur-base) var(--cosmos-ease-out);
+}
+
+.cosmos-amazing:hover {
+  border-color: var(--cosmos-color-coral);
+  box-shadow: var(--cosmos-shadow-sm);
+}
+
+.cosmos-amazing--expanded {
+  border-color: var(--cosmos-color-coral);
+}
+
+/* ===== Banner ===== */
+.cosmos-amazing__banner {
+  position: relative;
+  width: 100%;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cosmos-amazing__banner-planets {
+  display: flex;
+  align-items: center;
+  gap: var(--cosmos-space-3);
+}
+
+.cosmos-amazing__banner-img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+.cosmos-amazing__banner-img--square {
+  width: 96px; /* Saturno's ring extends wider — keep object-fit:contain */
+  border-radius: 0;
+  object-fit: contain;
+}
+.cosmos-amazing__banner-img--fallback {
+  /* radial-gradient already applied inline */
+}
+
+/* ===== Header ===== */
+.cosmos-amazing__header {
+  display: flex;
+  align-items: center;
+  gap: var(--cosmos-space-3);
+  padding: var(--cosmos-space-4);
+}
+
+.cosmos-amazing__emoji {
+  font-size: 1.35rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--cosmos-color-bg-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cosmos-amazing__title {
+  flex: 1;
+  font-family: var(--cosmos-font-display);
+  font-size: var(--cosmos-text-sm);
+  font-weight: var(--cosmos-weight-semibold);
+  color: var(--cosmos-color-ink);
+  line-height: var(--cosmos-leading-snug);
+}
+
+.cosmos-amazing__chevron {
+  font-size: var(--cosmos-text-lg);
+  font-weight: var(--cosmos-weight-bold);
+  color: var(--cosmos-color-coral);
+  width: 22px;
+  text-align: center;
+}
+
+/* ===== Body ===== */
+.cosmos-amazing__body-wrap {
+  overflow: hidden;
+}
+
+.cosmos-amazing__body {
+  padding: 0 var(--cosmos-space-4) var(--cosmos-space-4);
+  font-size: var(--cosmos-text-sm);
+  color: var(--cosmos-color-ink-soft);
+  line-height: var(--cosmos-leading-relaxed);
+}

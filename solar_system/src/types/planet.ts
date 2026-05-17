@@ -7,7 +7,19 @@ export type PlanetId =
   | 'saturno'
   | 'urano'
   | 'neptuno'
-  | 'sol';
+  | 'sol'
+  | 'sistema-solar';
+
+export interface AmazingFact {
+  id: string;
+  emoji: string;
+  title: string;
+  body: string;
+  /** Planeta(s) cuyo thumbnail PNG se usa como banner del card. */
+  bannerPlanetIds: PlanetId[];
+  /** Tono de fondo del banner (gradiente sutil detrás de las imágenes). */
+  accent: string;
+}
 
 export interface PlanetStat {
   label: string;
@@ -70,6 +82,9 @@ export interface Planet {
   /** Image used as the circular thumbnail in the sidebar list.
    *  If not set, falls back to the CSS radial-gradient sphere. */
   thumbnailUrl?: string;
+  /** Forma del thumbnail. 'square' se usa para cuerpos con anillos
+   *  (Saturno) donde un clip circular cortaría parte del asset. */
+  thumbnailShape?: 'circle' | 'square';
   available: boolean;
   shortDescription?: string;
   quickFacts?: { temperature: string; atmosphere: string; moons: string };

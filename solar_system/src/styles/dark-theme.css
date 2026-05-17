@@ -12,17 +12,45 @@
    dark cosmos). The toggle exclusively switches the cards' appearance.
    ================================================================ */
 
-/* Liquid-glass cards: a very thin white veil that lets the dark background
-   show through. The blur is what darkens/diffuses, not the tint.
-   Inspired by Apple Materials / iOS overlays. */
+/* Liquid-glass cards with Apple-style corner edge highlight.
+   Same look as the hero chips: white veil at 10% + blur + a 1px ring whose
+   opacity peaks at the top-left and bottom-right corners (135° gradient,
+   rendered via CSS mask trick). */
 [data-theme='dark'] .cosmos-sidebar__card,
 [data-theme='dark'] .cosmos-details__section,
 [data-theme='dark'] .cosmos-theme-toggle {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  position: relative;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid transparent;
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .cosmos-sidebar__card::before,
+[data-theme='dark'] .cosmos-details__section::before,
+[data-theme='dark'] .cosmos-theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 255, 255, 0.06) 28%,
+    rgba(255, 255, 255, 0.06) 72%,
+    rgba(255, 255, 255, 0.55) 100%
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
 }
 
 /* ===== Sidebar ===== */
@@ -116,6 +144,49 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* ===== Comparar planetas (panel derecho) ===== */
+[data-theme='dark'] .cosmos-compareinfo__selectors {
+  /* nothing structural — labels and selects re-skinned below */
+}
+[data-theme='dark'] .cosmos-compareinfo__select-label,
+[data-theme='dark'] .cosmos-compareinfo__vs {
+  color: rgba(240, 243, 248, 0.55);
+}
+[data-theme='dark'] .cosmos-compareinfo__select select {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #f0f3f8;
+}
+
+[data-theme='dark'] .cosmos-compareinfo__th,
+[data-theme='dark'] .cosmos-compareinfo__row {
+  border-bottom-color: rgba(255, 255, 255, 0.10);
+}
+[data-theme='dark'] .cosmos-compareinfo__th {
+  color: rgba(240, 243, 248, 0.5);
+}
+[data-theme='dark'] .cosmos-compareinfo__th span:not(:first-child) {
+  color: #f0f3f8;
+}
+[data-theme='dark'] .cosmos-compareinfo__label {
+  color: rgba(240, 243, 248, 0.7);
+}
+[data-theme='dark'] .cosmos-compareinfo__val {
+  color: #f0f3f8;
+}
+
+[data-theme='dark'] .cosmos-compareinfo__tip-name {
+  color: #f0f3f8;
+}
+[data-theme='dark'] .cosmos-compareinfo__tip-text {
+  color: rgba(240, 243, 248, 0.7);
+}
+
+[data-theme='dark'] .cosmos-compareinfo__metaphor {
+  background: rgba(0, 121, 247, 0.18);
+  color: #f0f3f8;
+}
+
 /* ===== Theme toggle ===== */
 [data-theme='dark'] .cosmos-theme-toggle__group {
   background: rgba(0, 0, 0, 0.30);
@@ -173,15 +244,17 @@
   pointer-events: none;
 }
 
-/* ===== Zoom controls ===== */
-[data-theme='dark'] .cosmos-zoom__btn {
+/* ===== Zoom controls + Strip nav arrows (mismo design system) ===== */
+[data-theme='dark'] .cosmos-zoom__btn,
+[data-theme='dark'] .cosmos-stripnav__btn {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.12);
   color: #f0f3f8;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
-[data-theme='dark'] .cosmos-zoom__btn:hover {
+[data-theme='dark'] .cosmos-zoom__btn:hover,
+[data-theme='dark'] .cosmos-stripnav__btn:hover {
   background: var(--cosmos-color-coral);
   color: #fff;
   border-color: var(--cosmos-color-coral);

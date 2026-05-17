@@ -1,0 +1,134 @@
+.cosmos-compareinfo__selectors {
+  display: flex;
+  align-items: center;
+  gap: var(--cosmos-space-2);
+}
+
+.cosmos-compareinfo__vs {
+  font-family: var(--cosmos-font-mono);
+  font-size: var(--cosmos-text-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cosmos-color-ink-mute);
+}
+
+.cosmos-compareinfo__select {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cosmos-compareinfo__select-label {
+  font-family: var(--cosmos-font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cosmos-color-ink-mute);
+}
+.cosmos-compareinfo__select select {
+  appearance: none;
+  width: 100%;
+  padding: var(--cosmos-space-2) var(--cosmos-space-3);
+  border-radius: var(--cosmos-radius-pill);
+  border: 1px solid var(--cosmos-color-line);
+  background: var(--cosmos-color-bg);
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-semibold);
+  font-size: var(--cosmos-text-sm);
+  cursor: pointer;
+  min-height: 36px;
+}
+
+/* ===== Tabla ===== */
+.cosmos-compareinfo__table {
+  display: flex;
+  flex-direction: column;
+}
+
+.cosmos-compareinfo__th,
+.cosmos-compareinfo__row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  align-items: center;
+  gap: var(--cosmos-space-2);
+  padding: var(--cosmos-space-2) 0;
+  border-bottom: 1px solid var(--cosmos-color-line-soft);
+}
+.cosmos-compareinfo__th {
+  font-family: var(--cosmos-font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cosmos-color-ink-mute);
+  border-bottom-width: 1px;
+}
+.cosmos-compareinfo__th span:not(:first-child),
+.cosmos-compareinfo__row .cosmos-compareinfo__val {
+  text-align: right;
+}
+
+.cosmos-compareinfo__label {
+  font-size: var(--cosmos-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cosmos-color-ink-soft);
+  font-weight: var(--cosmos-weight-semibold);
+}
+.cosmos-compareinfo__val {
+  font-size: var(--cosmos-text-sm);
+  font-weight: var(--cosmos-weight-bold);
+  color: var(--cosmos-color-ink);
+}
+
+/* ===== Tips por planeta ===== */
+.cosmos-compareinfo__tips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cosmos-space-3);
+  padding-top: var(--cosmos-space-3);
+}
+
+.cosmos-compareinfo__tip {
+  display: flex;
+  gap: var(--cosmos-space-3);
+  align-items: flex-start;
+}
+.cosmos-compareinfo__tip-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px currentColor;
+}
+.cosmos-compareinfo__tip-name {
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-bold);
+  font-size: var(--cosmos-text-sm);
+  color: var(--cosmos-color-ink);
+  margin-bottom: 2px;
+}
+.cosmos-compareinfo__tip-text {
+  font-size: var(--cosmos-text-sm);
+  color: var(--cosmos-color-ink-soft);
+  line-height: var(--cosmos-leading-snug);
+}
+
+/* ===== Metáfora ===== */
+.cosmos-compareinfo__metaphor {
+  display: flex;
+  gap: var(--cosmos-space-3);
+  align-items: flex-start;
+  padding: var(--cosmos-space-3) var(--cosmos-space-4);
+  background: var(--cosmos-color-coral-soft);
+  border-radius: var(--cosmos-radius-md);
+  color: var(--cosmos-color-coral-deep);
+}
+.cosmos-compareinfo__metaphor-emoji {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+.cosmos-compareinfo__metaphor p {
+  font-size: var(--cosmos-text-sm);
+  line-height: var(--cosmos-leading-snug);
+}

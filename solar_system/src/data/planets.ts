@@ -379,6 +379,7 @@ export const PLANETS: Record<PlanetId, Planet> = {
     colorAccent: '#a88f5c',
     titleColor: '#f5d885',
     thumbnailUrl: '/textures/tumbnails/saturn.png',
+    thumbnailShape: 'square',
     available: true,
     render3D: {
       textureUrl: '/textures/saturn.jpg',
@@ -588,6 +589,63 @@ export const PLANETS: Record<PlanetId, Planet> = {
         emoji: '🌍',
         title: 'Caben 1.3 millones de Tierras',
         body: 'Si vaciáramos el Sol, podríamos meter dentro más de un millón trescientas mil Tierras. ¡Es realmente gigantesco!',
+      },
+    ],
+  },
+
+  /* -------- Sistema Solar (entrada "macro" del sidebar) -------- */
+  'sistema-solar': {
+    id: 'sistema-solar',
+    name: 'Sistema Solar',
+    nickname: 'Nuestro vecindario cósmico',
+    diameterKm: 9_000_000_000, // ~diámetro de la órbita de Neptuno (referencia)
+    color: '#6c95e8',
+    colorAccent: '#243d70',
+    titleColor: '#a6c8ff',
+    thumbnailUrl: undefined, // CSS sphere por ahora
+    available: true,
+    shortDescription:
+      'Un sol, 8 planetas, decenas de lunas, asteroides y cometas viajando juntos por la Vía Láctea. Todo lo que conoces (incluida tú) vive aquí.',
+    quickFacts: {
+      temperature: '4,600 M años',
+      atmosphere: '8 planetas + 1 estrella',
+      moons: 'Vía Láctea',
+    },
+    stats: [
+      { label: 'Edad', value: '4,600', unit: 'M años', icon: STAT_ICONS.year },
+      { label: 'Planetas', value: '8', icon: STAT_ICONS.bodies },
+      { label: 'Lunas conocidas', value: '290+', icon: STAT_ICONS.moons },
+      {
+        label: 'Diámetro orbital',
+        value: '9,000',
+        unit: 'M km',
+        icon: STAT_ICONS.distance,
+      },
+      { label: 'Velocidad orbital', value: '220', unit: 'km/s', icon: STAT_ICONS.day },
+      { label: 'Año galáctico', value: '225', unit: 'M años', icon: STAT_ICONS.year },
+      { label: 'Brazo galáctico', value: 'Orión', icon: STAT_ICONS.composition },
+      { label: 'Distancia al centro', value: '26,000', unit: 'a-luz', icon: STAT_ICONS.distance },
+    ],
+    funFacts: [
+      {
+        emoji: '🌌',
+        title: 'Vivimos en una galaxia espiral',
+        body: 'La Vía Láctea tiene unos 100.000 millones de estrellas y mide ~100.000 años luz de ancho. Nuestro Sistema Solar es un puntito en uno de sus brazos.',
+      },
+      {
+        emoji: '🪨',
+        title: 'Cinturón de asteroides',
+        body: 'Entre Marte y Júpiter hay miles de rocas orbitando: el cinturón de asteroides. Si las juntaras todas, no harían ni media Luna.',
+      },
+      {
+        emoji: '❄️',
+        title: 'Más allá de Neptuno',
+        body: 'Existe el cinturón de Kuiper, una zona helada con planetas enanos como Plutón. Y más lejos aún está la nube de Oort, donde nacen los cometas.',
+      },
+      {
+        emoji: '🌀',
+        title: 'Todos giramos juntos',
+        body: 'El Sol y los planetas orbitan el centro de la Vía Láctea a 220 km/s. Dar una vuelta completa tarda 225 millones de años — una "año galáctico".',
       },
     ],
   },

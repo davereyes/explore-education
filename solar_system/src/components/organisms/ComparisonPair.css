@@ -1,0 +1,73 @@
+.cosmos-pair {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(var(--cosmos-space-6), 8vw, var(--cosmos-space-10));
+  padding: var(--cosmos-space-6);
+  pointer-events: auto;
+}
+
+.cosmos-pair__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cosmos-space-4);
+  flex-shrink: 0;
+}
+
+.cosmos-pair__planet {
+  position: relative;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  filter: drop-shadow(0 16px 30px rgba(0, 0, 0, 0.45));
+}
+.cosmos-pair__planet--square {
+  border-radius: 0;
+  overflow: visible;
+}
+.cosmos-pair__planet img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cosmos-pair__planet--square img {
+  object-fit: contain;
+}
+.cosmos-pair__planet-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.cosmos-pair__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.cosmos-pair__name {
+  font-family: var(--cosmos-font-display);
+  font-size: var(--cosmos-text-md);
+  font-weight: var(--cosmos-weight-bold);
+  letter-spacing: 0.04em;
+}
+
+.cosmos-pair__dia {
+  font-size: var(--cosmos-text-xs);
+  color: rgba(240, 243, 248, 0.55);
+}
+
+.cosmos-pair__vs {
+  font-family: var(--cosmos-font-display);
+  font-size: var(--cosmos-text-2xl);
+  font-weight: var(--cosmos-weight-bold);
+  color: #ffffff;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}

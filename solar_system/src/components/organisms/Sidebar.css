@@ -109,6 +109,34 @@
   letter-spacing: 0.16em;
 }
 
+/* ----- Sistema Solar shortcut: same shell as the brand card but clickable. */
+.cosmos-sidebar__system-card {
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color var(--cosmos-dur-base) var(--cosmos-ease-out),
+    box-shadow var(--cosmos-dur-base) var(--cosmos-ease-out);
+}
+
+.cosmos-sidebar__system-card--selected {
+  border-color: var(--cosmos-color-coral) !important;
+  box-shadow: var(--cosmos-shadow-glow-coral) !important;
+}
+
+.cosmos-sidebar__system-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 121, 247, 0.22), rgba(0, 0, 0, 0.55));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
 /* ----- Section card (Planetas / Nuestra Estrella) ----- */
 .cosmos-sidebar__section {
   display: flex;

@@ -28,7 +28,7 @@ interface Planet3DCanvasProps {
    ring. Here we remap UVs so U = (radius - inner) / (outer - inner). That
    makes each concentric band sample one column of the texture and follow the
    ring's curvature correctly. ----- */
-const RadialRing: FC<{ inner: number; outer: number; texture: Texture }> = ({
+export const RadialRing: FC<{ inner: number; outer: number; texture: Texture }> = ({
   inner,
   outer,
   texture,
@@ -80,54 +80,14 @@ const PlanetBody: FC<PlanetBodyProps> = ({ render3D }) => {
     if (cloudsRef.current) cloudsRef.current.rotation.y += delta * angularSpeed * 1.15;
   });
 
-  /* ----- Emissive body (Sun): glowing surface + corona halos.
-     Doesn't receive lighting and uses meshBasicMaterial so the texture
-     renders at full brightness like a star should. ----- */
+  /* ----- Emissive body (Sun): glowing surface only, sin corona.
+     meshBasicMaterial → texture a brillo pleno sin necesidad de luces. ----- */
   if (render3D.emissive) {
-    const glow = render3D.glowColor ?? '#ffb74a';
     return (
-      <>
-        <mesh ref={planetRef}>
-          <sphereGeometry args={[1, 96, 96]} />
-          <meshBasicMaterial map={surfaceTex} toneMapped={false} />
-        </mesh>
-        {/* Inner corona */}
-        <mesh scale={1.08}>
-          <sphereGeometry args={[1, 48, 48]} />
-          <meshBasicMaterial
-            color={glow}
-            transparent
-            opacity={0.45}
-            side={BackSide}
-            blending={AdditiveBlending}
-            depthWrite={false}
-          />
-        </mesh>
-        {/* Mid corona */}
-        <mesh scale={1.22}>
-          <sphereGeometry args={[1, 48, 48]} />
-          <meshBasicMaterial
-            color={glow}
-            transparent
-            opacity={0.20}
-            side={BackSide}
-            blending={AdditiveBlending}
-            depthWrite={false}
-          />
-        </mesh>
-        {/* Outer halo */}
-        <mesh scale={1.55}>
-          <sphereGeometry args={[1, 32, 32]} />
-          <meshBasicMaterial
-            color={glow}
-            transparent
-            opacity={0.08}
-            side={BackSide}
-            blending={AdditiveBlending}
-            depthWrite={false}
-          />
-        </mesh>
-      </>
+      <mesh ref={planetRef}>
+        <sphereGeometry args={[1, 96, 96]} />
+        <meshBasicMaterial map={surfaceTex} toneMapped={false} />
+      </mesh>
     );
   }
 
@@ -348,7 +308,7 @@ const CoreView: FC<CoreViewProps> = ({ render3D, layers, surfaceTex }) => {
 /* ----- The whole scene ----- */
 interface SceneProps extends Planet3DCanvasProps {
   zoomScale: number;
-  viewMode: 'explore' | 'core';
+  viewMode: 'explore' | 'core' | 'compare';
 }
 
 const Scene: FC<SceneProps> = ({ render3D, zoomScale, viewMode, planet }) => {

@@ -1,0 +1,144 @@
+/* ScaleStrip — la tira de planetas a escala.
+   El viewer del hero se extiende detrás de las cards (sidebar / details) para
+   que el planeta normal fluya behind ellas. En el strip eso esconde los
+   primeros planetas. Aquí re-aplicamos un margen para que el área scrolleable
+   coincida con la zona central visible. */
+.cosmos-strip {
+  position: relative;
+  height: 100%;
+  /* Re-aplicamos los offsets del viewer (que se extiende detrás de las cards)
+     + un buffer extra para que ningún planeta quede oculto bajo el sidebar. */
+  margin-left: calc(var(--cosmos-sidebar-width) + var(--cosmos-space-8) + var(--cosmos-space-4));
+  margin-right: calc(var(--cosmos-rail-width) + var(--cosmos-space-8) + var(--cosmos-space-4));
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+@media (max-width: 1180px) {
+  .cosmos-strip {
+    margin-right: var(--cosmos-space-8);
+  }
+}
+
+/* Outer scrollable container: native horizontal scroll, scrollbar siempre
+   visible y estilizada. */
+.cosmos-strip__scroll {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.05);
+}
+.cosmos-strip__scroll::-webkit-scrollbar {
+  height: 10px;
+}
+.cosmos-strip__scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+}
+.cosmos-strip__scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.cosmos-strip__scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+  background-clip: content-box;
+}
+
+/* Inner row — width:max-content fuerza el overflow horizontal. */
+.cosmos-strip__inner {
+  position: relative;
+  width: max-content;
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--cosmos-space-7), 6vw, var(--cosmos-space-10));
+  padding: var(--cosmos-space-6) var(--cosmos-space-7);
+}
+
+.cosmos-strip__baseline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  margin-top: 18px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.15) 0 8px,
+    transparent 8px 14px
+  );
+  pointer-events: none;
+}
+
+.cosmos-strip__item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--cosmos-space-3);
+  flex-shrink: 0;
+  /* Min-width fija por planeta — garantiza que (a) el strip siempre supera
+     el ancho visible y por tanto siempre hay scroll horizontal, y (b) los
+     planetas pequeños (Mercurio 5px, Venus 12px) tienen un column propio
+     legible con su label sin pegarse al siguiente. */
+  min-width: 140px;
+}
+
+.cosmos-strip__planet {
+  position: relative;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+  overflow: hidden;
+}
+.cosmos-strip__planet--square {
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+}
+.cosmos-strip__planet img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+.cosmos-strip__planet--square img {
+  object-fit: contain;
+}
+.cosmos-strip__planet-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.cosmos-strip__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+.cosmos-strip__name {
+  font-family: var(--cosmos-font-display);
+  font-weight: var(--cosmos-weight-semibold);
+  color: #f0f3f8;
+  font-size: var(--cosmos-text-sm);
+}
+.cosmos-strip__dia {
+  font-size: var(--cosmos-text-xs);
+  color: rgba(240, 243, 248, 0.55);
+}
