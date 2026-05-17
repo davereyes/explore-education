@@ -4,28 +4,56 @@ Estado global con **Zustand**. Una sola tienda, sin slices ni middleware por aho
 
 ## `useExplorerStore.ts`
 
+### Estado
+
 ```ts
 {
-  selectedPlanetId,      // qué planeta se está viendo en el Explorer
-  compareLeft,           // selección izquierda en /compare
-  compareRight,          // selección derecha en /compare
-  expandedFactIndex,     // qué fun fact está expandido (null = ninguno)
-  theme,                 // 'light' | 'dark' — temporal, solo afecta el fondo
-  setSelectedPlanet(id),
-  setCompareLeft(id),
-  setCompareRight(id),
-  toggleFact(index),     // toggle (si ya estaba expandido, colapsa)
-  setTheme(mode),
+  // ====== Selección / navegación ======
+  selectedPlanetId,        // 'mercurio' | 'venus' | … | 'sol' | 'sistema-solar'
+  comparePartnerId,        // segundo planeta del par en Compare (default 'tierra')
+  viewMode,                // 'explore' | 'core' | 'compare'
+  systemView,              // 'strip' | '3d'  (solo aplica cuando selectedPlanetId === 'sistema-solar')
+
+  // ====== Theming ======
+  theme,                   // 'light' | 'dark'
+
+  // ====== Vista 3D ======
+  cameraZoom,              // factor de escala aplicado al centro
+
+  // ====== Expansion / UI ephemeral compartida ======
+  expandedFactIndex,       // qué FunFact (Explore) está expandido
+  expandedAmazingId,       // qué AmazingFact (Compare) está expandido
 }
 ```
 
+### Acciones
+
+```ts
+setSelectedPlanet(id)                  // cambia planeta + reset zoom + viewMode='explore'
+setComparePartner(id)                  // cambia solo el partner del par
+setComparisonPair(a, b)                // ATÓMICO: cambia ambos + viewMode='compare' + reset zoom
+setViewMode(mode)                      // al entrar en 'compare' resetea partner al default
+setSystemView(view)                    // 'strip' | '3d'
+setTheme(mode)
+toggleFact(index)
+toggleAmazingFact(id)
+zoomIn() / zoomOut()                   // escala * ZOOM_STEP, clamp [ZOOM_MIN, ZOOM_MAX]
+```
+
+### Comportamientos importantes
+
+- **Cambiar planeta**: `setSelectedPlanet` también resetea `viewMode='explore'` y `cameraZoom=1`. Si vienes de compare/core, vuelves a la vista normal del nuevo planeta.
+- **Entrar a Compare**: `setViewMode('compare')` siempre resetea `comparePartnerId` al default (Tierra para todos; Marte si el actual es Tierra). Así nunca se queda "pegado" un partner manual.
+- **Default partner**: `getDefaultPartner(id)` en `utils/comparison.ts`.
+- **Initial state (home)**: arranca en `selectedPlanetId: 'sistema-solar'` + `systemView: '3d'` — primera impresión potente del sistema completo.
+
 ## Reglas
 
-- Selectores granulares en consumidores: `const x = useExplorerStore(s => s.x)` (no `const { x } = useExplorerStore()` para evitar re-renders innecesarios).
-- Sin async/effects en la store por ahora — todo es síncrono.
+- Selectores granulares en consumidores: `useExplorerStore(s => s.x)` (NO desestructurar todo).
+- Sin async/effects en la store — todo síncrono.
 - Si necesitas estado derivado, calcúlalo en el componente (con `useMemo` si es caro).
 
 ## Cuándo agregar al store vs `useState` local
 
-- **Store**: si el dato lo lee más de un componente cross-tree, o sobrevive al re-mount (ej: rotación de cámara, planeta seleccionado).
-- **useState local**: si es UI ephemeral de un solo componente (ej: hover state, input controlado).
+- **Store**: si el dato lo lee más de un componente cross-tree, o sobrevive al re-mount (ej: planeta seleccionado, zoom, expanded facts).
+- **useState local**: si es UI ephemeral de un solo componente (hover state, drag handle, input controlado).

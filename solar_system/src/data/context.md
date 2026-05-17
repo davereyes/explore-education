@@ -1,12 +1,16 @@
 # `data/`
 
-Datos hardcodeados de planetas y cuerpos del sistema solar.
+Datos hardcoded — única fuente de verdad para planetas, datos curiosos y config visual.
 
 ## Archivos
 
-- `planets.ts` — diccionario `Record<PlanetId, Planet>` con los 9 cuerpos (8 planetas + Sol).
+| Archivo                          | Contenido |
+|----------------------------------|-----------|
+| `planets.ts`                     | Diccionario `Record<PlanetId, Planet>`. Incluye los 8 planetas + Sol + `'sistema-solar'` (entrada macro virtual con sus propias stats sobre el sistema). |
+| `amazingFacts.ts`                | 6 "¿Sabías qué?" para mostrar en CompareDetails. Cada uno tiene emoji, título, body, `bannerPlanetIds` (qué thumbnails mostrar como banner) y un `accent` para el gradient del banner. |
+| `solarSystemVisualization.ts`    | Config 3D del sistema solar (distancias, tamaños, velocidades, tilts, anillos). Separa visual de presentación: si quieres ajustar el sistema 3D, editas aquí. |
 
-## Estructura por planeta
+## Estructura del Planet
 
 ```ts
 {
@@ -14,51 +18,62 @@ Datos hardcodeados de planetas y cuerpos del sistema solar.
   name: 'Tierra',
   nickname: 'Nuestro Hogar',
   diameterKm: 12_756,
-  color: '#3c83b8',
-  colorAccent: '#1f5a85',
+  color: '#3c83b8',                       // base
+  colorAccent: '#1f5a85',                 // versión oscura (sombras)
+  titleColor: '#5ab6ff',                  // versión vibrante (usado en hero title)
+  thumbnailUrl: '/textures/tumbnails/earth.png',
+  thumbnailShape: 'circle' | 'square',    // 'square' para Saturno (anillos)
   available: true,
-  shortDescription: 'Nuestro planeta: el único...',
+  shortDescription: '…',
   quickFacts: { temperature, atmosphere, moons },
-  stats: [{ label, value, unit, icon }, ...],
-  funFacts: [{ emoji, title, body }, ...],
-  coreLayers: [{ id, name, outerRadiusKm, innerRadiusKm, color, childSummary, detail }, ...],
+  stats: [{ label, value, unit, icon }, …],
+  funFacts: [{ emoji, title, body }, …],
+  coreLayers: [{ id, name, outerRadiusKm, innerRadiusKm, color, childSummary, detail }, …],
   render3D: {
     textureUrl,
     cloudsUrl?, ringUrl?, ringInner?, ringOuter?,
-    axialTiltDeg,
-    rotationPeriodSec,
-    scale,           // multiplicador visual (Mercurio 0.72, resto 0.55)
-    moons: [{ name, radius, orbitRadius, orbitPeriodSec, tint }, ...]
+    axialTiltDeg, rotationPeriodSec,
+    scale,                                // multiplicador visual en Planet3DCanvas
+    emissive?, glowColor?,                // caso Sol
+    moons: [{ name, radius, orbitRadius, orbitPeriodSec, tint }, …],
   }
 }
 ```
 
 ## Fuente de datos científicos
 
-NASA Planetary Fact Sheets: <https://nssdc.gsfc.nasa.gov/planetary/factsheet/>
+NASA Planetary Fact Sheets — <https://nssdc.gsfc.nasa.gov/planetary/factsheet/>.
+Distancias, masas, períodos, lunas: verificados. Donde el dato es muy variable (ej: lunas de Saturno cambian con cada misión nueva), usamos la cifra oficial al momento de implementar.
 
-Inclinaciones, períodos de rotación, gravedades, atmósferas, lunas, distancias — todo verificado contra NASA. Donde el stat es muy variable (ej: número de lunas de Saturno cambia con descubrimientos), usamos la cifra oficial al momento de implementar.
+## Lunas renderizadas (3D singular) vs reales
 
-## Lunas renderizadas (vs cantidad real)
+Renderizar las 146 lunas de Saturno es absurdo visualmente. Mostramos las "famosas":
 
-Renderizar las 146 lunas de Saturno es absurdo visualmente. Por eso solo mostramos las "famosas" por planeta:
+| Planeta  | Renderizadas en 3D singular                  | Reales |
+|----------|----------------------------------------------|--------|
+| Mercurio | —                                            | 0      |
+| Venus    | —                                            | 0      |
+| Tierra   | Luna                                         | 1      |
+| Marte    | Phobos, Deimos                               | 2      |
+| Júpiter  | Ío, Europa, Ganímedes, Calisto (galileanas)  | 95     |
+| Saturno  | Titán, Encélado                              | 146    |
+| Urano    | Titania, Oberón                              | 27     |
+| Neptuno  | Tritón                                       | 16     |
 
-| Planeta  | Renderizadas                                       | Real |
-|----------|----------------------------------------------------|------|
-| Mercurio | —                                                  | 0    |
-| Venus    | —                                                  | 0    |
-| Tierra   | Luna                                               | 1    |
-| Marte    | Phobos, Deimos                                     | 2    |
-| Júpiter  | Ío, Europa, Ganímedes, Calisto (galileanas)        | 95   |
-| Saturno  | Titán, Encélado                                    | 146  |
-| Urano    | Titania, Oberón                                    | 27   |
-| Neptuno  | Tritón                                             | 16   |
-
-El **stat "Lunas"** sí muestra la cifra real, así el dato educativo es preciso.
+El stat "Lunas" en el panel derecho sí muestra la cifra REAL para que el dato educativo sea preciso. En la vista de Sistema Solar 3D solo orbita la Luna de la Tierra (para mantener peso).
 
 ## Cómo agregar un planeta nuevo
 
 1. Añadir su `id` a `PlanetId` en `src/types/planet.ts`
 2. Agregar el objeto al diccionario `PLANETS`
 3. Agregar el `id` a `PLANET_ORDER` (o `ALL_BODIES_ORDER` si aplica)
-4. Si tiene 3D: descargar textura a `public/textures/` (CC BY 4.0 desde solarsystemscope.com), llenar `render3D`
+4. Si tiene 3D: descargar textura a `public/textures/` (CC BY 4.0 de solarsystemscope.com), llenar `render3D`
+5. Agregar entrada en `solarSystemVisualization.ts` si debe aparecer en la vista 3D del sistema
+
+## Cómo agregar un dato curioso ("¿Sabías qué?")
+
+Editar `amazingFacts.ts`. Cada entry necesita:
+- `id` (único, kebab-case)
+- `emoji`, `title`, `body`
+- `bannerPlanetIds`: array de uno o varios PlanetId — sus PNG thumbnails se renderizan como banner del card
+- `accent`: hex usado en el gradient sutil del banner

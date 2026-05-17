@@ -2,25 +2,39 @@
 
 Helpers puros sin estado ni side-effects. Cada función es testeable de forma aislada.
 
-## `statProgress.ts`
+## Archivos
 
-`computeStatProgress(stat: PlanetStat): { filled, total, tone }`
+| Archivo            | Contenido |
+|--------------------|-----------|
+| `statProgress.ts`  | `computeStatProgress(stat)` — heurística para fill ratio y tono de la barra en `StatRow`. |
+| `telemetry.ts`     | `getSectorCode(id)` y `getDistanceAU(planet)` — textos de la telemetría del hero ("SECTOR SOL-04 · DIST 1.52 UA"). |
+| `comparison.ts`    | `getDefaultPartner(id)`, `getPairMetaphor(a,b)`, `getPlanetTip(p)`, `compareRows(a,b)` + `COMPARABLE_IDS` — helpers para la vista Comparar. |
 
-Heurística para decidir cuántas de las 10 rayitas de la barra de progreso se rellenan, y de qué color (`teal` / `coral` / `muted`), basándose en el `label` y `value` del stat.
+## `comparison.ts` — detalles
 
-**No es estricto científicamente.** Solo busca visualizar magnitud relativa y resaltar valores extremos (gravedad muy alta → coral, atmósfera de "Traza" → muted gris, campo magnético "Muy fuerte" → 10 rayitas teal, etc.).
+- **`getDefaultPartner(id)`**: devuelve `'tierra'` siempre, EXCEPTO cuando `id === 'tierra'` → devuelve `'marte'`. La Tierra es la referencia natural para que un niño dimensione cualquier otro planeta.
+- **`getPairMetaphor(a, b)`**: tabla `PAIR_METAPHORS` de metáforas kid-friendly por pareja. Si no hay específica, genera con ratio de diámetros.
+- **`getPlanetTip(p)`**: una línea memorable por planeta.
+- **`compareRows(a, b)`**: extrae 7 stats clave (diámetro, gravedad, temperatura, día, año, lunas, distancia) y los formatea para tabla side-by-side.
 
-Reglas heurísticas por label:
+## `statProgress.ts` — detalles
 
-| Label             | Domain              | Tone si extremo |
-|-------------------|---------------------|-----------------|
-| Gravedad          | 0–30 m/s²           | coral si > 15   |
-| Atmósfera         | 0–100%              | muted si traza  |
-| Temperatura       | -500 → +500 °C abs  | coral si |T| > 100 |
-| Día               | 0–250 días          | teal            |
-| Año               | 0–200 años          | teal            |
-| Distancia al Sol  | 0–5,000 M km        | muted (siempre) |
-| Lunas             | log(n+1) × 5        | muted si 0      |
-| Campo magnético   | texto → 0/1/2/5/7/10 | muted si débil |
+Devuelve `{ filled, total, tone }` con `filled ∈ [0, 10]`, `tone ∈ 'teal' | 'coral' | 'muted'`.
 
-Si quieres agregar un nuevo tipo de stat, añade un `case` en el `if` con su lógica. El default es `filled: 5, tone: 'teal'`.
+| Label             | Domain                   | Tone si extremo    |
+|-------------------|--------------------------|--------------------|
+| Gravedad          | 0–30 m/s²                | coral si > 15      |
+| Atmósfera         | 0–100% (parsea hex)      | muted si "traza"   |
+| Temperatura       | -500 → +500 °C abs       | coral si |T| > 100 |
+| Día / Rotación    | 0–250 días               | teal               |
+| Año / Edad        | normalize a días (log)   | teal               |
+| Distancia al Sol  | 0–5,000 M km (log)       | muted (siempre)    |
+| Lunas             | clamp directo            | muted si 0         |
+| Campo magnético   | texto → 0/1/2/5/7/10     | muted si débil     |
+
+Si quieres añadir un nuevo tipo de stat, agrega un `case` con su lógica. Default es `filled: 5, tone: 'teal'`.
+
+## `telemetry.ts` — detalles
+
+- `getSectorCode(id)`: convierte `PlanetId` → string tipo "SOL-04" (basado en orden del array PLANET_ORDER + 1, cero-padded). El Sol = "SOL-00", Sistema Solar no aplica.
+- `getDistanceAU(planet)`: lee `stats[].label === 'Distancia al Sol'` del planeta y lo convierte de M km a Unidades Astronómicas.
