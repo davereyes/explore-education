@@ -16,6 +16,13 @@ export const animalCell: Cell = {
     source: 'https://3d.nih.gov/entries/3DPX-015797',
     license: 'CC-BY-NC-SA 4.0',
   },
+  generalSummary:
+    'La célula animal es eucariota: tiene un núcleo bien definido y muchos organelos cada uno con su trabajo. No tiene pared celular ni cloroplastos, así que su forma es flexible y obtiene energía comiendo, no del sol.',
+  generalSummaryEn:
+    'Animal cells are eukaryotic: they have a well-defined nucleus and many organelles, each with its own job. They have no cell wall and no chloroplasts, so they are flexible and get energy from eating, not sunlight.',
+  generalFunFact:
+    'Tu cuerpo tiene unos 37 billones de células animales — más que estrellas en la Vía Láctea.',
+  generalFunFactEn: 'Your body has about 37 trillion animal cells — more than stars in the Milky Way.',
   organelles: [
     {
       id: 'nucleus',
@@ -166,6 +173,13 @@ export const plantCell: Cell = {
   thumbnailEmoji: '🌿',
   // No GLB yet — uses procedural PlantCellModel. To switch, drop /public/models/plant-cell.glb and uncomment:
   // modelPath: '/models/plant-cell.glb',
+  generalSummary:
+    'La célula vegetal es eucariota y se distingue por tres rasgos: una pared celular rígida hecha de celulosa, una vacuola central enorme que la mantiene firme, y cloroplastos que fabrican comida con la luz del sol (fotosíntesis).',
+  generalSummaryEn:
+    'Plant cells are eukaryotic and stand out for three traits: a rigid cellulose cell wall, a huge central vacuole that keeps them firm, and chloroplasts that make food from sunlight (photosynthesis).',
+  generalFunFact:
+    'Las plantas son los únicos seres vivos que producen casi todo el oxígeno que respiramos.',
+  generalFunFactEn: 'Plants make nearly all the oxygen we breathe.',
   organelles: [
     {
       id: 'cell-wall',
@@ -389,6 +403,8 @@ const placeholder = (
   organelles: [],
   microscope: [],
   occurrence: { speciesEs: [], speciesEn: [], imageEmoji: emoji },
+  generalSummary: '',
+  generalSummaryEn: '',
 });
 
 export const cells: Cell[] = [

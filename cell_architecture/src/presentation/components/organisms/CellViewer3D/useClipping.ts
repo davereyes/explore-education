@@ -1,16 +1,14 @@
-import { useMemo } from 'react';
-import * as THREE from 'three';
-import { useStudioStore } from '@/presentation/store/useStudioStore';
+import type * as THREE from 'three';
 
+/**
+ * Cross-section / view-mode were removed from the UI. These helpers stay as
+ * no-ops so the existing material wiring keeps compiling. Drop them entirely
+ * if we ever delete the procedural models.
+ */
 export function useClippingPlanes(): THREE.Plane[] | null {
-  const crossSection = useStudioStore((s) => s.crossSection);
-  const planes = useMemo(() => [new THREE.Plane(new THREE.Vector3(1, 0, 0), 0)], []);
-  return crossSection ? planes : null;
+  return null;
 }
 
-export function useViewModeOpacity(base: number, solid = 1, crossOpacity?: number): number {
-  const viewMode = useStudioStore((s) => s.viewMode);
-  if (viewMode === 'solid') return solid;
-  if (viewMode === 'cross-section' && crossOpacity !== undefined) return crossOpacity;
+export function useViewModeOpacity(base: number): number {
   return base;
 }

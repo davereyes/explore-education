@@ -30,4 +30,9 @@ export interface Cell {
   microscope: MicroscopeImage[];
   occurrence: Occurrence;
   thumbnailEmoji: string;
+  /** Cell-level "general" copy shown when no specific organelle is selected. */
+  generalSummary: string;
+  generalSummaryEn: string;
+  generalFunFact?: string;
+  generalFunFactEn?: string;
 }

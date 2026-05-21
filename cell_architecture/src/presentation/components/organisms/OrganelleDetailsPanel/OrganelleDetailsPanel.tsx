@@ -15,17 +15,47 @@ export default function OrganelleDetailsPanel() {
   const { t } = useLanguage();
   const { selectedCellId, selectedOrganelleId, showLabels, toggleLabels } = useStudioStore();
   const cell = getCellById(selectedCellId);
-  const organelle = cell?.organelles.find((o) => o.id === selectedOrganelleId);
+  if (!cell) return null;
 
-  if (!organelle) {
+  // Cell-level "General" view
+  if (selectedOrganelleId === null) {
     return (
-      <CaCard title={t('Detalles del organelo', 'Organelle details')}>
-        <p className="ca-details__empty">
-          {t('Selecciona un organelo del modelo 3D.', 'Select an organelle from the 3D model.')}
-        </p>
+      <CaCard
+        title={t('Detalles de la célula', 'Cell details')}
+        accessory={<span className="ca-details__heart">♥</span>}
+      >
+        <div className="ca-details__head">
+          <div
+            className="ca-details__avatar"
+            style={{ background: 'linear-gradient(135deg, #ffd6a5, #b8a4ff)' }}
+          >
+            <span>{cell.thumbnailEmoji}</span>
+          </div>
+          <div>
+            <h3 className="ca-details__name">{t(cell.name, cell.nameEn)}</h3>
+            <p className="ca-details__tag">{t(cell.subtitle, cell.subtitleEn)}</p>
+          </div>
+        </div>
+        <dl className="ca-details__list">
+          <div className="ca-details__row">
+            <dt>{t('Clasificación', 'Classification')}</dt>
+            <dd>
+              {cell.classification === 'eukaryotic'
+                ? t('Eucariota', 'Eukaryotic')
+                : t('Procariota', 'Prokaryotic')}
+            </dd>
+          </div>
+          <div className="ca-details__row">
+            <dt>{t('Organelos', 'Organelles')}</dt>
+            <dd>{cell.organelles.length}</dd>
+          </div>
+        </dl>
       </CaCard>
     );
   }
+
+  const organelle = cell.organelles.find((o) => o.id === selectedOrganelleId);
+  if (!organelle) return null;
 
   return (
     <CaCard
@@ -53,7 +83,12 @@ export default function OrganelleDetailsPanel() {
         </div>
         <div className="ca-details__row">
           <dt>{t('Visible al microscopio óptico', 'Visible in LM')}</dt>
-          <dd>{t(VIS_MAP[organelle.visibleInLightMicroscope].es, VIS_MAP[organelle.visibleInLightMicroscope].en)}</dd>
+          <dd>
+            {t(
+              VIS_MAP[organelle.visibleInLightMicroscope].es,
+              VIS_MAP[organelle.visibleInLightMicroscope].en,
+            )}
+          </dd>
         </div>
         <div className="ca-details__row ca-details__row--toggle">
           <dt>{t('Etiqueta', 'Label')}</dt>

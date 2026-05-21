@@ -1,4 +1,5 @@
 import CaCard from '@/presentation/components/atoms/CaCard/CaCard';
+import CaDot from '@/presentation/components/atoms/CaDot/CaDot';
 import { useLanguage } from '@/presentation/context/LanguageContext';
 import { useStudioStore } from '@/presentation/store/useStudioStore';
 import { cells } from '@/infrastructure/data/cells';
@@ -6,7 +7,10 @@ import './CellSidebar.css';
 
 export default function CellSidebar() {
   const { t } = useLanguage();
-  const { selectedCellId, selectCell } = useStudioStore();
+  const selectedCellId = useStudioStore((s) => s.selectedCellId);
+  const selectedOrganelleId = useStudioStore((s) => s.selectedOrganelleId);
+  const selectCell = useStudioStore((s) => s.selectCell);
+  const selectOrganelle = useStudioStore((s) => s.selectOrganelle);
   const sorted = [...cells].sort((a, b) => (b.enabled ? 1 : 0) - (a.enabled ? 1 : 0));
 
   return (
@@ -38,9 +42,45 @@ export default function CellSidebar() {
                   <span className="ca-cell-list__name">{t(cell.name, cell.nameEn)}</span>
                   <span className="ca-cell-list__sub">{t(cell.subtitle, cell.subtitleEn)}</span>
                 </span>
-                {active && <span className="ca-cell-list__star">★</span>}
                 {!cell.enabled && <span className="ca-cell-list__lock">🔒</span>}
               </button>
+
+              {active && cell.enabled && (
+                <ul className="ca-cell-list__children">
+                  <li>
+                    <button
+                      type="button"
+                      className={`ca-cell-list__child ${
+                        selectedOrganelleId === null ? 'ca-cell-list__child--active' : ''
+                      }`}
+                      onClick={() => selectOrganelle(null)}
+                    >
+                      <span className="ca-cell-list__child-bullet" aria-hidden>
+                        ✦
+                      </span>
+                      <span className="ca-cell-list__child-label">
+                        {t('General', 'General')}
+                      </span>
+                    </button>
+                  </li>
+                  {cell.organelles.map((o) => (
+                    <li key={o.id}>
+                      <button
+                        type="button"
+                        className={`ca-cell-list__child ${
+                          selectedOrganelleId === o.id ? 'ca-cell-list__child--active' : ''
+                        }`}
+                        onClick={() => selectOrganelle(o.id)}
+                      >
+                        <CaDot colorVar={o.colorVar} size={8} />
+                        <span className="ca-cell-list__child-label">
+                          {t(o.name, o.nameEn)}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           );
         })}

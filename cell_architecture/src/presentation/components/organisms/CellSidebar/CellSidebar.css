@@ -4,16 +4,16 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .ca-cell-list__item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
-  padding: 6px 8px;
-  border-radius: 10px;
+  padding: 10px 10px;
+  border-radius: 12px;
   background: transparent;
   border: 1px solid transparent;
   text-align: left;
@@ -31,15 +31,15 @@
 }
 
 .ca-cell-list__thumb {
-  width: 28px;
-  height: 28px;
-  border-radius: 9px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   background: var(--ca-surface);
   border: 1px solid var(--ca-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 20px;
   flex-shrink: 0;
 }
 
@@ -51,24 +51,68 @@
 }
 
 .ca-cell-list__name {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ca-text);
+  line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .ca-cell-list__sub {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--ca-text-muted);
-}
-
-.ca-cell-list__star {
-  color: var(--ca-accent);
-  font-size: 11px;
+  font-style: italic;
+  font-family: var(--ca-font-serif);
 }
 
 .ca-cell-list__lock {
-  font-size: 10px;
+  font-size: 12px;
+}
+
+/* Nested children: General + organelles */
+.ca-cell-list__children {
+  list-style: none;
+  margin: 4px 0 6px 14px;
+  padding: 6px 0 6px 14px;
+  border-left: 1px dashed var(--ca-border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ca-cell-list__child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 9px;
+  background: transparent;
+  border: 0;
+  font-size: 13px;
+  color: var(--ca-text-soft);
+  text-align: left;
+}
+.ca-cell-list__child:hover {
+  background: var(--ca-bg-soft);
+  color: var(--ca-text);
+}
+.ca-cell-list__child--active {
+  background: var(--ca-accent-soft);
+  color: var(--ca-accent-strong);
+  font-weight: 600;
+}
+
+.ca-cell-list__child-bullet {
+  color: var(--ca-accent);
+  font-size: 11px;
+  width: 8px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.ca-cell-list__child-label {
+  flex: 1;
 }

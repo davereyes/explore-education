@@ -1,58 +1,34 @@
 import { create } from 'zustand';
-import { getCellById } from '@/infrastructure/data/cells';
+import type { MicroscopeType } from '@/domain/entities';
 
-export type ViewMode = 'solid' | 'layered' | 'cross-section';
+export type ViewerSource = '3d' | MicroscopeType;
 
 interface StudioState {
   selectedCellId: string;
+  /** null → cell-level "general" info; string → specific organelle id. */
   selectedOrganelleId: string | null;
-  hoveredOrganelleId: string | null;
-  viewMode: ViewMode;
-  crossSection: boolean;
-  isolate: boolean;
-  hideOthers: boolean;
+  viewerSource: ViewerSource;
   showLabels: boolean;
-  resetSignal: number;
 
   selectCell: (id: string) => void;
   selectOrganelle: (id: string | null) => void;
-  hoverOrganelle: (id: string | null) => void;
-  setViewMode: (mode: ViewMode) => void;
-  setCrossSection: (on: boolean) => void;
-  toggleIsolate: () => void;
-  toggleHideOthers: () => void;
+  setViewerSource: (source: ViewerSource) => void;
   toggleLabels: () => void;
-  resetView: () => void;
 }
 
 export const useStudioStore = create<StudioState>((set) => ({
   selectedCellId: 'plant',
-  selectedOrganelleId: 'chloroplast',
-  hoveredOrganelleId: null,
-  viewMode: 'layered',
-  crossSection: false,
-  isolate: false,
-  hideOthers: false,
+  selectedOrganelleId: null,
+  viewerSource: '3d',
   showLabels: true,
-  resetSignal: 0,
 
-  selectCell: (id) => {
-    const firstOrganelle = getCellById(id)?.organelles[0]?.id ?? null;
-    set({ selectedCellId: id, selectedOrganelleId: firstOrganelle, isolate: false, hideOthers: false });
-  },
+  selectCell: (id) =>
+    set({
+      selectedCellId: id,
+      selectedOrganelleId: null,
+      viewerSource: '3d',
+    }),
   selectOrganelle: (id) => set({ selectedOrganelleId: id }),
-  hoverOrganelle: (id) => set({ hoveredOrganelleId: id }),
-  setViewMode: (mode) => set({ viewMode: mode, crossSection: mode === 'cross-section' }),
-  setCrossSection: (on) => set({ crossSection: on, viewMode: on ? 'cross-section' : 'layered' }),
-  toggleIsolate: () => set((s) => ({ isolate: !s.isolate, hideOthers: false })),
-  toggleHideOthers: () => set((s) => ({ hideOthers: !s.hideOthers, isolate: false })),
+  setViewerSource: (source) => set({ viewerSource: source }),
   toggleLabels: () => set((s) => ({ showLabels: !s.showLabels })),
-  resetView: () =>
-    set((s) => ({
-      resetSignal: s.resetSignal + 1,
-      isolate: false,
-      hideOthers: false,
-      viewMode: 'layered',
-      crossSection: true,
-    })),
 }));

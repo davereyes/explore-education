@@ -8,17 +8,26 @@ export default function BiologicalNotesCard() {
   const { t } = useLanguage();
   const { selectedCellId, selectedOrganelleId } = useStudioStore();
   const cell = getCellById(selectedCellId);
-  const organelle = cell?.organelles.find((o) => o.id === selectedOrganelleId);
+  if (!cell) return null;
 
-  if (!organelle) {
+  // Cell-level
+  if (selectedOrganelleId === null) {
     return (
       <CaCard title={t('Notas biológicas', 'Biological notes')}>
-        <p className="ca-bio__empty">
-          {t('Selecciona un organelo para ver sus notas.', 'Pick an organelle to see its notes.')}
-        </p>
+        <p className="ca-bio__text">{t(cell.generalSummary, cell.generalSummaryEn)}</p>
+        {cell.generalFunFact && (
+          <p className="ca-bio__fun">
+            <span className="ca-bio__fun-label">{t('Dato curioso:', 'Fun fact:')}</span>{' '}
+            {t(cell.generalFunFact, cell.generalFunFactEn ?? cell.generalFunFact)}
+            <span className="ca-bio__sparkle"> ✦</span>
+          </p>
+        )}
       </CaCard>
     );
   }
+
+  const organelle = cell.organelles.find((o) => o.id === selectedOrganelleId);
+  if (!organelle) return null;
 
   return (
     <CaCard title={t('Notas biológicas', 'Biological notes')}>

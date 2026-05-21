@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { useStudioStore } from '@/presentation/store/useStudioStore';
 
 interface OrganelleGroupProps {
   organelleId: string;
@@ -8,34 +7,10 @@ interface OrganelleGroupProps {
 }
 
 /**
- * Wraps a sub-tree that represents a single organelle. Drives visibility based
- * on the store's isolate / hide-others state.
- *
- * The 3D model is intentionally NOT interactive — the user picks organelles
- * from the sidebar list, so no pointer/click handlers here.
+ * The 3D model is intentionally non-interactive, so this is currently just a
+ * pass-through group. Kept as a wrapper for procedural models because the
+ * isolate / hide-others controls may come back later.
  */
-export default function OrganelleGroup({
-  organelleId,
-  children,
-  keepInIsolate = false,
-}: OrganelleGroupProps) {
-  const selectedOrganelleId = useStudioStore((s) => s.selectedOrganelleId);
-  const isolate = useStudioStore((s) => s.isolate);
-  const hideOthers = useStudioStore((s) => s.hideOthers);
-
-  let visible = true;
-  if (isolate && selectedOrganelleId && selectedOrganelleId !== organelleId && !keepInIsolate) {
-    visible = false;
-  }
-  if (
-    hideOthers &&
-    organelleId !== 'cell-wall' &&
-    organelleId !== 'membrane' &&
-    selectedOrganelleId &&
-    selectedOrganelleId !== organelleId
-  ) {
-    visible = false;
-  }
-
-  return <group visible={visible}>{children}</group>;
+export default function OrganelleGroup({ children }: OrganelleGroupProps) {
+  return <group>{children}</group>;
 }
