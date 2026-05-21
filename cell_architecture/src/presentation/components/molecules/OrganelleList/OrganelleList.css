@@ -1,0 +1,35 @@
+.ca-organelle-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ca-organelle-list__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ca-space-3);
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: transparent;
+  border: 0;
+  font-size: 13px;
+  color: var(--ca-text-soft);
+  text-align: left;
+}
+.ca-organelle-list__row:hover {
+  background: var(--ca-bg-soft);
+  color: var(--ca-text);
+}
+.ca-organelle-list__row--active {
+  background: var(--ca-accent-soft);
+  color: var(--ca-accent-strong);
+  font-weight: 600;
+}
+
+.ca-organelle-list__name {
+  flex: 1;
+}

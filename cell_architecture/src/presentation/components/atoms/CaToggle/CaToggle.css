@@ -1,0 +1,39 @@
+.ca-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ca-space-3);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--ca-text-soft);
+}
+
+.ca-toggle__track {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--ca-border);
+  border: 0;
+  transition: background 0.2s var(--ca-ease);
+  padding: 0;
+}
+
+.ca-toggle__track--on {
+  background: var(--ca-accent);
+}
+
+.ca-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s var(--ca-ease);
+}
+
+.ca-toggle__track--on .ca-toggle__thumb {
+  transform: translateX(16px);
+}

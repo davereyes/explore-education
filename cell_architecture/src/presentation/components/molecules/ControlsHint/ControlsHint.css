@@ -1,0 +1,35 @@
+.ca-hint {
+  position: relative;
+  background: #fff7d6;
+  border: 1px solid #e8d585;
+  border-radius: var(--ca-radius-md);
+  padding: 10px 26px 10px 12px;
+  font-family: var(--ca-font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: #6a5614;
+  box-shadow: 0 4px 12px rgba(160, 120, 0, 0.12);
+  transform: rotate(-1.5deg);
+}
+
+.ca-hint__text {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.ca-hint__close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 1;
+  color: #6a5614;
+  background: rgba(0, 0, 0, 0.04);
+  border: 0;
+}
+.ca-hint__close:hover {
+  background: rgba(0, 0, 0, 0.08);
+}

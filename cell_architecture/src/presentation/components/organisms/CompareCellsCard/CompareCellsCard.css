@@ -1,0 +1,64 @@
+.ca-compare__info {
+  color: var(--ca-text-muted);
+  font-size: 12px;
+  cursor: help;
+}
+
+.ca-compare__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ca-space-3);
+}
+
+.ca-compare__pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--ca-space-2);
+  padding: 8px 10px;
+  background: var(--ca-bg-soft);
+  border: 1px solid var(--ca-border);
+  border-radius: var(--ca-radius-md);
+}
+
+.ca-compare__emoji {
+  font-size: 24px;
+}
+
+.ca-compare__pill-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-compare__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ca-text);
+}
+
+.ca-compare__sub {
+  font-size: 10px;
+  color: var(--ca-text-muted);
+  font-style: italic;
+  font-family: var(--ca-font-serif);
+}
+
+.ca-compare__vs {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--ca-accent-soft);
+  color: var(--ca-accent-strong);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ca-compare__cta {
+  margin-top: var(--ca-space-3);
+  width: 100%;
+  justify-content: center;
+}

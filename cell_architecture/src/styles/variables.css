@@ -1,0 +1,61 @@
+:root {
+  /* === Palette: warm cream + lavender/coral === */
+  --ca-bg: #faf5ef;
+  --ca-bg-soft: #f3ebe0;
+  --ca-surface: #ffffff;
+  --ca-surface-2: #fbf6ee;
+  --ca-surface-glass: rgba(255, 255, 255, 0.72);
+  --ca-border: #ece1d1;
+  --ca-border-strong: #d9c9b0;
+
+  --ca-text: #2a2438;
+  --ca-text-soft: #5b5170;
+  --ca-text-muted: #8a8198;
+  --ca-text-on-accent: #ffffff;
+
+  /* Accents */
+  --ca-accent: #7c5cff;       /* lavender */
+  --ca-accent-soft: #e8e0ff;
+  --ca-accent-strong: #5b3ad6;
+  --ca-coral: #ff8a7a;
+  --ca-coral-soft: #ffd8d1;
+  --ca-amber: #f4b860;
+  --ca-mint: #84d2c5;
+  --ca-rose: #f1a7c4;
+
+  /* Organelle hues */
+  --ca-org-nucleus: #7c5cff;
+  --ca-org-mitochondria: #ff8a7a;
+  --ca-org-er-rough: #f1a7c4;
+  --ca-org-er-smooth: #f4b860;
+  --ca-org-golgi: #84d2c5;
+  --ca-org-lysosome: #ffd166;
+  --ca-org-cytoplasm: #c5b8ff;
+  --ca-org-membrane: #b7e3d3;
+  --ca-org-ribosome: #ff5b6a;
+
+  /* Typography */
+  --ca-font-serif: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --ca-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Radii / spacing / shadows */
+  --ca-radius-sm: 8px;
+  --ca-radius-md: 14px;
+  --ca-radius-lg: 22px;
+  --ca-radius-xl: 28px;
+
+  --ca-shadow-sm: 0 1px 2px rgba(60, 40, 20, 0.06);
+  --ca-shadow-md: 0 8px 24px rgba(60, 40, 20, 0.08);
+  --ca-shadow-lg: 0 18px 48px rgba(60, 40, 20, 0.12);
+  --ca-shadow-inset: inset 0 0 0 1px var(--ca-border);
+
+  --ca-space-1: 4px;
+  --ca-space-2: 8px;
+  --ca-space-3: 12px;
+  --ca-space-4: 16px;
+  --ca-space-5: 24px;
+  --ca-space-6: 32px;
+  --ca-space-7: 48px;
+
+  --ca-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

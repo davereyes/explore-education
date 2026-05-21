@@ -1,0 +1,34 @@
+.ca-bio__text {
+  margin: 0;
+  font-family: var(--ca-font-serif);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ca-text);
+}
+
+.ca-bio__fun {
+  margin: var(--ca-space-3) 0 0;
+  font-family: var(--ca-font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ca-accent-strong);
+  line-height: 1.5;
+}
+
+.ca-bio__fun-label {
+  font-weight: 600;
+  font-style: normal;
+  color: var(--ca-coral);
+}
+
+.ca-bio__sparkle {
+  color: var(--ca-coral);
+}
+
+.ca-bio__empty {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ca-text-muted);
+  font-family: var(--ca-font-serif);
+}

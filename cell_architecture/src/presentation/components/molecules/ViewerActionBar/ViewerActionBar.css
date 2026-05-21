@@ -1,0 +1,31 @@
+.ca-actionbar {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ca-space-1);
+  background: var(--ca-surface);
+  border: 1px solid var(--ca-border);
+  border-radius: 999px;
+  padding: 6px 10px;
+  box-shadow: var(--ca-shadow-md);
+  z-index: 4;
+}
+
+.ca-actionbar__sep {
+  width: 1px;
+  height: 18px;
+  background: var(--ca-border);
+  display: inline-block;
+}
+
+.ca-exportbar {
+  position: absolute;
+  right: var(--ca-space-5);
+  bottom: 18px;
+  display: inline-flex;
+  gap: var(--ca-space-2);
+  z-index: 4;
+}
