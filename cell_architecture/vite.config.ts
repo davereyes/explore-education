@@ -10,7 +10,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 4040,
+    strictPort: true,
     open: true,
   },
 });

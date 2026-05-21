@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { getCellById } from '@/infrastructure/data/cells';
 
 export type ViewMode = 'solid' | 'layered' | 'cross-section';
 
@@ -35,7 +36,10 @@ export const useStudioStore = create<StudioState>((set) => ({
   showLabels: true,
   resetSignal: 0,
 
-  selectCell: (id) => set({ selectedCellId: id, selectedOrganelleId: null, isolate: false, hideOthers: false }),
+  selectCell: (id) => {
+    const firstOrganelle = getCellById(id)?.organelles[0]?.id ?? null;
+    set({ selectedCellId: id, selectedOrganelleId: firstOrganelle, isolate: false, hideOthers: false });
+  },
   selectOrganelle: (id) => set({ selectedOrganelleId: id }),
   hoverOrganelle: (id) => set({ hoveredOrganelleId: id }),
   setViewMode: (mode) => set({ viewMode: mode, crossSection: mode === 'cross-section' }),

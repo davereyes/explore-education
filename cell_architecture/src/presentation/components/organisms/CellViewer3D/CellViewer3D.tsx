@@ -11,7 +11,6 @@ import GLBCellModel from './GLBCellModel';
 import ModelErrorBoundary from './ModelErrorBoundary';
 import ControlsHint from '@/presentation/components/molecules/ControlsHint/ControlsHint';
 import ViewerActionBar from '@/presentation/components/molecules/ViewerActionBar/ViewerActionBar';
-import ViewModeSelector from '@/presentation/components/molecules/ViewModeSelector/ViewModeSelector';
 import './CellViewer3D.css';
 
 export const ActiveOrganelleContext = createContext<string | null>(null);
@@ -58,7 +57,6 @@ export default function CellViewer3D() {
           <h2 className="ca-viewer__title">{cellName}</h2>
           <p className="ca-viewer__subtitle">{cellSub}</p>
         </div>
-        <ViewModeSelector />
       </div>
 
       <div className="ca-viewer__canvas">
