@@ -8,6 +8,8 @@ import { useLanguage } from '@/presentation/context/LanguageContext';
 import { getCellById } from '@/infrastructure/data/cells';
 import AnimalCellModel from './AnimalCellModel';
 import PlantCellModel from './PlantCellModel';
+import GLBCellModel from './GLBCellModel';
+import ModelErrorBoundary from './ModelErrorBoundary';
 import ControlsHint from '@/presentation/components/molecules/ControlsHint/ControlsHint';
 import ViewerActionBar from '@/presentation/components/molecules/ViewerActionBar/ViewerActionBar';
 import ViewModeSelector from '@/presentation/components/molecules/ViewModeSelector/ViewModeSelector';
@@ -83,8 +85,8 @@ export default function CellViewer3D() {
             position={[6, 9, 5]}
             intensity={1.4}
             castShadow
-            shadow-mapSize-width={2048}
-            shadow-mapSize-height={2048}
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
             shadow-bias={-0.0005}
           />
           <directionalLight position={[-6, 4, -3]} intensity={0.55} color="#b8e0a0" />
@@ -103,7 +105,20 @@ export default function CellViewer3D() {
                     blur
                   />
                 </EffectComposer>
-                {selectedCellId === 'plant' ? <PlantCellModel /> : <AnimalCellModel />}
+                {cell?.modelPath ? (
+                  <ModelErrorBoundary
+                    fallback={
+                      selectedCellId === 'plant' ? <PlantCellModel /> : <AnimalCellModel />
+                    }
+                    resetKey={selectedCellId}
+                  >
+                    <GLBCellModel cell={cell} />
+                  </ModelErrorBoundary>
+                ) : selectedCellId === 'plant' ? (
+                  <PlantCellModel />
+                ) : (
+                  <AnimalCellModel />
+                )}
               </Selection>
             </ActiveOrganelleContext.Provider>
             <Environment preset="apartment" />

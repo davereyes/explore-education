@@ -9,6 +9,13 @@ export const animalCell: Cell = {
   classification: 'eukaryotic',
   enabled: true,
   thumbnailEmoji: '🐾',
+  modelPath: '/models/animal-cell.glb',
+  modelTransform: { scale: 1, position: [0, 0, 0], rotation: [0, 0, 0] },
+  modelCredit: {
+    author: 'destacados tv (NIH 3D Print Exchange · 3DPX-015797)',
+    source: 'https://3d.nih.gov/entries/3DPX-015797',
+    license: 'CC-BY-NC-SA 4.0',
+  },
   organelles: [
     {
       id: 'nucleus',

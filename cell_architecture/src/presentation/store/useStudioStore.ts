@@ -29,7 +29,7 @@ export const useStudioStore = create<StudioState>((set) => ({
   selectedOrganelleId: 'chloroplast',
   hoveredOrganelleId: null,
   viewMode: 'layered',
-  crossSection: true,
+  crossSection: false,
   isolate: false,
   hideOthers: false,
   showLabels: true,

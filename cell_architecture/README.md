@@ -50,10 +50,23 @@ El modelo 3D **es procedural** (esferas, torus knots, capsules) construido con p
 
 ### Reemplazar la geometría procedural por un GLB
 
-1. Descargar un modelo CC-BY de Sketchfab con organelos en meshes separados y nombrados (candidatos: [James_Anthony](https://sketchfab.com/3d-models/animal-cell-737b35f5b779418998d834c28ed15295), [montanna anotado](https://sketchfab.com/3d-models/animal-cell-20-annotated-in-english-0d9f7f4257224975b2ef83a283709b2f), [AnatoCells](https://sketchfab.com/3d-models/animal-cell-e2fc495016ca4542b4ff424e22e62277)).
-2. Optimizar con `gltf-pipeline` + Draco (`gltf-pipeline -i input.glb -o public/models/animal-cell.glb -d`).
-3. En `src/infrastructure/data/cells.ts`, llenar `modelPath` y los `meshName` por organelo.
-4. En `AnimalCellModel.tsx` reemplazar las primitivas por `useGLTF` + recorrer `nodes` aplicando los wrappers `OrganelleGroup`.
+El visor ya carga GLB automáticamente cuando `cell.modelPath` está definido (ver `src/presentation/components/organisms/CellViewer3D/GLBCellModel.tsx`). Pasos:
+
+1. Descargar un GLB. Recomendado: **[NIH 3D Print Exchange](https://3d.nih.gov/)** — modelos hechos por biólogos, gratuitos. Cuidado: revisar la licencia por modelo (CC-BY, CC-BY-NC-SA, dominio público, etc.).
+2. Colocar en `public/models/{cell-id}.glb` (por ejemplo `public/models/plant-cell.glb`).
+3. Comprimir con Draco: `npm run compress:models`. Reduce típicamente 5–30×.
+4. En `src/infrastructure/data/cells.ts`, añadir al cell:
+   ```ts
+   modelPath: '/models/plant-cell.glb',
+   modelTransform: { scale: 1 },        // se auto-ajusta a 5 unidades
+   modelCredit: { author, source, license },
+   ```
+5. Si el GLB tiene **meshes separados y nombrados** (mejor caso), el componente los recorre y se pueden mapear a `Organelle.meshName` para que click/hover funcione por organelo. Si es un mesh único (como el de `3DPX-015797`), el modelo se ve pero los controles Aislar/Ocultar pierden efecto.
+
+### Modelo actual
+
+- **Animal Cell** carga `/models/animal-cell.glb` (NIH 3DPX-015797, comprimido a 44 KB).
+- **Plant Cell** sigue usando geometría procedural (`PlantCellModel.tsx`). Para reemplazarla, descarga una de NIH (busca "plant cell" en 3d.nih.gov) y aplica los pasos de arriba.
 
 ## Scripts
 
@@ -68,7 +81,8 @@ npm run format
 
 ## Atribuciones
 
-- Geometría procedural propia inspirada en diagramas biológicos estándar.
+- **Animal Cell GLB**: "Animal Cell 2.0" by *destacados tv* — [NIH 3D Print Exchange · 3DPX-015797](https://3d.nih.gov/entries/3DPX-015797), licencia **CC-BY-NC-SA 4.0** (uso no comercial con atribución, derivados con la misma licencia). Para uso comercial, sustituir por un GLB con licencia compatible (CC0 / CC-BY / dominio público).
+- Geometría procedural de la célula vegetal: propia, inspirada en diagramas biológicos estándar.
 - Contenido biológico basado en referencias generales (Britannica, Khan Academy).
 - Cuando se sustituyan los placeholders del microscopio por imágenes reales, listar la fuente y licencia aquí (preferir Wikimedia Commons / NIH Image Gallery).
 

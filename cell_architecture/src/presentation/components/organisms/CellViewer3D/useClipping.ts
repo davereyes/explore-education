@@ -4,7 +4,7 @@ import { useStudioStore } from '@/presentation/store/useStudioStore';
 
 export function useClippingPlanes(): THREE.Plane[] | null {
   const crossSection = useStudioStore((s) => s.crossSection);
-  const planes = useMemo(() => [new THREE.Plane(new THREE.Vector3(1, 0, 0), 0.2)], []);
+  const planes = useMemo(() => [new THREE.Plane(new THREE.Vector3(1, 0, 0), 0)], []);
   return crossSection ? planes : null;
 }
 

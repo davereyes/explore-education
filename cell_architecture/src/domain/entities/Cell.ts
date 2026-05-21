@@ -9,6 +9,12 @@ export interface Occurrence {
   imageEmoji: string;
 }
 
+export interface ModelTransform {
+  scale?: number;
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+}
+
 export interface Cell {
   id: string;
   name: string;
@@ -17,6 +23,8 @@ export interface Cell {
   subtitleEn: string;
   classification: CellClassification;
   modelPath?: string;
+  modelTransform?: ModelTransform;
+  modelCredit?: { author: string; source: string; license: string };
   enabled: boolean;
   organelles: Organelle[];
   microscope: MicroscopeImage[];
