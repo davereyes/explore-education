@@ -29,3 +29,30 @@
   gap: var(--ca-space-2);
   z-index: 4;
 }
+
+@media (max-width: 1024px) {
+  .ca-actionbar {
+    padding: 4px 6px;
+    gap: 0;
+  }
+  .ca-actionbar .ca-button__label {
+    display: none;
+  }
+  .ca-actionbar__sep {
+    height: 14px;
+  }
+  .ca-exportbar {
+    right: 12px;
+    bottom: 12px;
+  }
+  .ca-exportbar .ca-button__label {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .ca-actionbar {
+    left: 12px;
+    transform: none;
+  }
+}

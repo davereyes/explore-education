@@ -68,3 +68,24 @@
   max-width: 220px;
   pointer-events: auto;
 }
+
+@media (max-width: 1024px) {
+  .ca-viewer__title {
+    font-size: 26px;
+  }
+  .ca-viewer__subtitle {
+    font-size: 12px;
+  }
+  .ca-viewer__hint {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .ca-viewer__top {
+    padding: 10px 12px 0;
+  }
+  .ca-viewer__title {
+    font-size: 22px;
+  }
+}

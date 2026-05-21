@@ -63,3 +63,15 @@
   width: 100%;
   justify-content: center;
 }
+
+@media (max-width: 720px) {
+  .ca-compare__row {
+    flex-wrap: wrap;
+  }
+  .ca-compare__pill {
+    flex: 1 1 100%;
+  }
+  .ca-compare__vs {
+    margin: 0 auto;
+  }
+}

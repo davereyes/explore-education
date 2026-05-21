@@ -50,3 +50,19 @@
   padding-top: 6px;
   border-top: 1px dashed var(--ca-border);
 }
+
+@media (max-width: 1024px) {
+  .ca-vmode {
+    min-width: 0;
+    padding: 6px 8px;
+  }
+  .ca-vmode__label {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .ca-vmode__cross {
+    display: none;
+  }
+}
