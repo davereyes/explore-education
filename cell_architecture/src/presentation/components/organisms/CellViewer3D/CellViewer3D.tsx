@@ -10,6 +10,7 @@ import GLBCellModel from './GLBCellModel';
 import ModelErrorBoundary from './ModelErrorBoundary';
 import ControlsHint from '@/presentation/components/molecules/ControlsHint/ControlsHint';
 import ViewerActionBar from '@/presentation/components/molecules/ViewerActionBar/ViewerActionBar';
+import ViewerMicroscopeBar from '@/presentation/components/molecules/ViewerMicroscopeBar/ViewerMicroscopeBar';
 import './CellViewer3D.css';
 
 export const ActiveOrganelleContext = createContext<string | null>(null);
@@ -156,6 +157,7 @@ export default function CellViewer3D() {
           <ThreeDScene activeId={selectedOrganelleId} />
         )}
 
+        <ViewerMicroscopeBar />
         <ViewerActionBar />
       </div>
     </div>
