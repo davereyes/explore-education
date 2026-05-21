@@ -2,7 +2,6 @@ import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import type { Cell } from '@/domain/entities';
-import OrganelleGroup from './OrganelleGroup';
 import { useClippingPlanes } from './useClipping';
 
 interface GLBCellModelProps {
@@ -10,17 +9,57 @@ interface GLBCellModelProps {
 }
 
 /**
- * GLBCellModel — loads an externally hosted glTF/GLB file and renders it.
- *
- * The GLB is wrapped in a single OrganelleGroup keyed on 'whole-cell' so the
- * standard hover/click/isolate plumbing keeps working at the cell level until
- * per-organelle mesh names are mapped in cells.ts.
- *
- * To enable per-organelle interactivity later, inspect the GLB's mesh names
- * (uncomment the console.log inside the traverse) and add `meshName` matches
- * to each Organelle entry. Then split the rendering loop to wrap each mesh
- * subset in its own OrganelleGroup.
+ * Color palette applied to single-mesh GLBs (e.g. NIH 3DPX-015797) so the
+ * sculpted relief gets a colorful organelle look instead of staying uniformly
+ * peach. Each entry is a "soft attractor": every vertex's color is the inverse-
+ * distance weighted average of all attractors. Positions are normalized to
+ * [-1, 1] inside the model's local bounding box.
  */
+const ANIMAL_PALETTE: Array<{ pos: [number, number, number]; color: string; weight?: number }> = [
+  { pos: [0.35, 0.5, 0.25], color: '#7c5cff', weight: 1.4 },   // nucleus
+  { pos: [-0.55, 0.2, -0.25], color: '#ff8a7a', weight: 1.0 }, // mitochondria cluster
+  { pos: [0.0, -0.45, 0.35], color: '#f1a7c4', weight: 1.0 },  // rough ER
+  { pos: [-0.35, 0.35, 0.4], color: '#84d2c5', weight: 0.9 },  // golgi
+  { pos: [0.45, -0.3, -0.25], color: '#ffd166', weight: 0.8 },// lysosomes
+  { pos: [0.0, 0.0, 0.0], color: '#ffd8c2', weight: 0.6 },     // cytoplasm warm fill
+];
+
+function bakeVertexColors(geometry: THREE.BufferGeometry, palette: typeof ANIMAL_PALETTE) {
+  const positionAttr = geometry.attributes.position as THREE.BufferAttribute;
+  geometry.computeBoundingBox();
+  const bbox = geometry.boundingBox!;
+  const center = bbox.getCenter(new THREE.Vector3());
+  const size = bbox.getSize(new THREE.Vector3());
+  const halfMax = Math.max(size.x, size.y, size.z) * 0.5 || 1;
+
+  const palettePoints = palette.map((p) => ({
+    pos: new THREE.Vector3(...p.pos),
+    color: new THREE.Color(p.color),
+    weight: p.weight ?? 1,
+  }));
+
+  const colors = new Float32Array(positionAttr.count * 3);
+  const v = new THREE.Vector3();
+  const c = new THREE.Color();
+  for (let i = 0; i < positionAttr.count; i++) {
+    v.fromBufferAttribute(positionAttr, i).sub(center).divideScalar(halfMax);
+    let rSum = 0, gSum = 0, bSum = 0, wSum = 0;
+    for (const p of palettePoints) {
+      const d = v.distanceToSquared(p.pos);
+      const w = p.weight / (d * 3 + 0.06);
+      rSum += p.color.r * w;
+      gSum += p.color.g * w;
+      bSum += p.color.b * w;
+      wSum += w;
+    }
+    c.setRGB(rSum / wSum, gSum / wSum, bSum / wSum);
+    colors[i * 3] = c.r;
+    colors[i * 3 + 1] = c.g;
+    colors[i * 3 + 2] = c.b;
+  }
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+}
+
 export default function GLBCellModel({ cell }: GLBCellModelProps) {
   const { scene } = useGLTF(cell.modelPath!);
   const clipping = useClippingPlanes();
@@ -30,20 +69,27 @@ export default function GLBCellModel({ cell }: GLBCellModelProps) {
       if (obj instanceof THREE.Mesh) {
         obj.castShadow = true;
         obj.receiveShadow = true;
+
+        // Bake colors into the geometry once per scene.
+        if (!obj.geometry.attributes.color) {
+          bakeVertexColors(obj.geometry, ANIMAL_PALETTE);
+        }
+
         const mat = obj.material as THREE.Material | THREE.Material[];
         const apply = (m: THREE.Material) => {
           m.clippingPlanes = clipping ?? [];
           m.clipShadows = !!clipping;
           m.side = THREE.DoubleSide;
-          // Give the bare NIH mesh some warmth + sheen so it looks like a cell, not a 3D-print white blob.
           if (m instanceof THREE.MeshStandardMaterial || m instanceof THREE.MeshPhysicalMaterial) {
-            m.color = new THREE.Color('#f0c8b8');
-            m.roughness = 0.4;
+            m.vertexColors = true;
+            m.color = new THREE.Color('#ffffff'); // let vertex colors drive hue
+            m.roughness = 0.45;
             m.metalness = 0.05;
             if (m instanceof THREE.MeshPhysicalMaterial) {
-              m.sheen = 0.6;
-              m.sheenColor = new THREE.Color('#ffe0d0');
-              m.clearcoat = 0.4;
+              m.sheen = 0.5;
+              m.sheenColor = new THREE.Color('#ffeed6');
+              m.clearcoat = 0.35;
+              m.clearcoatRoughness = 0.6;
             }
           }
           m.needsUpdate = true;
@@ -84,5 +130,4 @@ export default function GLBCellModel({ cell }: GLBCellModelProps) {
   );
 }
 
-// Preload at module load so the first paint is fast once the cell is selected.
 useGLTF.preload('/models/animal-cell.glb');

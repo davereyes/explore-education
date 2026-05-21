@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
-import { MeshDistortMaterial, MeshWobbleMaterial, RoundedBox } from '@react-three/drei';
+import { MeshDistortMaterial, MeshWobbleMaterial } from '@react-three/drei';
 import OrganelleGroup from './OrganelleGroup';
 import { useClippingPlanes, useViewModeOpacity } from './useClipping';
 
@@ -36,33 +36,38 @@ export default function PlantCellModel() {
 
 function CellWall() {
   const clipping = useClippingPlanes();
-  const opacity = useViewModeOpacity(0.42, 0.95);
+  const opacity = useViewModeOpacity(0.38, 0.92);
+  // Plant cells are not actually cube-shaped; this gives a rounded, sculpted
+  // disc-like shape that visually matches the NIH-style sculpted animal cell.
   return (
     <OrganelleGroup organelleId="cell-wall" keepInIsolate>
-      <RoundedBox name="CellWall" args={[5.4, 4.4, 5.4]} radius={0.6} smoothness={8} castShadow receiveShadow>
+      <mesh name="CellWall" scale={[1.5, 0.95, 1.5]} castShadow receiveShadow>
+        <icosahedronGeometry args={[2.4, 4]} />
         <meshPhysicalMaterial
           color="#7fb069"
-          roughness={0.55}
+          roughness={0.5}
           metalness={0}
-          clearcoat={0.4}
+          clearcoat={0.5}
+          clearcoatRoughness={0.5}
           sheen={0.8}
-          sheenColor="#cdeebb"
+          sheenColor="#d6f0bd"
           transparent
           opacity={opacity}
           side={THREE.DoubleSide}
           clippingPlanes={clipping ?? []}
         />
-      </RoundedBox>
-      {/* fibrous overlay for cellulose look */}
-      <RoundedBox args={[5.42, 4.42, 5.42]} radius={0.6} smoothness={4}>
+      </mesh>
+      {/* fibrous cellulose hint */}
+      <mesh scale={[1.5, 0.95, 1.5]}>
+        <icosahedronGeometry args={[2.42, 3]} />
         <meshStandardMaterial
-          color="#4f8c2f"
+          color="#3f7a2a"
           wireframe
           transparent
-          opacity={0.16}
+          opacity={0.14}
           clippingPlanes={clipping ?? []}
         />
-      </RoundedBox>
+      </mesh>
     </OrganelleGroup>
   );
 }
@@ -71,10 +76,11 @@ function CellWall() {
 
 function Membrane() {
   const clipping = useClippingPlanes();
-  const opacity = useViewModeOpacity(0.18, 0.55);
+  const opacity = useViewModeOpacity(0.16, 0.5);
   return (
     <OrganelleGroup organelleId="membrane">
-      <RoundedBox name="Membrane" args={[5.05, 4.05, 5.05]} radius={0.55} smoothness={6}>
+      <mesh name="Membrane" scale={[1.4, 0.88, 1.4]}>
+        <icosahedronGeometry args={[2.3, 3]} />
         <meshPhysicalMaterial
           color="#b7e3d3"
           transparent
@@ -86,7 +92,7 @@ function Membrane() {
           side={THREE.DoubleSide}
           clippingPlanes={clipping ?? []}
         />
-      </RoundedBox>
+      </mesh>
     </OrganelleGroup>
   );
 }
