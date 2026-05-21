@@ -3,37 +3,38 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--ca-border);
-  border-radius: var(--ca-radius-lg);
+  border-radius: 18px;
   box-shadow: var(--ca-shadow-md);
   overflow: hidden;
+  flex: 0 0 auto;
 }
 
 .ca-card--padded {
-  padding: var(--ca-space-5);
+  padding: 12px 14px;
 }
 
 .ca-card__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--ca-space-4);
+  margin-bottom: 10px;
 }
 
 .ca-card__title {
   font-family: var(--ca-font-sans);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ca-text-muted);
   display: flex;
   align-items: center;
-  gap: var(--ca-space-2);
+  gap: 6px;
 }
 
 .ca-card__accessory {
   display: inline-flex;
   align-items: center;
-  gap: var(--ca-space-2);
+  gap: 6px;
   color: var(--ca-text-muted);
 }

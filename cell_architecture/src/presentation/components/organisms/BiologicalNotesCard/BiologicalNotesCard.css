@@ -1,18 +1,18 @@
 .ca-bio__text {
   margin: 0;
   font-family: var(--ca-font-serif);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 12.5px;
+  line-height: 1.45;
   color: var(--ca-text);
 }
 
 .ca-bio__fun {
-  margin: var(--ca-space-3) 0 0;
+  margin: 8px 0 0;
   font-family: var(--ca-font-serif);
   font-style: italic;
-  font-size: 13px;
+  font-size: 11.5px;
   color: var(--ca-accent-strong);
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .ca-bio__fun-label {
@@ -27,7 +27,7 @@
 
 .ca-bio__empty {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   font-style: italic;
   color: var(--ca-text-muted);
   font-family: var(--ca-font-serif);

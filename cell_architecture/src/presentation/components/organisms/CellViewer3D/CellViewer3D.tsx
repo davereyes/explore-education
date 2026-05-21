@@ -7,6 +7,7 @@ import { useStudioStore } from '@/presentation/store/useStudioStore';
 import { useLanguage } from '@/presentation/context/LanguageContext';
 import { getCellById } from '@/infrastructure/data/cells';
 import AnimalCellModel from './AnimalCellModel';
+import PlantCellModel from './PlantCellModel';
 import ControlsHint from '@/presentation/components/molecules/ControlsHint/ControlsHint';
 import ViewerActionBar from '@/presentation/components/molecules/ViewerActionBar/ViewerActionBar';
 import ViewModeSelector from '@/presentation/components/molecules/ViewModeSelector/ViewModeSelector';
@@ -72,14 +73,22 @@ export default function CellViewer3D() {
         <Canvas
           shadows
           dpr={[1, 2]}
-          camera={{ position: [5, 2.5, 6], fov: 38, near: 0.1, far: 100 }}
+          camera={{ position: [7.5, 4, 9], fov: 38, near: 0.1, far: 100 }}
           gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
         >
           <color attach="background" args={['#fbf6ee']} />
           <fog attach="fog" args={['#fbf6ee', 16, 28]} />
-          <ambientLight intensity={0.55} />
-          <directionalLight position={[6, 8, 4]} intensity={1.0} castShadow />
-          <directionalLight position={[-5, 3, -2]} intensity={0.45} color="#b8a4ff" />
+          <ambientLight intensity={0.45} />
+          <directionalLight
+            position={[6, 9, 5]}
+            intensity={1.4}
+            castShadow
+            shadow-mapSize-width={2048}
+            shadow-mapSize-height={2048}
+            shadow-bias={-0.0005}
+          />
+          <directionalLight position={[-6, 4, -3]} intensity={0.55} color="#b8e0a0" />
+          <pointLight position={[0, -4, 0]} intensity={0.3} color="#ffd6a5" />
 
           <ClippingSetup />
 
@@ -94,19 +103,19 @@ export default function CellViewer3D() {
                     blur
                   />
                 </EffectComposer>
-                <AnimalCellModel />
+                {selectedCellId === 'plant' ? <PlantCellModel /> : <AnimalCellModel />}
               </Selection>
             </ActiveOrganelleContext.Provider>
-            <Environment preset="studio" />
+            <Environment preset="apartment" />
           </Suspense>
 
           <ContactShadows
-            position={[0, -2.4, 0]}
-            opacity={0.32}
-            scale={12}
-            blur={2.4}
-            far={3}
-            color="#3a2a1a"
+            position={[0, -2.6, 0]}
+            opacity={0.4}
+            scale={14}
+            blur={2.6}
+            far={4}
+            color="#2a1d0a"
           />
 
           <OrbitControls
@@ -114,8 +123,8 @@ export default function CellViewer3D() {
             enablePan
             enableZoom
             enableRotate
-            minDistance={3.5}
-            maxDistance={14}
+            minDistance={5}
+            maxDistance={18}
             makeDefault
           />
           <ResetHandler controls={controlsRef} />

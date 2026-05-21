@@ -25,8 +25,8 @@ interface StudioState {
 }
 
 export const useStudioStore = create<StudioState>((set) => ({
-  selectedCellId: 'animal',
-  selectedOrganelleId: 'mitochondrion',
+  selectedCellId: 'plant',
+  selectedOrganelleId: 'chloroplast',
   hoveredOrganelleId: null,
   viewMode: 'layered',
   crossSection: true,

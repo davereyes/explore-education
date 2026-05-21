@@ -1,121 +1,46 @@
-import { useMemo, type ReactNode } from 'react';
-import { Select } from '@react-three/postprocessing';
+import { useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
-import { useStudioStore } from '@/presentation/store/useStudioStore';
-import { useActiveOrganelle } from './CellViewer3D';
-
-interface OrganelleGroupProps {
-  organelleId: string;
-  children: ReactNode;
-}
-
-function OrganelleGroup({ organelleId, children }: OrganelleGroupProps) {
-  const active = useActiveOrganelle();
-  const selectedOrganelleId = useStudioStore((s) => s.selectedOrganelleId);
-  const isolate = useStudioStore((s) => s.isolate);
-  const hideOthers = useStudioStore((s) => s.hideOthers);
-  const selectOrganelle = useStudioStore((s) => s.selectOrganelle);
-  const hoverOrganelle = useStudioStore((s) => s.hoverOrganelle);
-
-  let visible = true;
-  if (isolate && selectedOrganelleId && selectedOrganelleId !== organelleId) visible = false;
-  if (hideOthers && organelleId !== 'membrane' && selectedOrganelleId && selectedOrganelleId !== organelleId)
-    visible = false;
-
-  return (
-    <Select enabled={active === organelleId}>
-      <group
-        visible={visible}
-        onPointerOver={(e) => {
-          e.stopPropagation();
-          hoverOrganelle(organelleId);
-          document.body.style.cursor = 'pointer';
-        }}
-        onPointerOut={(e) => {
-          e.stopPropagation();
-          hoverOrganelle(null);
-          document.body.style.cursor = '';
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          selectOrganelle(organelleId);
-        }}
-      >
-        {children}
-      </group>
-    </Select>
-  );
-}
-
-function useClippingPlanes() {
-  const crossSection = useStudioStore((s) => s.crossSection);
-  const planes = useMemo(() => {
-    const plane = new THREE.Plane(new THREE.Vector3(1, 0, 0), 0.4);
-    return [plane];
-  }, []);
-  return crossSection ? planes : null;
-}
-
-function useTransparencyForMode(base: number): number {
-  const viewMode = useStudioStore((s) => s.viewMode);
-  if (viewMode === 'solid') return Math.min(1, base + 0.35);
-  if (viewMode === 'cross-section') return base;
-  return base; // layered
-}
+import { MeshDistortMaterial, MeshWobbleMaterial } from '@react-three/drei';
+import OrganelleGroup from './OrganelleGroup';
+import { useClippingPlanes, useViewModeOpacity } from './useClipping';
 
 export default function AnimalCellModel() {
-  const cellRef = useRef<THREE.Group>(null);
+  const root = useRef<THREE.Group>(null);
   useFrame((_, dt) => {
-    if (cellRef.current) cellRef.current.rotation.y += dt * 0.05;
+    if (root.current) root.current.rotation.y += dt * 0.04;
   });
-
   return (
-    <group ref={cellRef} position={[0, 0, 0]} scale={1}>
+    <group ref={root}>
       <Membrane />
       <Cytoplasm />
       <Nucleus />
-      <Nucleolus />
       <Mitochondria />
       <RoughER />
-      <SmoothER />
       <Golgi />
       <Lysosomes />
     </group>
   );
 }
 
-/* ---------- Organelle meshes ---------- */
-
 function Membrane() {
   const clipping = useClippingPlanes();
-  const opacity = useTransparencyForMode(0.18);
+  const opacity = useViewModeOpacity(0.22, 0.65);
   return (
-    <OrganelleGroup organelleId="membrane">
+    <OrganelleGroup organelleId="membrane" keepInIsolate>
       <mesh name="Membrane" castShadow receiveShadow>
-        <sphereGeometry args={[2.6, 64, 64]} />
+        <sphereGeometry args={[2.6, 96, 96]} />
         <meshPhysicalMaterial
           color="#b7e3d3"
           transparent
           opacity={opacity}
-          roughness={0.35}
-          metalness={0}
-          transmission={0.4}
+          roughness={0.32}
+          transmission={0.5}
           thickness={0.6}
-          clearcoat={0.6}
+          clearcoat={0.7}
+          sheen={0.3}
+          sheenColor="#d3f3e6"
           side={THREE.DoubleSide}
-          clippingPlanes={clipping ?? []}
-        />
-      </mesh>
-      {/* subtle outer phospholipid bumps */}
-      <mesh name="MembraneBumps">
-        <sphereGeometry args={[2.62, 32, 32]} />
-        <meshStandardMaterial
-          color="#94d0bc"
-          wireframe
-          opacity={0.08}
-          transparent
           clippingPlanes={clipping ?? []}
         />
       </mesh>
@@ -127,12 +52,14 @@ function Cytoplasm() {
   const clipping = useClippingPlanes();
   return (
     <mesh name="Cytoplasm">
-      <sphereGeometry args={[2.5, 48, 48]} />
-      <meshStandardMaterial
+      <icosahedronGeometry args={[2.48, 4]} />
+      <MeshDistortMaterial
         color="#c5b8ff"
         transparent
         opacity={0.12}
         roughness={0.6}
+        distort={0.08}
+        speed={0.3}
         clippingPlanes={clipping ?? []}
       />
     </mesh>
@@ -141,48 +68,38 @@ function Cytoplasm() {
 
 function Nucleus() {
   const clipping = useClippingPlanes();
-  const opacity = useTransparencyForMode(0.85);
+  const opacity = useViewModeOpacity(0.95);
   return (
     <OrganelleGroup organelleId="nucleus">
-      <mesh name="Nucleus" position={[0.6, 0.3, 0.3]} castShadow>
-        <sphereGeometry args={[1.05, 48, 48]} />
-        <meshPhysicalMaterial
-          color="#7c5cff"
-          roughness={0.35}
-          metalness={0.1}
-          clearcoat={0.7}
-          transparent
-          opacity={opacity}
-          clippingPlanes={clipping ?? []}
-        />
-      </mesh>
-      {/* nuclear envelope */}
-      <mesh position={[0.6, 0.3, 0.3]}>
-        <sphereGeometry args={[1.12, 48, 48]} />
-        <meshStandardMaterial
-          color="#5b3ad6"
-          transparent
-          opacity={0.18}
-          roughness={0.5}
-          clippingPlanes={clipping ?? []}
-        />
-      </mesh>
-    </OrganelleGroup>
-  );
-}
-
-function Nucleolus() {
-  const clipping = useClippingPlanes();
-  return (
-    <OrganelleGroup organelleId="nucleolus">
-      <mesh name="Nucleolus" position={[0.85, 0.55, 0.55]} castShadow>
-        <sphereGeometry args={[0.36, 32, 32]} />
-        <meshStandardMaterial
-          color="#3d2c80"
-          roughness={0.45}
-          clippingPlanes={clipping ?? []}
-        />
-      </mesh>
+      <group position={[0.6, 0.3, 0.3]}>
+        <mesh name="Nucleus" castShadow>
+          <icosahedronGeometry args={[1.05, 4]} />
+          <meshPhysicalMaterial
+            color="#a87cff"
+            roughness={0.4}
+            clearcoat={0.6}
+            sheen={0.4}
+            sheenColor="#d3bdff"
+            transparent
+            opacity={opacity}
+            clippingPlanes={clipping ?? []}
+          />
+        </mesh>
+        <mesh>
+          <sphereGeometry args={[1.12, 48, 48]} />
+          <meshStandardMaterial
+            color="#5b3ad6"
+            transparent
+            opacity={0.18}
+            roughness={0.5}
+            clippingPlanes={clipping ?? []}
+          />
+        </mesh>
+        <mesh position={[0.25, 0.2, 0.25]}>
+          <sphereGeometry args={[0.32, 24, 24]} />
+          <meshStandardMaterial color="#3d2c80" roughness={0.45} clippingPlanes={clipping ?? []} />
+        </mesh>
+      </group>
     </OrganelleGroup>
   );
 }
@@ -190,7 +107,6 @@ function Nucleolus() {
 function Mitochondria() {
   const clipping = useClippingPlanes();
   const positions: Array<[number, number, number, number]> = [
-    // x, y, z, rotZ
     [-0.9, 0.7, 0.6, 0.7],
     [-1.3, -0.4, 0.2, -0.4],
     [0.2, -1.1, 0.9, 1.1],
@@ -201,19 +117,21 @@ function Mitochondria() {
       {positions.map(([x, y, z, rz], i) => (
         <group key={i} position={[x, y, z]} rotation={[0.4, 0.2, rz]}>
           <mesh name={`Mitochondrion_${i}`} castShadow>
-            <capsuleGeometry args={[0.22, 0.55, 12, 24]} />
-            <meshPhysicalMaterial
+            <capsuleGeometry args={[0.22, 0.55, 16, 24]} />
+            <MeshWobbleMaterial
               color="#ff8a7a"
               roughness={0.35}
-              clearcoat={0.5}
+              factor={0.06}
+              speed={0.5}
               clippingPlanes={clipping ?? []}
             />
           </mesh>
-          {/* inner cristae hint */}
-          <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
-            <torusGeometry args={[0.16, 0.04, 8, 24]} />
-            <meshStandardMaterial color="#c14a3d" clippingPlanes={clipping ?? []} />
-          </mesh>
+          {Array.from({ length: 3 }).map((_, j) => (
+            <mesh key={j} position={[0, (j - 1) * 0.18, 0]} rotation={[Math.PI / 2, 0, 0]}>
+              <torusGeometry args={[0.15, 0.025, 8, 20]} />
+              <meshStandardMaterial color="#b8392f" clippingPlanes={clipping ?? []} />
+            </mesh>
+          ))}
         </group>
       ))}
     </OrganelleGroup>
@@ -226,15 +144,16 @@ function RoughER() {
     <OrganelleGroup organelleId="rough-er">
       <group position={[-0.4, -0.2, 0.6]} rotation={[0.3, 0.5, 0.2]}>
         <mesh name="RoughER" castShadow>
-          <torusKnotGeometry args={[0.55, 0.13, 96, 16, 2, 3]} />
+          <torusKnotGeometry args={[0.55, 0.13, 128, 18, 2, 3]} />
           <meshPhysicalMaterial
             color="#f1a7c4"
             roughness={0.4}
-            clearcoat={0.4}
+            clearcoat={0.5}
+            sheen={0.3}
+            sheenColor="#ffd2e1"
             clippingPlanes={clipping ?? []}
           />
         </mesh>
-        {/* ribosome dots */}
         {Array.from({ length: 22 }).map((_, i) => {
           const a = (i / 22) * Math.PI * 2;
           const r = 0.55;
@@ -253,25 +172,6 @@ function RoughER() {
   );
 }
 
-function SmoothER() {
-  const clipping = useClippingPlanes();
-  return (
-    <OrganelleGroup organelleId="smooth-er">
-      <group position={[1.1, -0.6, -0.4]} rotation={[0.6, 0.8, 0.4]}>
-        <mesh name="SmoothER" castShadow>
-          <torusKnotGeometry args={[0.45, 0.1, 80, 14, 3, 5]} />
-          <meshPhysicalMaterial
-            color="#f4b860"
-            roughness={0.35}
-            clearcoat={0.55}
-            clippingPlanes={clipping ?? []}
-          />
-        </mesh>
-      </group>
-    </OrganelleGroup>
-  );
-}
-
 function Golgi() {
   const clipping = useClippingPlanes();
   return (
@@ -279,11 +179,12 @@ function Golgi() {
       <group position={[-1.1, 0.9, -0.5]} rotation={[0.2, -0.4, 0.3]}>
         {[0, 1, 2, 3, 4].map((i) => (
           <mesh key={i} name={`Golgi_${i}`} position={[0, i * 0.13 - 0.26, 0]} castShadow>
-            <torusGeometry args={[0.35 - i * 0.03, 0.06, 12, 32]} />
+            <torusGeometry args={[0.35 - i * 0.03, 0.06, 16, 40]} />
             <meshPhysicalMaterial
               color="#84d2c5"
               roughness={0.3}
               clearcoat={0.6}
+              sheen={0.3}
               clippingPlanes={clipping ?? []}
             />
           </mesh>

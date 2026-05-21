@@ -1,19 +1,20 @@
 .ca-occur {
   display: flex;
   align-items: center;
-  gap: var(--ca-space-3);
+  gap: 10px;
 }
 
 .ca-occur__hosts {
-  font-size: 32px;
-  width: 88px;
-  height: 64px;
+  font-size: 24px;
+  width: 72px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #ffe6d4, #ffd6c4);
-  border-radius: var(--ca-radius-md);
-  letter-spacing: -4px;
+  border-radius: 12px;
+  letter-spacing: -3px;
+  flex-shrink: 0;
 }
 
 .ca-occur__list {
@@ -22,11 +23,11 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
 }
 .ca-occur__list li {
-  font-size: 12px;
-  padding: 4px 10px;
+  font-size: 11px;
+  padding: 3px 8px;
   border-radius: 999px;
   background: var(--ca-bg-soft);
   color: var(--ca-text-soft);

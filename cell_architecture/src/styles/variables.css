@@ -33,6 +33,9 @@
   --ca-org-cytoplasm: #c5b8ff;
   --ca-org-membrane: #b7e3d3;
   --ca-org-ribosome: #ff5b6a;
+  --ca-org-cell-wall: #7fb069;
+  --ca-org-vacuole: #6ec5d6;
+  --ca-org-chloroplast: #5fa55a;
 
   /* Typography */
   --ca-font-serif: 'Fraunces', 'Playfair Display', Georgia, serif;

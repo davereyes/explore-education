@@ -2,20 +2,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--ca-space-4) var(--ca-space-6);
-  gap: var(--ca-space-5);
+  padding: 6px 16px;
+  gap: 16px;
+  flex: 0 0 auto;
 }
 
 .ca-header__brand {
   display: flex;
   align-items: center;
-  gap: var(--ca-space-4);
+  gap: 12px;
 }
 
 .ca-header__logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   background:
     radial-gradient(circle at 30% 30%, #ffd6a5, transparent 60%),
     radial-gradient(circle at 70% 70%, #b8a4ff, transparent 65%),
@@ -24,7 +25,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 22px;
   box-shadow: var(--ca-shadow-sm);
 }
 
@@ -35,18 +36,17 @@
 
 .ca-header__name {
   font-family: var(--ca-font-serif);
-  font-size: 26px;
+  font-size: 20px;
   line-height: 1.1;
-  letter-spacing: -0.01em;
   font-style: italic;
   color: var(--ca-text);
 }
 
 .ca-header__tag {
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   font-family: var(--ca-font-serif);
   font-style: italic;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--ca-accent);
 }
 
@@ -59,46 +59,42 @@
 .ca-header__nav {
   display: flex;
   align-items: center;
-  gap: var(--ca-space-2);
+  gap: 4px;
 }
 
 .ca-header__nav-item {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 8px 14px;
-  border-radius: var(--ca-radius-md);
+  gap: 1px;
+  padding: 4px 10px;
+  border-radius: 10px;
   color: var(--ca-text-soft);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   background: transparent;
   border: 0;
   transition: background 0.18s var(--ca-ease);
 }
-
 .ca-header__nav-item:hover:not(:disabled) {
   background: var(--ca-bg-soft);
 }
-
 .ca-header__nav-item--active {
   color: var(--ca-accent-strong);
 }
-
 .ca-header__nav-item:disabled {
   opacity: 0.5;
 }
-
 .ca-header__nav-icon {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .ca-header__lang {
-  margin-left: var(--ca-space-3);
-  font-size: 11px;
+  margin-left: 6px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  padding: 6px 10px;
+  padding: 5px 9px;
   border-radius: 999px;
   background: var(--ca-surface);
   border: 1px solid var(--ca-border);
@@ -110,9 +106,9 @@
 }
 
 .ca-header__avatar {
-  margin-left: var(--ca-space-2);
-  width: 44px;
-  height: 44px;
+  margin-left: 4px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: linear-gradient(135deg, #ffd6a5, #ffb4a2);
   border: 2px solid var(--ca-surface);
@@ -120,5 +116,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 18px;
 }
