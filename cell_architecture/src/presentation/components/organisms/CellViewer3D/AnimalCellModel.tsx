@@ -1,17 +1,11 @@
-import { useRef } from 'react';
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
 import { MeshDistortMaterial, MeshWobbleMaterial } from '@react-three/drei';
 import OrganelleGroup from './OrganelleGroup';
 import { useClippingPlanes, useViewModeOpacity } from './useClipping';
 
 export default function AnimalCellModel() {
-  const root = useRef<THREE.Group>(null);
-  useFrame((_, dt) => {
-    if (root.current) root.current.rotation.y += dt * 0.04;
-  });
   return (
-    <group ref={root}>
+    <group>
       <Membrane />
       <Cytoplasm />
       <Nucleus />

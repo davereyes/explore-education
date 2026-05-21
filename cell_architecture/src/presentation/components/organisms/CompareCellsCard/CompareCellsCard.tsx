@@ -1,5 +1,4 @@
 import CaCard from '@/presentation/components/atoms/CaCard/CaCard';
-import CaButton from '@/presentation/components/atoms/CaButton/CaButton';
 import { useLanguage } from '@/presentation/context/LanguageContext';
 import { useStudioStore } from '@/presentation/store/useStudioStore';
 import { cells, getCellById } from '@/infrastructure/data/cells';
@@ -39,15 +38,6 @@ export default function CompareCellsCard() {
           </div>
         </div>
       </div>
-      <CaButton
-        variant="soft"
-        className="ca-compare__cta"
-        disabled
-        title={t('Próximamente', 'Coming soon')}
-        iconRight={<span>›</span>}
-      >
-        {t('Abrir comparación', 'Open Comparison View')}
-      </CaButton>
     </CaCard>
   );
 }

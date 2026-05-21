@@ -2,7 +2,6 @@ import { Suspense, useEffect, useMemo, useRef, createContext, useContext } from 
 import type { ReactNode, MutableRefObject } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows } from '@react-three/drei';
-import { EffectComposer, Outline, Selection } from '@react-three/postprocessing';
 import { useStudioStore } from '@/presentation/store/useStudioStore';
 import { useLanguage } from '@/presentation/context/LanguageContext';
 import { getCellById } from '@/infrastructure/data/cells';
@@ -96,30 +95,20 @@ export default function CellViewer3D() {
 
           <Suspense fallback={null}>
             <ActiveOrganelleContext.Provider value={activeId}>
-              <Selection>
-                <EffectComposer multisampling={4} autoClear={false}>
-                  <Outline
-                    visibleEdgeColor={0x7c5cff}
-                    hiddenEdgeColor={0x7c5cff}
-                    edgeStrength={5}
-                    blur
-                  />
-                </EffectComposer>
-                {cell?.modelPath ? (
-                  <ModelErrorBoundary
-                    fallback={
-                      selectedCellId === 'plant' ? <PlantCellModel /> : <AnimalCellModel />
-                    }
-                    resetKey={selectedCellId}
-                  >
-                    <GLBCellModel cell={cell} />
-                  </ModelErrorBoundary>
-                ) : selectedCellId === 'plant' ? (
-                  <PlantCellModel />
-                ) : (
-                  <AnimalCellModel />
-                )}
-              </Selection>
+              {cell?.modelPath ? (
+                <ModelErrorBoundary
+                  fallback={
+                    selectedCellId === 'plant' ? <PlantCellModel /> : <AnimalCellModel />
+                  }
+                  resetKey={selectedCellId}
+                >
+                  <GLBCellModel cell={cell} />
+                </ModelErrorBoundary>
+              ) : selectedCellId === 'plant' ? (
+                <PlantCellModel />
+              ) : (
+                <AnimalCellModel />
+              )}
             </ActiveOrganelleContext.Provider>
             <Environment preset="apartment" />
           </Suspense>

@@ -1,6 +1,5 @@
-import { useRef, useMemo } from 'react';
+import { useMemo } from 'react';
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
 import { MeshDistortMaterial, MeshWobbleMaterial, RoundedBox } from '@react-three/drei';
 import OrganelleGroup from './OrganelleGroup';
 import { useClippingPlanes, useViewModeOpacity } from './useClipping';
@@ -19,13 +18,8 @@ import { useClippingPlanes, useViewModeOpacity } from './useClipping';
  * useGLTF — the OrganelleGroup wrappers stay the same.
  */
 export default function PlantCellModel() {
-  const root = useRef<THREE.Group>(null);
-  useFrame((_, dt) => {
-    if (root.current) root.current.rotation.y += dt * 0.04;
-  });
-
   return (
-    <group ref={root}>
+    <group>
       <CellWall />
       <Membrane />
       <Vacuole />
@@ -42,17 +36,17 @@ export default function PlantCellModel() {
 
 function CellWall() {
   const clipping = useClippingPlanes();
-  const opacity = useViewModeOpacity(0.32, 0.9);
+  const opacity = useViewModeOpacity(0.42, 0.95);
   return (
     <OrganelleGroup organelleId="cell-wall" keepInIsolate>
       <RoundedBox name="CellWall" args={[5.4, 4.4, 5.4]} radius={0.6} smoothness={8} castShadow receiveShadow>
         <meshPhysicalMaterial
-          color="#9ec178"
-          roughness={0.7}
+          color="#7fb069"
+          roughness={0.55}
           metalness={0}
-          clearcoat={0.2}
-          sheen={0.6}
-          sheenColor="#bedf9a"
+          clearcoat={0.4}
+          sheen={0.8}
+          sheenColor="#cdeebb"
           transparent
           opacity={opacity}
           side={THREE.DoubleSide}
@@ -62,10 +56,10 @@ function CellWall() {
       {/* fibrous overlay for cellulose look */}
       <RoundedBox args={[5.42, 4.42, 5.42]} radius={0.6} smoothness={4}>
         <meshStandardMaterial
-          color="#6f9c4f"
+          color="#4f8c2f"
           wireframe
           transparent
-          opacity={0.12}
+          opacity={0.16}
           clippingPlanes={clipping ?? []}
         />
       </RoundedBox>
@@ -108,12 +102,12 @@ function Vacuole() {
         <mesh name="Vacuole" castShadow>
           <icosahedronGeometry args={[1.85, 4]} />
           <MeshDistortMaterial
-            color="#7fc7d9"
+            color="#3aa6c4"
             roughness={0.18}
             metalness={0.05}
-            transmission={0.55}
+            transmission={0.45}
             thickness={1.2}
-            clearcoat={0.8}
+            clearcoat={0.9}
             clearcoatRoughness={0.2}
             distort={0.18}
             speed={0.4}
@@ -144,10 +138,10 @@ function Nucleus() {
         <mesh name="Nucleus" castShadow>
           <icosahedronGeometry args={[0.9, 4]} />
           <meshPhysicalMaterial
-            color="#a87cff"
-            roughness={0.45}
-            clearcoat={0.6}
-            sheen={0.4}
+            color="#7c4dff"
+            roughness={0.4}
+            clearcoat={0.7}
+            sheen={0.5}
             sheenColor="#d3bdff"
             transparent
             opacity={opacity}
@@ -208,11 +202,11 @@ function Chloroplast({ position, rotation }: { position: [number, number, number
       <mesh name="Chloroplast" castShadow scale={[1, 0.45, 0.6]}>
         <sphereGeometry args={[0.55, 48, 48]} />
         <meshPhysicalMaterial
-          color="#6fb46a"
-          roughness={0.4}
-          clearcoat={0.6}
-          sheen={0.5}
-          sheenColor="#b3dca5"
+          color="#3d9239"
+          roughness={0.35}
+          clearcoat={0.7}
+          sheen={0.6}
+          sheenColor="#9fd698"
           clippingPlanes={clipping ?? []}
         />
       </mesh>
@@ -225,10 +219,10 @@ function Chloroplast({ position, rotation }: { position: [number, number, number
               <mesh key={j} position={[0, 0, (j - 1.5) * 0.04]} rotation={[Math.PI / 2, 0, 0]}>
                 <cylinderGeometry args={[0.06, 0.06, 0.025, 16]} />
                 <meshStandardMaterial
-                  color="#3f7a3a"
+                  color="#c84c3e"
                   roughness={0.35}
-                  emissive="#1f4a1d"
-                  emissiveIntensity={0.4}
+                  emissive="#7a1f1a"
+                  emissiveIntensity={0.45}
                   clippingPlanes={clipping ?? []}
                 />
               </mesh>

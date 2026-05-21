@@ -164,7 +164,8 @@ export const plantCell: Cell = {
   classification: 'eukaryotic',
   enabled: true,
   thumbnailEmoji: '🌿',
-  modelPath: '/models/plant-cell.glb',
+  // No GLB yet — uses procedural PlantCellModel. To switch, drop /public/models/plant-cell.glb and uncomment:
+  // modelPath: '/models/plant-cell.glb',
   organelles: [
     {
       id: 'cell-wall',
@@ -331,19 +332,34 @@ export const plantCell: Cell = {
       type: 'light',
       label: 'Microscopio óptico',
       labelEn: 'Light Microscope',
-      swatch: 'linear-gradient(135deg, #b7e3a0 0%, #6cb88a 50%, #8fd1b8 100%)',
+      imageUrl: '/microscope/plant-light-elodea.jpg',
+      credit: {
+        author: '~delta',
+        source: 'https://commons.wikimedia.org/wiki/File:Elodea_cells_under_microscope.jpg',
+        license: 'CC BY-SA 4.0',
+      },
     },
     {
       type: 'stained',
-      label: 'Tinción safranina',
-      labelEn: 'Stained Selection',
-      swatch: 'linear-gradient(135deg, #ff9aa2 0%, #c25b88 60%, #8a3a73 100%)',
+      label: 'Tinción · cebolla',
+      labelEn: 'Stained · onion',
+      imageUrl: '/microscope/plant-stained-red-onion.jpg',
+      credit: {
+        author: 'TheGroninger',
+        source: 'https://commons.wikimedia.org/wiki/File:Red_onion_cells.jpg',
+        license: 'CC BY-SA 4.0',
+      },
     },
     {
       type: 'electron',
       label: 'Microscopio electrónico',
       labelEn: 'Electron Microscope',
-      swatch: 'linear-gradient(135deg, #2d3a2a 0%, #4a5a44 50%, #889a82 100%)',
+      imageUrl: '/microscope/plant-electron-lettuce.jpg',
+      credit: {
+        author: 'Yuv345',
+        source: 'https://commons.wikimedia.org/wiki/File:Lettuce_Chloroplast_STEM.jpg',
+        license: 'CC BY-SA 4.0',
+      },
     },
   ],
   occurrence: {

@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
-import { Select } from '@react-three/postprocessing';
 import { useStudioStore } from '@/presentation/store/useStudioStore';
-import { useActiveOrganelle } from './CellViewer3D';
 
 interface OrganelleGroupProps {
   organelleId: string;
@@ -9,17 +7,21 @@ interface OrganelleGroupProps {
   keepInIsolate?: boolean;
 }
 
+/**
+ * Wraps a sub-tree that represents a single organelle. Drives visibility based
+ * on the store's isolate / hide-others state.
+ *
+ * The 3D model is intentionally NOT interactive — the user picks organelles
+ * from the sidebar list, so no pointer/click handlers here.
+ */
 export default function OrganelleGroup({
   organelleId,
   children,
   keepInIsolate = false,
 }: OrganelleGroupProps) {
-  const active = useActiveOrganelle();
   const selectedOrganelleId = useStudioStore((s) => s.selectedOrganelleId);
   const isolate = useStudioStore((s) => s.isolate);
   const hideOthers = useStudioStore((s) => s.hideOthers);
-  const selectOrganelle = useStudioStore((s) => s.selectOrganelle);
-  const hoverOrganelle = useStudioStore((s) => s.hoverOrganelle);
 
   let visible = true;
   if (isolate && selectedOrganelleId && selectedOrganelleId !== organelleId && !keepInIsolate) {
@@ -35,27 +37,5 @@ export default function OrganelleGroup({
     visible = false;
   }
 
-  return (
-    <Select enabled={active === organelleId}>
-      <group
-        visible={visible}
-        onPointerOver={(e) => {
-          e.stopPropagation();
-          hoverOrganelle(organelleId);
-          document.body.style.cursor = 'pointer';
-        }}
-        onPointerOut={(e) => {
-          e.stopPropagation();
-          hoverOrganelle(null);
-          document.body.style.cursor = '';
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          selectOrganelle(organelleId);
-        }}
-      >
-        {children}
-      </group>
-    </Select>
-  );
+  return <group visible={visible}>{children}</group>;
 }

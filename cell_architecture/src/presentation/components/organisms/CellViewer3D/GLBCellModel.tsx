@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import type { Cell } from '@/domain/entities';
 import OrganelleGroup from './OrganelleGroup';
@@ -23,7 +22,6 @@ interface GLBCellModelProps {
  * subset in its own OrganelleGroup.
  */
 export default function GLBCellModel({ cell }: GLBCellModelProps) {
-  const groupRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF(cell.modelPath!);
   const clipping = useClippingPlanes();
 
@@ -56,10 +54,6 @@ export default function GLBCellModel({ cell }: GLBCellModelProps) {
     });
   }, [scene, clipping]);
 
-  useFrame((_, dt) => {
-    if (groupRef.current) groupRef.current.rotation.y += dt * 0.04;
-  });
-
   const t = cell.modelTransform ?? {};
   const TARGET_SIZE = 5;
   const { autoScale, centerOffset } = useMemo(() => {
@@ -79,7 +73,6 @@ export default function GLBCellModel({ cell }: GLBCellModelProps) {
 
   return (
     <group
-      ref={groupRef}
       scale={finalScale}
       position={t.position ?? [0, 0, 0]}
       rotation={t.rotation ?? [0, 0, 0]}

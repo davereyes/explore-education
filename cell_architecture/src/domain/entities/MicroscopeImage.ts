@@ -4,7 +4,13 @@ export interface MicroscopeImage {
   type: MicroscopeType;
   label: string;
   labelEn: string;
-  /** Tailwind-like gradient string used as a placeholder until real images land. */
-  swatch: string;
-  credit?: string;
+  /** Remote image URL (typically a Wikimedia Commons thumb). */
+  imageUrl?: string;
+  /** Fallback gradient used when no image is available yet. */
+  swatch?: string;
+  credit?: {
+    author: string;
+    source: string;
+    license: string;
+  };
 }
