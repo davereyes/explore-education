@@ -23,6 +23,35 @@ export const animalCell: Cell = {
   generalFunFact:
     'Tu cuerpo tiene unos 37 billones de células animales — más que estrellas en la Vía Láctea.',
   generalFunFactEn: 'Your body has about 37 trillion animal cells — more than stars in the Milky Way.',
+  amazingNumbers: [
+    { emoji: '⚡', es: 'Una sola célula puede fabricar millones de moléculas de ATP por segundo', en: 'A single cell can make millions of ATP molecules per second' },
+    { emoji: '🧬', es: 'Si estiraras el ADN de un núcleo humano, mediría casi 2 m', en: 'Stretched out, the DNA in one human nucleus reaches almost 2 m' },
+    { emoji: '🔄', es: 'Cada día tu cuerpo reemplaza ~330 mil millones de células', en: 'Your body replaces ~330 billion cells every day' },
+  ],
+  discoveryTimeline: [
+    { year: 1665, emoji: '🔬', es: 'Robert Hooke ve las primeras células (en corcho vegetal)', en: 'Robert Hooke sees the first cells (in plant cork)' },
+    { year: 1674, emoji: '🦠', es: 'Leeuwenhoek observa células vivas con su microscopio', en: 'Leeuwenhoek observes living cells with his microscope' },
+    { year: 1839, emoji: '🐾', es: 'Theodor Schwann extiende la teoría celular a los animales', en: 'Theodor Schwann extends cell theory to animals' },
+    { year: 1855, emoji: '🔁', es: 'Rudolf Virchow: "toda célula viene de otra célula"', en: 'Rudolf Virchow: "every cell comes from another cell"' },
+  ],
+  tryAtHome:
+    'Raspa con una cuchara plástica el interior de tu mejilla (suavito), pon la muestra en un portaobjetos con una gota de azul de metileno y mírala. Vas a ver células epiteliales con su núcleo bien marcado.',
+  tryAtHomeEn:
+    'Gently scrape the inside of your cheek with a plastic spoon, smear it on a slide with a drop of methylene blue and look at it. You will see epithelial cells with their nucleus clearly marked.',
+  cellQuiz: {
+    prompt: '¿Qué le falta a la célula animal que sí tiene la vegetal?',
+    promptEn: 'What does the animal cell lack that the plant cell has?',
+    options: [
+      { es: 'Núcleo y mitocondrias', en: 'Nucleus and mitochondria' },
+      { es: 'Pared celular y cloroplastos', en: 'Cell wall and chloroplasts' },
+      { es: 'Membrana y citoplasma', en: 'Membrane and cytoplasm' },
+    ],
+    correctIndex: 1,
+    explanation:
+      'La célula animal es flexible (sin pared) y obtiene su energía comiendo, no del sol (sin cloroplastos).',
+    explanationEn:
+      'The animal cell is flexible (no wall) and gets energy from eating, not the sun (no chloroplasts).',
+  },
   organelles: [
     {
       id: 'nucleus',
@@ -61,6 +90,18 @@ export const animalCell: Cell = {
       notesEn: 'Turns sugars and oxygen into energy (ATP) so the cell can work.',
       funFact: 'Tiene su propio ADN heredado de mamá — viene de bacterias ancestrales.',
       funFactEn: 'It has its own DNA inherited from mom — it comes from ancient bacteria.',
+      quiz: {
+        prompt: '¿Por qué a la mitocondria le dicen "la central eléctrica"?',
+        promptEn: 'Why is the mitochondrion called "the powerhouse"?',
+        options: [
+          { es: 'Porque guarda ADN', en: 'Because it stores DNA' },
+          { es: 'Porque genera la energía (ATP) de la célula', en: 'Because it generates the cell\'s energy (ATP)' },
+          { es: 'Porque controla la división', en: 'Because it controls division' },
+        ],
+        correctIndex: 1,
+        explanation: 'Convierte la comida y oxígeno en ATP, la "moneda de energía" que la célula gasta para todo.',
+        explanationEn: 'It turns food and oxygen into ATP, the "energy currency" the cell spends on everything.',
+      },
     },
     {
       id: 'rough-er',
@@ -180,6 +221,46 @@ export const plantCell: Cell = {
   generalFunFact:
     'Las plantas son los únicos seres vivos que producen casi todo el oxígeno que respiramos.',
   generalFunFactEn: 'Plants make nearly all the oxygen we breathe.',
+  uniqueFeatures: [
+    { emoji: '🟩', name: 'Pared celular', nameEn: 'Cell wall' },
+    { emoji: '💧', name: 'Vacuola central', nameEn: 'Central vacuole' },
+    { emoji: '🌿', name: 'Cloroplastos', nameEn: 'Chloroplasts' },
+  ],
+  amazingNumbers: [
+    { emoji: '🌳', es: 'Una hoja puede tener ~500,000 cloroplastos por mm²', en: 'A leaf can have ~500,000 chloroplasts per mm²' },
+    { emoji: '💧', es: 'La vacuola puede ocupar hasta 90% del volumen de la célula', en: 'The vacuole can take up to 90% of the cell volume' },
+    { emoji: '🌍', es: 'La celulosa es la molécula orgánica más abundante del planeta', en: 'Cellulose is the most abundant organic molecule on Earth' },
+  ],
+  discoveryTimeline: [
+    { year: 1665, emoji: '🔬', es: 'Robert Hooke ve las primeras células — en una rebanada de corcho', en: 'Robert Hooke sees the first cells — in a slice of cork' },
+    { year: 1674, emoji: '🦠', es: 'Anton van Leeuwenhoek observa células vivas (un alga)', en: 'Anton van Leeuwenhoek observes living cells (an alga)' },
+    { year: 1838, emoji: '🌱', es: 'Matthias Schleiden propone que todas las plantas están hechas de células', en: 'Matthias Schleiden proposes that all plants are made of cells' },
+    { year: 1839, emoji: '📜', es: 'Schleiden + Schwann formulan la Teoría Celular', en: 'Schleiden + Schwann formulate Cell Theory' },
+  ],
+  specializedCells: [
+    { emoji: '🌱', name: 'Pelo radicular', nameEn: 'Root hair', role: 'Absorbe agua y minerales de la tierra', roleEn: 'Absorbs water and minerals from the soil' },
+    { emoji: '☀️', name: 'Palizada', nameEn: 'Palisade', role: 'La fábrica de fotosíntesis dentro de la hoja', roleEn: 'The photosynthesis factory inside the leaf' },
+    { emoji: '🌬️', name: 'Guarda', nameEn: 'Guard cell', role: 'Abre y cierra los poros (estomas) de la hoja', roleEn: 'Opens and closes the leaf pores (stomata)' },
+    { emoji: '💧', name: 'Xilema', nameEn: 'Xylem', role: 'Tubo que sube el agua desde la raíz hasta la copa', roleEn: 'Tube that carries water from the root up to the top' },
+  ],
+  tryAtHome:
+    'Pela una capa fina de cebolla morada, ponla en un portaobjetos con una gota de agua y mírala con un microscopio escolar. Vas a ver pared celular, núcleo y citoplasma con claridad — sin teñirla casi.',
+  tryAtHomeEn:
+    'Peel a thin layer of red onion, place it on a slide with a drop of water and look at it under a school microscope. You will see the cell wall, nucleus and cytoplasm clearly — even without staining.',
+  cellQuiz: {
+    prompt: '¿Qué tres cosas tiene una célula vegetal que NO tiene una célula animal?',
+    promptEn: 'Which three things does a plant cell have that an animal cell does NOT?',
+    options: [
+      { es: 'Núcleo, mitocondria y ribosomas', en: 'Nucleus, mitochondria and ribosomes' },
+      { es: 'Pared celular, vacuola central y cloroplastos', en: 'Cell wall, central vacuole and chloroplasts' },
+      { es: 'Membrana, ADN y citoplasma', en: 'Membrane, DNA and cytoplasm' },
+    ],
+    correctIndex: 1,
+    explanation:
+      'Esas tres son exclusivas: la pared le da forma, la vacuola la mantiene firme y los cloroplastos hacen fotosíntesis.',
+    explanationEn:
+      'Those three are exclusive: the wall gives shape, the vacuole keeps it firm, and chloroplasts do photosynthesis.',
+  },
   organelles: [
     {
       id: 'cell-wall',
@@ -200,6 +281,18 @@ export const plantCell: Cell = {
         'Rigid cellulose structure that protects the cell and gives it shape. It is what tells plant cells apart from animal cells.',
       funFact: 'La celulosa es la molécula orgánica más abundante del planeta.',
       funFactEn: 'Cellulose is the most abundant organic molecule on the planet.',
+      quiz: {
+        prompt: '¿De qué material está hecha la pared celular?',
+        promptEn: 'What is the cell wall made of?',
+        options: [
+          { es: 'Grasa', en: 'Fat' },
+          { es: 'Celulosa', en: 'Cellulose' },
+          { es: 'Proteína', en: 'Protein' },
+        ],
+        correctIndex: 1,
+        explanation: 'La celulosa es una fibra rígida que solo las plantas (y algunas algas y hongos) saben fabricar.',
+        explanationEn: 'Cellulose is a rigid fiber that only plants (and some algae and fungi) know how to build.',
+      },
     },
     {
       id: 'vacuole',
@@ -220,6 +313,18 @@ export const plantCell: Cell = {
         'Giant sac filled with water and nutrients. Keeps the plant stiff — when it empties, the plant wilts.',
       funFact: 'Por la vacuola, una planta sin agua se cae como un globo desinflado.',
       funFactEn: 'Thanks to the vacuole, a thirsty plant flops like a deflated balloon.',
+      quiz: {
+        prompt: '¿Por qué una planta se marchita cuando le falta agua?',
+        promptEn: 'Why does a plant wilt when it lacks water?',
+        options: [
+          { es: 'Los cloroplastos dejan de hacer fotosíntesis', en: 'Chloroplasts stop photosynthesis' },
+          { es: 'La vacuola pierde agua y deja de empujar contra la pared', en: 'The vacuole loses water and stops pushing against the wall' },
+          { es: 'El núcleo se apaga', en: 'The nucleus shuts down' },
+        ],
+        correctIndex: 1,
+        explanation: 'Esa presión se llama turgencia. Sin ella la célula se "desinfla" y la planta cae.',
+        explanationEn: 'That pressure is called turgor. Without it the cell "deflates" and the plant droops.',
+      },
     },
     {
       id: 'chloroplast',
@@ -240,6 +345,18 @@ export const plantCell: Cell = {
         'Catches sunlight and uses it to make sugars (photosynthesis). It carries chlorophyll — that is what makes plants green.',
       funFact: 'También tienen ADN propio, igual que las mitocondrias.',
       funFactEn: 'They also carry their own DNA, just like mitochondria.',
+      quiz: {
+        prompt: '¿Qué hace el cloroplasto?',
+        promptEn: 'What does the chloroplast do?',
+        options: [
+          { es: 'Almacena agua y nutrientes', en: 'Stores water and nutrients' },
+          { es: 'Hace comida con la luz del sol', en: 'Makes food using sunlight' },
+          { es: 'Empaqueta proteínas', en: 'Packages proteins' },
+        ],
+        correctIndex: 1,
+        explanation: 'Eso se llama fotosíntesis: convierte CO₂ + agua + luz en azúcar y oxígeno.',
+        explanationEn: 'That is photosynthesis: it turns CO₂ + water + light into sugar and oxygen.',
+      },
     },
     {
       id: 'nucleus',
@@ -260,6 +377,18 @@ export const plantCell: Cell = {
         "Holds the plant's DNA and directs everything the cell does. The huge vacuole pushes it against the wall.",
       funFact: 'En las células vegetales, el núcleo casi siempre vive arrinconado.',
       funFactEn: 'In plant cells, the nucleus almost always lives shoved off to one side.',
+      quiz: {
+        prompt: '¿Qué guarda el núcleo?',
+        promptEn: 'What does the nucleus store?',
+        options: [
+          { es: 'Azúcar', en: 'Sugar' },
+          { es: 'ADN', en: 'DNA' },
+          { es: 'Agua', en: 'Water' },
+        ],
+        correctIndex: 1,
+        explanation: 'El ADN es el manual de instrucciones de la célula.',
+        explanationEn: 'DNA is the cell\'s instruction manual.',
+      },
     },
     {
       id: 'mitochondrion',

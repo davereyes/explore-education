@@ -15,6 +15,35 @@ export interface ModelTransform {
   rotation?: [number, number, number];
 }
 
+import type { QuizQuestion } from './Organelle';
+
+export interface AmazingNumber {
+  emoji: string;
+  es: string;
+  en: string;
+}
+
+export interface DiscoveryEvent {
+  year: number;
+  emoji: string;
+  es: string;
+  en: string;
+}
+
+export interface SpecializedCellType {
+  emoji: string;
+  name: string;
+  nameEn: string;
+  role: string;
+  roleEn: string;
+}
+
+export interface UniqueFeature {
+  emoji: string;
+  name: string;
+  nameEn: string;
+}
+
 export interface Cell {
   id: string;
   name: string;
@@ -35,4 +64,13 @@ export interface Cell {
   generalSummaryEn: string;
   generalFunFact?: string;
   generalFunFactEn?: string;
+
+  // Enrichment fields (all optional, render-conditional)
+  uniqueFeatures?: UniqueFeature[];
+  amazingNumbers?: AmazingNumber[];
+  discoveryTimeline?: DiscoveryEvent[];
+  specializedCells?: SpecializedCellType[];
+  tryAtHome?: string;
+  tryAtHomeEn?: string;
+  cellQuiz?: QuizQuestion;
 }

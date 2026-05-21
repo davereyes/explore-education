@@ -4,19 +4,46 @@ import CellViewer3D from '@/presentation/components/organisms/CellViewer3D/CellV
 import OrganelleDetailsPanel from '@/presentation/components/organisms/OrganelleDetailsPanel/OrganelleDetailsPanel';
 import BiologicalNotesCard from '@/presentation/components/organisms/BiologicalNotesCard/BiologicalNotesCard';
 import OccurrenceCard from '@/presentation/components/organisms/OccurrenceCard/OccurrenceCard';
+import UniqueFeaturesCard from '@/presentation/components/organisms/EnrichmentCards/UniqueFeaturesCard';
+import PhotosynthesisCard from '@/presentation/components/organisms/EnrichmentCards/PhotosynthesisCard';
+import QuickQuizCard from '@/presentation/components/organisms/EnrichmentCards/QuickQuizCard';
+import SpecializedCellsCard from '@/presentation/components/organisms/EnrichmentCards/SpecializedCellsCard';
+import TryAtHomeCard from '@/presentation/components/organisms/EnrichmentCards/TryAtHomeCard';
+import DiscoveryTimelineCard from '@/presentation/components/organisms/EnrichmentCards/DiscoveryTimelineCard';
+import AmazingNumbersCard from '@/presentation/components/organisms/EnrichmentCards/AmazingNumbersCard';
+import { useStudioStore } from '@/presentation/store/useStudioStore';
+import { getCellById } from '@/infrastructure/data/cells';
+
+function DetailsColumn() {
+  const selectedCellId = useStudioStore((s) => s.selectedCellId);
+  const selectedOrganelleId = useStudioStore((s) => s.selectedOrganelleId);
+  const cell = getCellById(selectedCellId);
+  if (!cell) return null;
+
+  const onGeneral = selectedOrganelleId === null;
+
+  return (
+    <>
+      <OrganelleDetailsPanel />
+      {onGeneral && <UniqueFeaturesCard cell={cell} />}
+      <BiologicalNotesCard />
+      {onGeneral && <PhotosynthesisCard cell={cell} />}
+      <QuickQuizCard />
+      {onGeneral && <AmazingNumbersCard cell={cell} />}
+      {onGeneral && <SpecializedCellsCard cell={cell} />}
+      <TryAtHomeCard cell={cell} />
+      {onGeneral && <DiscoveryTimelineCard cell={cell} />}
+      <OccurrenceCard />
+    </>
+  );
+}
 
 export default function StudioPage() {
   return (
     <StudioTemplate
       sidebar={<CellSidebar />}
       viewer={<CellViewer3D />}
-      details={
-        <>
-          <OrganelleDetailsPanel />
-          <BiologicalNotesCard />
-          <OccurrenceCard />
-        </>
-      }
+      details={<DetailsColumn />}
     />
   );
 }

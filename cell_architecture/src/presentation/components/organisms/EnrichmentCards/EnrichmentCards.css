@@ -1,0 +1,261 @@
+/* ── Unique features chips ─────────────────────────────────── */
+.ca-feat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ca-feat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e8e0ff, #d6f0bd);
+  color: var(--ca-text);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(124, 92, 255, 0.18);
+}
+.ca-feat-chip__emoji {
+  font-size: 14px;
+}
+
+/* ── Photosynthesis equation ────────────────────────────────── */
+.ca-photo-eq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 4px;
+  background: linear-gradient(135deg, #e6f5da, #fff6d1);
+  border-radius: 12px;
+}
+.ca-photo-eq__item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 38px;
+}
+.ca-photo-eq__icon {
+  font-size: 18px;
+}
+.ca-photo-eq__lbl {
+  font-size: 11px;
+  color: var(--ca-text-soft);
+  font-family: var(--ca-font-mono, monospace);
+}
+.ca-photo-eq__op {
+  font-size: 16px;
+  color: var(--ca-text-muted);
+  font-weight: 600;
+}
+.ca-photo-eq__note {
+  margin: 8px 0 0;
+  font-family: var(--ca-font-serif);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ca-text-soft);
+  text-align: center;
+}
+
+/* ── Quick quiz ─────────────────────────────────────────────── */
+.ca-quiz__prompt {
+  margin: 0 0 10px;
+  font-family: var(--ca-font-serif);
+  font-size: 13.5px;
+  color: var(--ca-text);
+  line-height: 1.4;
+}
+.ca-quiz__options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ca-quiz__opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--ca-surface);
+  border: 1px solid var(--ca-border);
+  font-size: 12.5px;
+  color: var(--ca-text);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.16s var(--ca-ease), border-color 0.16s var(--ca-ease);
+}
+.ca-quiz__opt:hover:not(:disabled) {
+  background: var(--ca-bg-soft);
+  border-color: var(--ca-border-strong);
+}
+.ca-quiz__opt:disabled {
+  cursor: default;
+}
+.ca-quiz__opt-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ca-bg-soft);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ca-text-soft);
+  flex-shrink: 0;
+}
+.ca-quiz__opt--correct {
+  background: #e3f6dd;
+  border-color: #84d2c5;
+  color: #2f6a44;
+}
+.ca-quiz__opt--correct .ca-quiz__opt-letter {
+  background: #84d2c5;
+  color: #fff;
+}
+.ca-quiz__opt--wrong {
+  background: #ffdfd9;
+  border-color: var(--ca-coral);
+  color: #8a3a2a;
+}
+.ca-quiz__opt--wrong .ca-quiz__opt-letter {
+  background: var(--ca-coral);
+  color: #fff;
+}
+.ca-quiz__feedback {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.ca-quiz__feedback--ok {
+  background: #e3f6dd;
+  color: #2f6a44;
+}
+.ca-quiz__feedback--bad {
+  background: #ffe9e2;
+  color: #8a3a2a;
+}
+.ca-quiz__feedback p {
+  margin: 4px 0 6px;
+  font-family: var(--ca-font-serif);
+}
+.ca-quiz__retry {
+  background: transparent;
+  border: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ca-accent-strong);
+  padding: 0;
+  cursor: pointer;
+}
+.ca-quiz__retry:hover {
+  text-decoration: underline;
+}
+
+/* ── Specialized cells list ─────────────────────────────────── */
+.ca-spec-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ca-spec-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.ca-spec-row__emoji {
+  font-size: 20px;
+  width: 26px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.ca-spec-row__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ca-text);
+}
+.ca-spec-row__role {
+  font-size: 12px;
+  color: var(--ca-text-soft);
+  font-family: var(--ca-font-serif);
+  font-style: italic;
+  line-height: 1.35;
+}
+
+/* ── Try at home ────────────────────────────────────────────── */
+.ca-try__text {
+  margin: 0;
+  font-family: var(--ca-font-serif);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ca-text);
+  background: linear-gradient(135deg, #fff7d6 0%, #ffe4b8 100%);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #e8d585;
+}
+
+/* ── Timeline ───────────────────────────────────────────────── */
+.ca-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-left: 2px dashed var(--ca-border-strong);
+  padding-left: 12px;
+}
+.ca-timeline__row {
+  display: grid;
+  grid-template-columns: 44px 22px 1fr;
+  align-items: start;
+  gap: 8px;
+  font-size: 12px;
+}
+.ca-timeline__year {
+  font-family: var(--ca-font-mono, monospace);
+  font-weight: 700;
+  color: var(--ca-accent-strong);
+  font-size: 12px;
+}
+.ca-timeline__bullet {
+  text-align: center;
+  font-size: 14px;
+}
+.ca-timeline__text {
+  color: var(--ca-text);
+  line-height: 1.35;
+}
+
+/* ── Amazing numbers ────────────────────────────────────────── */
+.ca-stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ca-stats__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--ca-text);
+  line-height: 1.4;
+}
+.ca-stats__emoji {
+  font-size: 18px;
+  width: 26px;
+  flex-shrink: 0;
+  text-align: center;
+}

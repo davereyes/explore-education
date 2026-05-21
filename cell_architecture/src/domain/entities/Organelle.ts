@@ -15,4 +15,15 @@ export interface Organelle {
   notesEn: string;
   funFact: string;
   funFactEn: string;
+  /** Optional 1-question multiple-choice quiz for this organelle. */
+  quiz?: QuizQuestion;
+}
+
+export interface QuizQuestion {
+  prompt: string;
+  promptEn: string;
+  options: Array<{ es: string; en: string }>;
+  correctIndex: number;
+  explanation?: string;
+  explanationEn?: string;
 }
