@@ -8,7 +8,6 @@ import AnimalCellModel from './AnimalCellModel';
 import PlantCellModel from './PlantCellModel';
 import GLBCellModel from './GLBCellModel';
 import ModelErrorBoundary from './ModelErrorBoundary';
-import ControlsHint from '@/presentation/components/molecules/ControlsHint/ControlsHint';
 import ViewerActionBar from '@/presentation/components/molecules/ViewerActionBar/ViewerActionBar';
 import ViewerMicroscopeBar from '@/presentation/components/molecules/ViewerMicroscopeBar/ViewerMicroscopeBar';
 import './CellViewer3D.css';
@@ -100,8 +99,10 @@ export default function CellViewer3D() {
   const viewerSource: ViewerSource = useStudioStore((s) => s.viewerSource);
 
   const cell = getCellById(selectedCellId);
+  const organelle = cell?.organelles.find((o) => o.id === selectedOrganelleId);
   const microscopeImage =
     viewerSource !== '3d' ? cell?.microscope.find((m) => m.type === viewerSource) : null;
+  const showingPhoto = !!microscopeImage?.imageUrl;
 
   const cellName = useMemo(
     () => (cell ? (language === 'es' ? cell.name : cell.nameEn) : ''),
@@ -111,30 +112,31 @@ export default function CellViewer3D() {
     () => (cell ? (language === 'es' ? cell.subtitle : cell.subtitleEn) : ''),
     [cell, language],
   );
-
-  const showingPhoto = !!microscopeImage?.imageUrl;
+  const description = useMemo(() => {
+    if (!cell) return '';
+    if (organelle) return t(organelle.notes, organelle.notesEn);
+    return t(cell.generalSummary, cell.generalSummaryEn);
+  }, [cell, organelle, t]);
 
   return (
     <div className="ca-viewer">
       <div className="ca-viewer__top">
-        <div className="ca-viewer__heading">
-          <h2 className="ca-viewer__title">{cellName}</h2>
-          <p className="ca-viewer__subtitle">{cellSub}</p>
-        </div>
+        {!showingPhoto && (
+          <div className="ca-viewer__heading">
+            <h2 className="ca-viewer__title">{cellName}</h2>
+            <p className="ca-viewer__subtitle">{cellSub}</p>
+            {description && <p className="ca-viewer__desc">{description}</p>}
+          </div>
+        )}
+        {showingPhoto && (
+          <div className="ca-viewer__source-badge">
+            <span className="ca-viewer__source-dot" />
+            {t(cellName + ' · ' + microscopeImage!.label, cellName + ' · ' + microscopeImage!.labelEn)}
+          </div>
+        )}
       </div>
 
       <div className="ca-viewer__canvas">
-        {!showingPhoto && (
-          <div className="ca-viewer__hint">
-            <ControlsHint
-              tip={t(
-                'Tip: Arrastra para rotar  ·  Scroll para hacer zoom  ·  Ctrl + arrastra para mover',
-                'Tip: Drag to rotate  ·  Scroll to zoom  ·  Ctrl + drag to pan',
-              )}
-            />
-          </div>
-        )}
-
         {showingPhoto ? (
           <div className="ca-viewer__photo">
             <img

@@ -60,6 +60,58 @@
   text-align: center;
 }
 
+.ca-photo-eq__lead {
+  margin: 0 0 10px;
+  font-family: var(--ca-font-serif);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ca-text);
+}
+
+.ca-photo-steps {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ca-photo-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--ca-text);
+  line-height: 1.4;
+  font-family: var(--ca-font-serif);
+}
+.ca-photo-steps__num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #3d9239;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--ca-font-sans);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ca-photo-eq__why {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #fff7d6 0%, #e8f5da 100%);
+  border-radius: 10px;
+  border-left: 3px solid #3d9239;
+  font-size: 12.5px;
+  font-family: var(--ca-font-serif);
+  line-height: 1.45;
+  color: var(--ca-text);
+}
+
 /* ── Quick quiz ─────────────────────────────────────────────── */
 .ca-quiz__prompt {
   margin: 0 0 10px;

@@ -2,7 +2,6 @@ import StudioTemplate from '@/presentation/components/templates/StudioTemplate/S
 import CellSidebar from '@/presentation/components/organisms/CellSidebar/CellSidebar';
 import CellViewer3D from '@/presentation/components/organisms/CellViewer3D/CellViewer3D';
 import OrganelleDetailsPanel from '@/presentation/components/organisms/OrganelleDetailsPanel/OrganelleDetailsPanel';
-import BiologicalNotesCard from '@/presentation/components/organisms/BiologicalNotesCard/BiologicalNotesCard';
 import OccurrenceCard from '@/presentation/components/organisms/OccurrenceCard/OccurrenceCard';
 import UniqueFeaturesCard from '@/presentation/components/organisms/EnrichmentCards/UniqueFeaturesCard';
 import PhotosynthesisCard from '@/presentation/components/organisms/EnrichmentCards/PhotosynthesisCard';
@@ -26,7 +25,6 @@ function DetailsColumn() {
     <>
       <OrganelleDetailsPanel />
       {onGeneral && <UniqueFeaturesCard cell={cell} />}
-      <BiologicalNotesCard />
       {onGeneral && <PhotosynthesisCard cell={cell} />}
       <QuickQuizCard />
       {onGeneral && <AmazingNumbersCard cell={cell} />}
