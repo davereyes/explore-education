@@ -17,8 +17,8 @@ export default function PhotosynthesisCard({ cell }: { cell: Cell }) {
     >
       <p className="ca-photo-eq__lead">
         {t(
-          'La fotosíntesis es cómo las plantas se hacen su propia comida. Atrapan luz solar con la clorofila (lo verde de los cloroplastos) y la usan para combinar agua y aire en azúcar — soltando oxígeno al hacerlo.',
-          'Photosynthesis is how plants make their own food. They catch sunlight with chlorophyll (the green inside chloroplasts) and use it to combine water and air into sugar — releasing oxygen in the process.',
+          'Es cómo las plantas se hacen su propia comida: la clorofila atrapa la luz y la usa para convertir agua y aire en azúcar.',
+          'How plants make their own food: chlorophyll catches light and uses it to turn water and air into sugar.',
         )}
       </p>
 
@@ -54,8 +54,8 @@ export default function PhotosynthesisCard({ cell }: { cell: Cell }) {
           <span className="ca-photo-steps__num">1</span>
           <span>
             {t(
-              'La raíz absorbe agua del suelo y la sube por el xilema hasta las hojas.',
-              'The root absorbs water from the soil and pushes it up through the xylem to the leaves.',
+              'La raíz absorbe agua; los estomas de la hoja dejan entrar CO₂.',
+              'The root takes in water; the leaf\'s stomata let CO₂ in.',
             )}
           </span>
         </li>
@@ -63,8 +63,8 @@ export default function PhotosynthesisCard({ cell }: { cell: Cell }) {
           <span className="ca-photo-steps__num">2</span>
           <span>
             {t(
-              'Los estomas (poros) de la hoja se abren y dejan entrar CO₂ del aire.',
-              'The stomata (pores) on the leaf open and let CO₂ in from the air.',
+              'En los cloroplastos, la clorofila atrapa la luz y rompe el agua — libera O₂.',
+              'In the chloroplasts, chlorophyll catches the light and splits the water — releasing O₂.',
             )}
           </span>
         </li>
@@ -72,17 +72,8 @@ export default function PhotosynthesisCard({ cell }: { cell: Cell }) {
           <span className="ca-photo-steps__num">3</span>
           <span>
             {t(
-              'Dentro de los cloroplastos, la clorofila atrapa la luz y rompe el agua: libera oxígeno y guarda la energía.',
-              'Inside the chloroplasts, chlorophyll catches the light and splits the water: it releases oxygen and stores the energy.',
-            )}
-          </span>
-        </li>
-        <li>
-          <span className="ca-photo-steps__num">4</span>
-          <span>
-            {t(
-              'Esa energía combina el CO₂ con hidrógeno para fabricar glucosa — el azúcar que la planta usa para vivir y crecer.',
-              'That energy combines CO₂ with hydrogen to build glucose — the sugar the plant uses to live and grow.',
+              'Esa energía combina CO₂ + hidrógeno para fabricar glucosa, el alimento de la planta.',
+              'That energy combines CO₂ + hydrogen into glucose — the plant\'s food.',
             )}
           </span>
         </li>
@@ -90,8 +81,8 @@ export default function PhotosynthesisCard({ cell }: { cell: Cell }) {
 
       <p className="ca-photo-eq__why">
         {t(
-          'Por qué importa: casi todo el oxígeno que respiramos viene de la fotosíntesis. Sin plantas, no hay aire para nosotros.',
-          'Why it matters: almost all the oxygen we breathe comes from photosynthesis. No plants → no air for us.',
+          'Casi todo el oxígeno que respiramos viene de aquí.',
+          'Almost all the oxygen we breathe comes from this.',
         )}
       </p>
     </CaCard>
