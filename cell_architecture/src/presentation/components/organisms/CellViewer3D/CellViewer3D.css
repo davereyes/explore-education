@@ -14,8 +14,9 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 18px 22px;
-  background: transparent;
+  background: var(--ca-surface);
   border-radius: 22px;
+  box-shadow: var(--ca-shadow-md);
   flex: 0 0 auto;
 }
 
@@ -76,8 +77,9 @@
   position: relative;
   flex: 1 1 auto;
   min-height: 0;
-  background: transparent;
+  background: var(--ca-surface);
   border-radius: 22px;
+  box-shadow: var(--ca-shadow-md);
   overflow: hidden;
 }
 
