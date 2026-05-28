@@ -12,7 +12,6 @@
   align-items: stretch;
   gap: 6px;
   background: var(--ca-surface);
-  border: 1px solid var(--ca-border);
   border-radius: var(--ca-radius-lg);
   box-shadow: var(--ca-shadow-md);
   padding: 6px;
@@ -81,7 +80,6 @@
   display: flex;
   flex-direction: column;
   background: var(--ca-surface);
-  border: 1px solid var(--ca-border);
   border-radius: var(--ca-radius-lg);
   box-shadow: var(--ca-shadow-md);
   overflow: hidden;

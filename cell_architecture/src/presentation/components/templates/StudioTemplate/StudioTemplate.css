@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 0;
   overflow: hidden;
-  background: var(--ca-bg);
+  background: transparent;
   --ca-current-sidebar: var(--ca-sidebar-width);
 }
 

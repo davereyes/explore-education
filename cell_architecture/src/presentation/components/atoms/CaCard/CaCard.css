@@ -1,6 +1,5 @@
 .ca-card {
   background: var(--ca-surface);
-  border: 1px solid var(--ca-border);
   border-radius: var(--ca-radius-lg);
   box-shadow: var(--ca-shadow-md);
   overflow: hidden;

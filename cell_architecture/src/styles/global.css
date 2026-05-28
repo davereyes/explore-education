@@ -17,6 +17,12 @@ body {
   line-height: 1.5;
   color: var(--ca-text);
   background-color: var(--ca-bg);
+  background-image:
+    radial-gradient(900px 600px at 0% 0%, #dfe9ff 0%, transparent 55%),
+    radial-gradient(800px 600px at 100% 0%, #fff1d6 0%, transparent 55%),
+    radial-gradient(900px 700px at 100% 100%, #ffd9e3 0%, transparent 60%),
+    radial-gradient(900px 700px at 0% 100%, #dff6e6 0%, transparent 55%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

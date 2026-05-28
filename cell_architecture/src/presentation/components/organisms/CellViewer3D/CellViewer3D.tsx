@@ -34,8 +34,6 @@ function ThreeDScene({ activeId }: { activeId: string | null }) {
       camera={{ position: [7.5, 4, 9], fov: 38, near: 0.1, far: 100 }}
       gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
     >
-      <color attach="background" args={['#f8f8f8']} />
-      <fog attach="fog" args={['#f8f8f8', 16, 28]} />
       <ambientLight intensity={0.45} />
       <directionalLight
         position={[6, 9, 5]}

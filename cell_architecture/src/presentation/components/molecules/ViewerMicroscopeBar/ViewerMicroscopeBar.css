@@ -6,7 +6,6 @@
   flex-direction: column;
   gap: 4px;
   background: var(--ca-surface);
-  border: 1px solid var(--ca-border);
   border-radius: 14px;
   padding: 8px 10px 10px;
   box-shadow: var(--ca-shadow-md);
