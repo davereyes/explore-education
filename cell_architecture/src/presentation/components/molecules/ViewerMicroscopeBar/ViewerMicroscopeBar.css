@@ -3,13 +3,28 @@
   left: 20px;
   bottom: 16px;
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
   background: var(--ca-surface);
   border: 1px solid var(--ca-border);
   border-radius: 14px;
-  padding: 6px;
+  padding: 8px 10px 10px;
   box-shadow: var(--ca-shadow-md);
   z-index: 4;
+}
+
+.ca-vbar__title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ca-text-muted);
+  padding-left: 2px;
+}
+
+.ca-vbar__thumbs {
+  display: flex;
+  gap: 8px;
 }
 
 .ca-vbar__thumb {
@@ -59,8 +74,11 @@
   .ca-vbar {
     left: 12px;
     bottom: 12px;
-    padding: 4px;
-    gap: 6px;
+    padding: 6px 8px 8px;
+    gap: 4px;
+  }
+  .ca-vbar__title {
+    font-size: 9px;
   }
   .ca-vbar__thumb {
     width: 36px;

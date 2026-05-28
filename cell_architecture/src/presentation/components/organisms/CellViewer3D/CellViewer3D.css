@@ -14,10 +14,8 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 18px 22px;
-  background: var(--ca-surface);
-  border: 1px solid var(--ca-border);
+  background: var(--ca-bg);
   border-radius: 22px;
-  box-shadow: var(--ca-shadow-md);
   flex: 0 0 auto;
 }
 
@@ -78,10 +76,8 @@
   position: relative;
   flex: 1 1 auto;
   min-height: 0;
-  background: var(--ca-surface);
-  border: 1px solid var(--ca-border);
+  background: var(--ca-bg);
   border-radius: 22px;
-  box-shadow: var(--ca-shadow-md);
   overflow: hidden;
 }
 
