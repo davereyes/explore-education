@@ -4,10 +4,10 @@
   flex-direction: column;
   height: 100%;
   min-height: 0;
-  background: linear-gradient(180deg, #fbf6ee 0%, #f5ecdc 100%);
+  background: var(--ca-surface);
   border: 1px solid var(--ca-border);
   border-radius: 22px;
-  box-shadow: var(--ca-shadow-lg);
+  box-shadow: var(--ca-shadow-md);
   overflow: hidden;
 }
 

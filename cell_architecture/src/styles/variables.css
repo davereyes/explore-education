@@ -1,12 +1,12 @@
 :root {
-  /* === Palette: clean light surfaces + warm accents === */
-  --ca-bg: #f4efe7;
-  --ca-bg-soft: #ede6da;
+  /* === Palette: cool neutral light gray, like clean product UIs === */
+  --ca-bg: #f0eff2;
+  --ca-bg-soft: #e9e8ec;
   --ca-surface: #ffffff;
-  --ca-surface-2: #fbf8f3;
+  --ca-surface-2: #f7f6f9;
   --ca-surface-glass: #ffffff;
-  --ca-border: #ece4d4;
-  --ca-border-strong: #d6cab5;
+  --ca-border: #e6e5ea;
+  --ca-border-strong: #c8c7cf;
 
   --ca-text: #2a2438;
   --ca-text-soft: #5b5170;
