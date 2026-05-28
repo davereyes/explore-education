@@ -1,12 +1,12 @@
 :root {
-  /* === Palette: warm cream + lavender/coral === */
-  --ca-bg: #faf5ef;
-  --ca-bg-soft: #f3ebe0;
+  /* === Palette: clean light surfaces + warm accents === */
+  --ca-bg: #f4efe7;
+  --ca-bg-soft: #ede6da;
   --ca-surface: #ffffff;
-  --ca-surface-2: #fbf6ee;
-  --ca-surface-glass: rgba(255, 255, 255, 0.72);
-  --ca-border: #ece1d1;
-  --ca-border-strong: #d9c9b0;
+  --ca-surface-2: #fbf8f3;
+  --ca-surface-glass: #ffffff;
+  --ca-border: #ece4d4;
+  --ca-border-strong: #d6cab5;
 
   --ca-text: #2a2438;
   --ca-text-soft: #5b5170;
@@ -15,7 +15,7 @@
 
   /* Accents */
   --ca-accent: #7c5cff;       /* lavender */
-  --ca-accent-soft: #e8e0ff;
+  --ca-accent-soft: #ece5ff;
   --ca-accent-strong: #5b3ad6;
   --ca-coral: #ff8a7a;
   --ca-coral-soft: #ffd8d1;
@@ -41,15 +41,15 @@
   --ca-font-serif: 'Fraunces', 'Playfair Display', Georgia, serif;
   --ca-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Radii / spacing / shadows */
-  --ca-radius-sm: 8px;
+  /* Radii / spacing / shadows — softer, lighter */
+  --ca-radius-sm: 10px;
   --ca-radius-md: 14px;
   --ca-radius-lg: 22px;
   --ca-radius-xl: 28px;
 
-  --ca-shadow-sm: 0 1px 2px rgba(60, 40, 20, 0.06);
-  --ca-shadow-md: 0 8px 24px rgba(60, 40, 20, 0.08);
-  --ca-shadow-lg: 0 18px 48px rgba(60, 40, 20, 0.12);
+  --ca-shadow-sm: 0 1px 2px rgba(60, 40, 20, 0.04);
+  --ca-shadow-md: 0 4px 16px rgba(60, 40, 20, 0.05);
+  --ca-shadow-lg: 0 12px 32px rgba(60, 40, 20, 0.08);
   --ca-shadow-inset: inset 0 0 0 1px var(--ca-border);
 
   --ca-space-1: 4px;
@@ -61,4 +61,6 @@
   --ca-space-7: 48px;
 
   --ca-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --ca-sidebar-width: 268px;
 }

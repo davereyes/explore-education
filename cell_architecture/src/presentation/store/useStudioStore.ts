@@ -9,11 +9,13 @@ interface StudioState {
   selectedOrganelleId: string | null;
   viewerSource: ViewerSource;
   showLabels: boolean;
+  sidebarCollapsed: boolean;
 
   selectCell: (id: string) => void;
   selectOrganelle: (id: string | null) => void;
   setViewerSource: (source: ViewerSource) => void;
   toggleLabels: () => void;
+  toggleSidebar: () => void;
 }
 
 export const useStudioStore = create<StudioState>((set) => ({
@@ -21,6 +23,7 @@ export const useStudioStore = create<StudioState>((set) => ({
   selectedOrganelleId: null,
   viewerSource: '3d',
   showLabels: true,
+  sidebarCollapsed: false,
 
   selectCell: (id) =>
     set({
@@ -31,4 +34,5 @@ export const useStudioStore = create<StudioState>((set) => ({
   selectOrganelle: (id) => set({ selectedOrganelleId: id }),
   setViewerSource: (source) => set({ viewerSource: source }),
   toggleLabels: () => set((s) => ({ showLabels: !s.showLabels })),
+  toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
 }));

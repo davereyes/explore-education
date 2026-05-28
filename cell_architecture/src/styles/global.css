@@ -13,14 +13,10 @@ body,
 body {
   margin: 0;
   font-family: var(--ca-font-sans);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--ca-text);
   background-color: var(--ca-bg);
-  background-image:
-    radial-gradient(1200px 600px at 12% -10%, rgba(124, 92, 255, 0.08), transparent 60%),
-    radial-gradient(900px 500px at 110% 110%, rgba(255, 138, 122, 0.08), transparent 60%);
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

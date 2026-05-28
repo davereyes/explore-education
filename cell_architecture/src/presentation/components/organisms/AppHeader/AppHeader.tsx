@@ -13,19 +13,6 @@ export default function AppHeader() {
 
   return (
     <header className="ca-header">
-      <div className="ca-header__brand">
-        <div className="ca-header__logo" aria-hidden="true">
-          <span className="ca-header__logo-emoji">🧫</span>
-        </div>
-        <div className="ca-header__title">
-          <h1 className="ca-header__name">Cell Architecture Studio</h1>
-          <p className="ca-header__tag">
-            {t('Explora la vida a nivel microscópico', 'Explore life at the microscopic level')}
-            <span className="ca-header__sparkle">✦</span>
-          </p>
-        </div>
-      </div>
-
       <nav className="ca-header__nav">
         {NAV_ITEMS.map((item) => (
           <button

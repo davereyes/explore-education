@@ -1,4 +1,3 @@
-import CaCard from '@/presentation/components/atoms/CaCard/CaCard';
 import CaDot from '@/presentation/components/atoms/CaDot/CaDot';
 import { useLanguage } from '@/presentation/context/LanguageContext';
 import { useStudioStore } from '@/presentation/store/useStudioStore';
@@ -11,18 +10,35 @@ export default function CellSidebar() {
   const selectedOrganelleId = useStudioStore((s) => s.selectedOrganelleId);
   const selectCell = useStudioStore((s) => s.selectCell);
   const selectOrganelle = useStudioStore((s) => s.selectOrganelle);
+  const collapsed = useStudioStore((s) => s.sidebarCollapsed);
+  const toggleSidebar = useStudioStore((s) => s.toggleSidebar);
   const sorted = [...cells].sort((a, b) => (b.enabled ? 1 : 0) - (a.enabled ? 1 : 0));
 
   return (
-    <CaCard
-      title={
-        <>
-          <span style={{ color: 'var(--ca-mint)' }}>🌱</span>
-          {t('Tipos de célula', 'Cell types')}
-        </>
-      }
-      accessory={<span style={{ fontSize: 12 }}>▾</span>}
-    >
+    <div className={`ca-sidebar ${collapsed ? 'ca-sidebar--collapsed' : ''}`}>
+      <header className="ca-sidebar__head">
+        <div className="ca-sidebar__brand">
+          <div className="ca-sidebar__logo" aria-hidden="true">
+            <span>🧫</span>
+          </div>
+          {!collapsed && (
+            <div className="ca-sidebar__title-stack">
+              <strong className="ca-sidebar__title">Cell Architecture</strong>
+              <span className="ca-sidebar__subtitle">Studio</span>
+            </div>
+          )}
+        </div>
+        <button
+          type="button"
+          className="ca-sidebar__collapse"
+          onClick={toggleSidebar}
+          aria-label={collapsed ? t('Expandir panel', 'Expand panel') : t('Colapsar panel', 'Collapse panel')}
+          title={collapsed ? t('Expandir', 'Expand') : t('Colapsar', 'Collapse')}
+        >
+          {collapsed ? '›' : '‹'}
+        </button>
+      </header>
+
       <ul className="ca-cell-list">
         {sorted.map((cell) => {
           const active = cell.id === selectedCellId;
@@ -35,17 +51,19 @@ export default function CellSidebar() {
                 }`}
                 disabled={!cell.enabled}
                 onClick={() => cell.enabled && selectCell(cell.id)}
-                title={!cell.enabled ? t('Próximamente', 'Coming soon') : undefined}
+                title={collapsed ? t(cell.name, cell.nameEn) : !cell.enabled ? t('Próximamente', 'Coming soon') : undefined}
               >
                 <span className="ca-cell-list__thumb">{cell.thumbnailEmoji}</span>
-                <span className="ca-cell-list__text">
-                  <span className="ca-cell-list__name">{t(cell.name, cell.nameEn)}</span>
-                  <span className="ca-cell-list__sub">{t(cell.subtitle, cell.subtitleEn)}</span>
-                </span>
-                {!cell.enabled && <span className="ca-cell-list__lock">🔒</span>}
+                {!collapsed && (
+                  <span className="ca-cell-list__text">
+                    <span className="ca-cell-list__name">{t(cell.name, cell.nameEn)}</span>
+                    <span className="ca-cell-list__sub">{t(cell.subtitle, cell.subtitleEn)}</span>
+                  </span>
+                )}
+                {!collapsed && !cell.enabled && <span className="ca-cell-list__lock">🔒</span>}
               </button>
 
-              {active && cell.enabled && (
+              {!collapsed && active && cell.enabled && (
                 <ul className="ca-cell-list__children">
                   <li>
                     <button
@@ -85,6 +103,6 @@ export default function CellSidebar() {
           );
         })}
       </ul>
-    </CaCard>
+    </div>
   );
 }
