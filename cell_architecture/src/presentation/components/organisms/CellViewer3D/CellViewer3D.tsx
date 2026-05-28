@@ -72,9 +72,9 @@ function ThreeDScene({ activeId }: { activeId: string | null }) {
 
       <ContactShadows
         position={[0, -2.6, 0]}
-        opacity={0.4}
+        opacity={0.18}
         scale={14}
-        blur={2.6}
+        blur={3.2}
         far={4}
         color="#2a1d0a"
       />
