@@ -51,6 +51,8 @@
   --ca-shadow-md: 0 4px 16px rgba(60, 40, 20, 0.05);
   --ca-shadow-lg: 0 12px 32px rgba(60, 40, 20, 0.08);
   --ca-shadow-inset: inset 0 0 0 1px var(--ca-border);
+  /* 70% of --ca-shadow-md — used on side-column cards (left + right) */
+  --ca-shadow-side: 0 3px 12px rgba(60, 40, 20, 0.035);
 
   --ca-space-1: 4px;
   --ca-space-2: 8px;

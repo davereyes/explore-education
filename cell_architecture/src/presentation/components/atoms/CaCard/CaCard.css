@@ -1,7 +1,7 @@
 .ca-card {
   background: var(--ca-surface);
   border-radius: var(--ca-radius-lg);
-  box-shadow: var(--ca-shadow-md);
+  box-shadow: var(--ca-shadow-side);
   overflow: hidden;
   flex: 0 0 auto;
 }
