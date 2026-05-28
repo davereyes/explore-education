@@ -10,12 +10,16 @@ interface StudioState {
   viewerSource: ViewerSource;
   showLabels: boolean;
   sidebarCollapsed: boolean;
+  /** When true, body background is flat #F8F8F8 (no gradient) and the
+   *  center cards adopt the same gray. Default false = gradient + white cards. */
+  flatBackground: boolean;
 
   selectCell: (id: string) => void;
   selectOrganelle: (id: string | null) => void;
   setViewerSource: (source: ViewerSource) => void;
   toggleLabels: () => void;
   toggleSidebar: () => void;
+  toggleFlatBackground: () => void;
 }
 
 export const useStudioStore = create<StudioState>((set) => ({
@@ -24,6 +28,7 @@ export const useStudioStore = create<StudioState>((set) => ({
   viewerSource: '3d',
   showLabels: true,
   sidebarCollapsed: false,
+  flatBackground: false,
 
   selectCell: (id) =>
     set({
@@ -35,4 +40,5 @@ export const useStudioStore = create<StudioState>((set) => ({
   setViewerSource: (source) => set({ viewerSource: source }),
   toggleLabels: () => set((s) => ({ showLabels: !s.showLabels })),
   toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
+  toggleFlatBackground: () => set((s) => ({ flatBackground: !s.flatBackground })),
 }));

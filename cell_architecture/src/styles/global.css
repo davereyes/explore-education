@@ -27,6 +27,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Flat mode: solid gray everywhere, no gradient bleed-through. */
+body:has(.ca-studio--flat) {
+  background-image: none;
+  background-color: #f8f8f8;
+}
+
+.ca-studio--flat .ca-viewer__top,
+.ca-studio--flat .ca-viewer__canvas {
+  background: #f8f8f8 !important;
+  box-shadow: none !important;
+}
+
 button {
   font: inherit;
   color: inherit;

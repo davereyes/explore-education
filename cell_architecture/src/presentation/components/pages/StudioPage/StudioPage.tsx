@@ -10,6 +10,7 @@ import SpecializedCellsCard from '@/presentation/components/organisms/Enrichment
 import TryAtHomeCard from '@/presentation/components/organisms/EnrichmentCards/TryAtHomeCard';
 import DiscoveryTimelineCard from '@/presentation/components/organisms/EnrichmentCards/DiscoveryTimelineCard';
 import AmazingNumbersCard from '@/presentation/components/organisms/EnrichmentCards/AmazingNumbersCard';
+import BackgroundToggleCard from '@/presentation/components/organisms/EnrichmentCards/BackgroundToggleCard';
 import { useStudioStore } from '@/presentation/store/useStudioStore';
 import { getCellById } from '@/infrastructure/data/cells';
 
@@ -23,6 +24,7 @@ function DetailsColumn() {
 
   return (
     <>
+      <BackgroundToggleCard />
       <OrganelleDetailsPanel />
       {onGeneral && <UniqueFeaturesCard cell={cell} />}
       {onGeneral && <PhotosynthesisCard cell={cell} />}
