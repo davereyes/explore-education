@@ -25,6 +25,13 @@
 .ca-studio__col--sidebar,
 .ca-studio__col--details {
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge legacy */
+}
+
+.ca-studio__col--sidebar::-webkit-scrollbar,
+.ca-studio__col--details::-webkit-scrollbar {
+  display: none; /* Chrome / Safari / Edge */
 }
 
 .ca-studio__col--main {
