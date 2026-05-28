@@ -12,6 +12,7 @@ export default function CellSidebar() {
   const selectOrganelle = useStudioStore((s) => s.selectOrganelle);
   const collapsed = useStudioStore((s) => s.sidebarCollapsed);
   const toggleSidebar = useStudioStore((s) => s.toggleSidebar);
+  const { language, toggle: toggleLanguage } = useLanguage();
   const sorted = [...cells].sort((a, b) => (b.enabled ? 1 : 0) - (a.enabled ? 1 : 0));
 
   return (
@@ -39,7 +40,7 @@ export default function CellSidebar() {
         </button>
       </header>
 
-      <ul className="ca-cell-list">
+      <ul className="ca-cell-list ca-cell-list--scroll">
         {sorted.map((cell) => {
           const active = cell.id === selectedCellId;
           return (
@@ -103,6 +104,17 @@ export default function CellSidebar() {
           );
         })}
       </ul>
+
+      <footer className="ca-sidebar__foot">
+        <button
+          type="button"
+          className="ca-sidebar__lang"
+          onClick={toggleLanguage}
+          title={t('Cambiar idioma', 'Switch language')}
+        >
+          {language.toUpperCase()}
+        </button>
+      </footer>
     </div>
   );
 }

@@ -4,10 +4,8 @@
   flex-direction: column;
   height: 100%;
   min-height: 0;
-  background: var(--ca-surface);
-  border: 1px solid var(--ca-border);
+  background: var(--ca-bg);
   border-radius: 22px;
-  box-shadow: var(--ca-shadow-md);
   overflow: hidden;
 }
 
