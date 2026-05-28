@@ -25,10 +25,7 @@ export default function OrganelleDetailsPanel() {
         accessory={<span className="ca-details__heart">♥</span>}
       >
         <div className="ca-details__head">
-          <div
-            className="ca-details__avatar"
-            style={{ background: 'linear-gradient(135deg, #ffd6a5, #b8a4ff)' }}
-          >
+          <div className="ca-details__avatar ca-details__avatar--cell">
             <span>{cell.thumbnailEmoji}</span>
           </div>
           <div>

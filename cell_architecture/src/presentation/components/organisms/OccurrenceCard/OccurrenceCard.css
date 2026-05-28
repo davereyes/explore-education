@@ -11,7 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ffe6d4, #ffd6c4);
+  background: var(--ca-bg-soft);
+  border: 1px solid var(--ca-border);
   border-radius: 12px;
   letter-spacing: -3px;
   flex-shrink: 0;
